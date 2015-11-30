@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LedDynamicArea.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDataType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LedDynamicArea.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDataType.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LedDynamicArea.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\MultiColor_1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_3.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_4.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_5.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_6.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_7.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_8.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_9.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_10.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_11.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_12.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_13.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_14.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_15.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_16.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_17.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_18.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_19.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_20.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_21.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_22.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_23.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_24.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_25.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_26.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_27.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_28.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_29.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_30.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_31.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_32.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_33.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_34.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_35.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_36.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_37.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_38.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_39.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_40.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_41.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_42.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_43.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_44.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_45.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_46.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\MultiColor_47.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_3.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_4.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_5.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_6.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_7.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_8.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_9.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_10.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_11.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_12.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_13.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_14.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_15.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_16.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_17.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_18.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_19.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_20.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_21.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_22.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Res\SingleColor_23.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\ControllerList.json" />
+  </ItemGroup>
+</Project>
