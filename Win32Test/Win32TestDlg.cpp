@@ -7,6 +7,8 @@
 #include "Win32TestDlg.h"
 #include "afxdialogex.h"
 
+#include "LedDynamicArea.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -99,6 +101,7 @@ BOOL CWin32TestDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	::Initialize();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
