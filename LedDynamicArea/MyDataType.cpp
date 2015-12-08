@@ -1,5 +1,8 @@
 #include "MyDataType.h"
 
+#include <string>
+#include <vector>
+
 #include <Windows.h>
 
 #include "resource.h"
@@ -19,5 +22,25 @@ void CreateFrameArray(int singleColorCount, int multiColorCount)
 	for (int i = 0; i < multiColorCount; i++)
 	{
 		g_pMultiColorFrameBitmapIDs[i] = IDB_MULTICOLOR_1 + i;
+	}
+}
+
+void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary)
+{
+	HRSRC hResource = FindResource(GetModuleHandle(L"LedDynamicArea.dll"), MAKEINTRESOURCE(IDR_CONTROLLERLIST), TEXT("FILE"));
+	if (hResource)
+	{
+		HGLOBAL hg = LoadResource(GetModuleHandle(L"LedDynamicArea.dll"), hResource);
+		if (hg)
+		{
+			LPVOID pData = LockResource(hg);
+			if (pData)
+			{
+				DWORD dwSize = SizeofResource(GetModuleHandle(L"LedDynamicArea.dll"), hResource);
+				Json::Reader reader;
+				reader.parse((char*)pData, (char*)pData + dwSize, ControllerList_Obj, false);
+				Controller_Supary = ControllerList_Obj["ProtocolVer_List"];
+			}
+		}
 	}
 }

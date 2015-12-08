@@ -39,7 +39,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -343,7 +343,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4T2",
@@ -375,7 +375,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -687,7 +687,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4T3",
@@ -719,7 +719,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -1031,7 +1031,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4A1",
@@ -1063,7 +1063,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -1352,7 +1352,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4A2",
@@ -1384,7 +1384,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -1701,7 +1701,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4A3",
@@ -1733,7 +1733,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -2050,7 +2050,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4AQ",
@@ -2082,7 +2082,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -2399,7 +2399,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4A",
@@ -2431,7 +2431,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -2722,7 +2722,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4UT",
@@ -2754,7 +2754,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -2989,7 +2989,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4U0",
@@ -3021,7 +3021,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -3264,7 +3264,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4U1",
@@ -3296,7 +3296,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -3539,7 +3539,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4U2",
@@ -3571,7 +3571,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -3814,7 +3814,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4U2X",
@@ -3846,7 +3846,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -4081,7 +4081,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4U3",
@@ -4113,7 +4113,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -4356,7 +4356,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4M0",
@@ -4388,7 +4388,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -4700,7 +4700,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4M1",
@@ -4732,7 +4732,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -5040,7 +5040,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4M",
@@ -5072,7 +5072,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -5380,7 +5380,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4MC",
@@ -5409,7 +5409,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -5693,7 +5693,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4C",
@@ -5725,7 +5725,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -5940,7 +5940,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4E1",
@@ -5972,7 +5972,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -6191,7 +6191,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4E",
@@ -6223,7 +6223,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -6446,7 +6446,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-4EL",
@@ -6478,7 +6478,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -6697,7 +6697,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  }, {
 	   	"ControllerName": "BX-3T",
@@ -6728,7 +6728,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -6971,7 +6971,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 
 	  },{
@@ -6994,32 +6994,32 @@
 	   	"Default_ScreenType":1,
 			"UnCompatbile_List":[
 			  {
-			  	"FirmwareVersion":"10071400",
+			  	"FirmwareVersion":"10071400"
 			  },
 			  {
-			  	"FirmwareVersion":"10071600",
+			  	"FirmwareVersion":"10071600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072000",
+			  	"FirmwareVersion":"10072000"
 			  },
 			  {
-			  	"FirmwareVersion":"10072100",
+			  	"FirmwareVersion":"10072100"
 			  },
 			  {
-			  	"FirmwareVersion":"10072200",
+			  	"FirmwareVersion":"10072200"
 			  },
 			  {
-			  	"FirmwareVersion":"10072600",
+			  	"FirmwareVersion":"10072600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072700",
+			  	"FirmwareVersion":"10072700"
 			  },
 			  {
-			  	"FirmwareVersion":"10080300",
+			  	"FirmwareVersion":"10080300"
 			  },
 			  {
-			  	"FirmwareVersion":"10080400",
-			  },
+			  	"FirmwareVersion":"10080400"
+			  }
 			],
 
 			"Serial_Communication_Valid":true,
@@ -7032,7 +7032,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -7297,7 +7297,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 
 			
@@ -7321,32 +7321,32 @@
 	   	"Default_ScreenType":1,
 			"UnCompatbile_List":[
 			  {
-			  	"FirmwareVersion":"10071400",
+			  	"FirmwareVersion":"10071400"
 			  },
 			  {
-			  	"FirmwareVersion":"10071600",
+			  	"FirmwareVersion":"10071600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072000",
+			  	"FirmwareVersion":"10072000"
 			  },
 			  {
-			  	"FirmwareVersion":"10072100",
+			  	"FirmwareVersion":"10072100"
 			  },
 			  {
-			  	"FirmwareVersion":"10072200",
+			  	"FirmwareVersion":"10072200"
 			  },
 			  {
-			  	"FirmwareVersion":"10072600",
+			  	"FirmwareVersion":"10072600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072700",
+			  	"FirmwareVersion":"10072700"
 			  },
 			  {
-			  	"FirmwareVersion":"10080300",
+			  	"FirmwareVersion":"10080300"
 			  },
 			  {
-			  	"FirmwareVersion":"10080400",
-			  },
+			  	"FirmwareVersion":"10080400"
+			  }
 			],
 
 			"Serial_Communication_Valid":true,
@@ -7359,7 +7359,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -7652,7 +7652,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 
 	  },{
@@ -7675,32 +7675,32 @@
 	   	"Default_ScreenType":1,
 			"UnCompatbile_List":[
 			  {
-			  	"FirmwareVersion":"10071400",
+			  	"FirmwareVersion":"10071400"
 			  },
 			  {
-			  	"FirmwareVersion":"10071600",
+			  	"FirmwareVersion":"10071600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072000",
+			  	"FirmwareVersion":"10072000"
 			  },
 			  {
-			  	"FirmwareVersion":"10072100",
+			  	"FirmwareVersion":"10072100"
 			  },
 			  {
-			  	"FirmwareVersion":"10072200",
+			  	"FirmwareVersion":"10072200"
 			  },
 			  {
-			  	"FirmwareVersion":"10072600",
+			  	"FirmwareVersion":"10072600"
 			  },
 			  {
-			  	"FirmwareVersion":"10072700",
+			  	"FirmwareVersion":"10072700"
 			  },
 			  {
-			  	"FirmwareVersion":"10080300",
+			  	"FirmwareVersion":"10080300"
 			  },
 			  {
-			  	"FirmwareVersion":"10080400",
-			  },
+			  	"FirmwareVersion":"10080400"
+			  }
 			],
 
 			"Serial_Communication_Valid":true,
@@ -7713,7 +7713,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -8011,20 +8011,20 @@
 	   	"Default_ScreenType":1,
 			"UnCompatbile_List":[
 			  {
-			  	"FirmwareVersion":"10072100",
+			  	"FirmwareVersion":"10072100"
 			  },
 			  {
-			  	"FirmwareVersion":"10072200",
+			  	"FirmwareVersion":"10072200"
 			  },
 			  {
-			  	"FirmwareVersion":"10072600",
+			  	"FirmwareVersion":"10072600"
 			  },
 			  {
-			  	"FirmwareVersion":"10080400",
+			  	"FirmwareVersion":"10080400"
 			  },
 			  {
-			  	"FirmwareVersion":"10080500",
-			  },
+			  	"FirmwareVersion":"10080500"
+			  }
 			],
 
 			"Serial_Communication_Valid":true,
@@ -8037,7 +8037,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -8341,7 +8341,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  }
 	  ]
@@ -8381,7 +8381,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -8707,7 +8707,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  	  {
@@ -8740,7 +8740,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -9074,7 +9074,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -9107,7 +9107,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -9441,7 +9441,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -9474,7 +9474,7 @@
 			"WiFi_Communication_Valid":true,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -9808,7 +9808,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -9841,7 +9841,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -10172,7 +10172,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -10205,7 +10205,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -10536,7 +10536,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -10569,7 +10569,7 @@
 			"WiFi_Communication_Valid":true,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -10900,7 +10900,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },	  
 	  {
@@ -10933,7 +10933,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -10970,7 +10970,7 @@
 			"Data_Flow_Valid": false,
 			"Parameter_Info_Visible": false,
 			"Parameter_Info": "",
-			"Timer_Area_FontSize_Info_Visible": False,
+			"Timer_Area_FontSize_Info_Visible": false,
 			"Timer_Area_FontSize_Info":"For BX-M Series, with limited resources, maximum support 24 characters (32 dots characters)')",
 
 			"Flash_All":2048,
@@ -11264,7 +11264,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -11297,7 +11297,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -11628,7 +11628,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -11661,7 +11661,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -11992,7 +11992,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -12025,7 +12025,7 @@
 			"WiFi_Communication_Valid":true,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -12356,7 +12356,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },	  
 	  {
@@ -12389,7 +12389,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -12727,7 +12727,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -12760,7 +12760,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -13095,7 +13095,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -13128,7 +13128,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -13463,7 +13463,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -13496,7 +13496,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -13831,7 +13831,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -13864,7 +13864,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -14194,7 +14194,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -14227,7 +14227,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -14565,7 +14565,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -14598,7 +14598,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -14933,7 +14933,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -14966,7 +14966,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -15301,7 +15301,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -15334,7 +15334,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -15669,7 +15669,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 	  {
@@ -15702,7 +15702,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -16037,7 +16037,7 @@
 			{
 				"Info": "Support startup screen configuration",
 				"bReturn":true
-			},
+			}
 			]
 	  },
 		{
@@ -16057,22 +16057,22 @@
 	   	"Screen_MaxArea_1":[ /*高度从小到大逐渐增加的顺序添加*/
 				{
 					"Max_Width": 4096,
-					"Max_Height":128,
+					"Max_Height":128
 				},
 				{
 					"Max_Width": 2048,
-					"Max_Height":256,
-				},
+					"Max_Height":256
+				}
 			],
 	   	"Screen_MaxArea_2":[/*高度从小到大逐渐增加的顺序添加*/
 				{
 					"Max_Width": 4096,
-					"Max_Height":128,
+					"Max_Height":128
 				},
 				{
 					"Max_Width": 2048,
-					"Max_Height":256,
-				},
+					"Max_Height":256
+				}
 			],
 			
 	   	"Default_Width":768,
@@ -16090,7 +16090,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -16322,7 +16322,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-5E3",
@@ -16341,22 +16341,22 @@
 	   	"Screen_MaxArea_1":[/*高度从小到大逐渐增加的顺序添加*/
 				{
 					"Max_Width": 4096,
-					"Max_Height":256,
+					"Max_Height":256
 				},
 				{
 					"Max_Width": 2048,
-					"Max_Height":512,
-				},
+					"Max_Height":512
+				}
 			],
 	   	"Screen_MaxArea_2":[/*高度从小到大逐渐增加的顺序添加*/
 				{
 					"Max_Width": 4096,
-					"Max_Height":256,
+					"Max_Height":256
 				},
 				{
 					"Max_Width": 2048,
-					"Max_Height":512,
-				},
+					"Max_Height":512
+				}
 			],
 	   	
 	   	"Default_Width":768,
@@ -16374,7 +16374,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -16606,7 +16606,7 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
 	  },{
 	   	"ControllerName": "BX-5EC",
@@ -16622,12 +16622,12 @@
 	   	"Screen_MaxArea_4":[/*高度从小到大逐渐增加的顺序添加*/
 				{
 					"Max_Width": 4096,
-					"Max_Height":256,
+					"Max_Height":256
 				},
 				{
 					"Max_Width": 2048,
-					"Max_Height":512,
-				},
+					"Max_Height":512
+				}
 			],
 	   	
 	   	"Default_Width":768,
@@ -16645,7 +16645,7 @@
 			"WiFi_Communication_Valid":false,
 			"Serial_Baud_List":[
 				{
-					"Baud":"9600",
+					"Baud":"9600"
 				},{
 					"Baud":"57600"
 				}
@@ -16877,9 +16877,9 @@
 			{
 				"Info": "Support full-screen test",
 				"bReturn":false
-			},
+			}
 			]
-	  },
+	  }
 	  ]
   }
   ]
