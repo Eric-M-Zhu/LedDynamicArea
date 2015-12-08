@@ -17,22 +17,25 @@ static Json::Value devicelist_ja;
 
 int __stdcall Initialize()
 {
-	int result = RETURN_ERROR_OTHER;
 	Json::Reader reader;
 
 	InitializeCriticalSection(&g_cs);
 	CreateFrameArray(PROGRAM_FRAME_SINGLE_COLOR_COUNT, PROGRAM_FRAME_MULI_COLOR_COUNT);
 	// TODO: GetCRC16ByteArray
+	// TODO: Create send threads list
 	WSAStartup(MAKEWORD(1, 1), &wsaData);
 	GetControllerList(g_ControllerList_Obj, g_Controller_Supary);
 
 	reader.parse("{\"ScreenList\":[]}", devicelist_root, false);
 	devicelist_ja = devicelist_root["ScreenList"];
 
-	return result;
+	return RETURN_NOERROR;
 }
 
 int __stdcall Uninitialize()
-{  
-	return 0;                                                                        
+{
+	WSACleanup();
+	// TODO: Free send threads in list
+	DeleteCriticalSection(&g_cs);
+	return RETURN_NOERROR;                                                                        
 }                                                                                                                    
