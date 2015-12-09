@@ -62,6 +62,9 @@ extern "C" {
 		int nWidth, int nHeight, int nScreenType, int nPixelMode, const char *pCom, int nBaud, const char *pSocketIP, int nSocketPort,
 		int nServerMode, const char *pBarcode, const char *pNetworkID, const char *pServerIP, int nServerPort,
 		const char *pServerAccessUser, const char *pServerAccessPassword, const char *pCommandDataFile);
+	LEDDYNAMICAREA_LIB_API int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, int nTimeOut, int nAllProRelate,
+		const char *pProRelateList, int nPlayPriority, int nAreaX, int nAreaY, int nAreaWidth, int nAreaHeight,
+		int nAreaFMode, int nAreaFLine, int nAreaFColor, int nAreaFStunt, int nAreaFRunSpeed, int nAreaFMoveStep);
 
 #undef LEDDYNAMICAREA_LIB_API
 

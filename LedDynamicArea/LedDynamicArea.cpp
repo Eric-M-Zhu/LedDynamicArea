@@ -186,3 +186,132 @@ int __stdcall AddScreen_Dynamic(int nControlType, int nScreenNo, int nSendMode,
 	// TODO: new thread
 	return RETURN_NOERROR;
 }
+
+/*------------------------------------------------------------------------------ -
+过程名:    AddScreenDynamicArea
+	向动态库中指定显示屏添加动态区域；该函数不与显示屏通讯。
+	参数 :
+nScreenNo：显示屏屏号；该参数与AddScreen_Dynamic函数中的nScreenNo参数对应。
+nDYAreaID：动态区域编号；目前系统中最多5个动态区域；该值取值范围为0~4;
+nRunMode：动态区域运行模式：
+0:动态区数据循环显示；
+1 : 动态区数据显示完成后静止显示最后一页数据；
+2 : 动态区数据循环显示，超过设定时间后数据仍未更新时不再显示；
+3 : 动态区数据循环显示，超过设定时间后数据仍未更新时显示Logo信息, Logo 信息即为动态区域的最后一页信息
+4 : 动态区数据顺序显示，显示完最后一页后就不再显示
+nTimeOut：动态区数据超时时间；单位：秒
+nAllProRelate：节目关联标志；
+1：所有节目都显示该动态区域；
+0：在指定节目中显示该动态区域，如果动态区域要独立于节目显示，则下一个参数为空。
+pProRelateList：节目关联列表，用节目编号表示；节目编号间用","隔开, 节目编号定义为LedshowTW 2013软件中"P***"中的"***"
+nPlayPriority：动态区域播放优先级；
+0：该动态区域与异步节目一起播放(动态区域有关联异步节目才有效)；
+1：异步节目停止播放，仅播放该动态区域
+nAreaX：动态区域起始横坐标；单位：像素
+nAreaY：动态区域起始纵坐标；单位：像素
+nAreaWidth：动态区域宽度；单位：像素
+nAreaHeight：动态区域高度；单位：像素
+nAreaFMode：动态区域边框显示标志；0：纯色；1：花色；255：无边框
+nAreaFLine：动态区域边框类型, 纯色最大取值为FRAME_SINGLE_COLOR_COUNT；花色最大取值为：FRAME_MULI_COLOR_COUNT
+nAreaFColor：边框显示颜色；选择为纯色边框类型时该参数有效；
+nAreaFStunt：边框运行特技；
+0：闪烁；1：顺时针转动；2：逆时针转动；3：闪烁加顺时针转动；
+4:闪烁加逆时针转动；5：红绿交替闪烁；6：红绿交替转动；7：静止打出
+nAreaFRunSpeed：边框运行速度；
+nAreaFMoveStep：边框移动步长；该值取值范围：1~8；
+返回值 : 详见返回状态代码定义。
+------------------------------------------------------------------------------ - */
+
+int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, int nTimeOut, int nAllProRelate,
+	const char *pProRelateList, int nPlayPriority, int nAreaX, int nAreaY, int nAreaWidth, int nAreaHeight,
+	int nAreaFMode, int nAreaFLine, int nAreaFColor, int nAreaFStunt, int nAreaFRunSpeed, int nAreaFMoveStep)
+{
+	int nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+	int nDYAreaOrd;
+	Json::Value newDynamicArea;
+
+	if (nScreenOrd < 0)
+	{
+		return RETURN_ERROR_NOFIND_SCREENNO;
+	}
+
+	// TODO: Check if is sending
+
+	newDynamicArea["DY_AreaID"] = nDYAreaID;
+	newDynamicArea["DY_RunMode"] = nRunMode;
+	newDynamicArea["DY_TimeOut"] = nTimeOut;
+	newDynamicArea["DY_AllProRelate"] = nAllProRelate;
+	newDynamicArea["DY_ProRelateList"] = Json::arrayValue;
+	newDynamicArea["DY_PlayImmediately"] = nPlayPriority;
+	newDynamicArea["DY_AreaX"] = nAreaX;
+	newDynamicArea["DY_AreaY"] = nAreaY;
+	newDynamicArea["DY_AreaWidth"] = nAreaWidth;
+	newDynamicArea["DY_AreaHeight"] = nAreaHeight;
+	newDynamicArea["DY_AreaFStunt"] = nAreaFStunt;
+	newDynamicArea["DY_AreaFRunSpeed"] = nAreaFRunSpeed;
+	newDynamicArea["DY_AreaFMoveStep"] = nAreaFMoveStep;
+	newDynamicArea["DY_AreaFMode"] = nAreaFMode; //0:纯色；1：花色；$FF:没有边框
+	newDynamicArea["DY_AreaFWidth"] = 1;
+	newDynamicArea["DY_AreaFLine"] = nAreaFLine;
+	newDynamicArea["DY_AreaFColor"] = nAreaFColor;
+	newDynamicArea["Area_lstfile"] = Json::arrayValue; //区域的文件内容
+	devicelist_ja[nScreenOrd]["Screen_lstDYArea"].append(newDynamicArea);
+	nDYAreaOrd = devicelist_ja[nScreenOrd]["Screen_lstDYArea"].size() - 1;
+
+	if (devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"].asInt() == 0)
+	{
+		if (devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"].asInt() >= PROGRAM_FRAME_SINGLE_COLOR_COUNT)
+		{
+			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"] = 0;
+		}
+		/*devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFWidth'] : =
+			GetSelFrameWidth(devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFMode']
+				, devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFLine']);*/
+	}
+	else if (devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"].asInt() == 1)
+	{
+		if (devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"].asInt() >= PROGRAM_FRAME_MULI_COLOR_COUNT)
+		{
+			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"] = 0;
+		}
+		/*devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFWidth'] : =
+			GetSelFrameWidth(devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFMode']
+				, devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFLine']);*/
+	}
+	else
+	{
+		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"] = 0xFF;
+		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFWidth"] = 0;
+	}
+
+	if (nAllProRelate == 0)
+	{
+		char *pszProRelate = new char[strlen(pProRelateList)];
+
+		if (pszProRelate)
+		{
+			char *pToken = NULL;
+
+			strcpy(pszProRelate, pProRelateList);
+			pToken = strtok(pszProRelate, ",");
+			while (pToken)
+			{
+				Json::Value proRelateID;
+				proRelateID["RelateProID"] = atoi(pToken);
+				devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_ProRelateList"].append(proRelateID);
+				pToken = strtok(NULL, ",");
+			}
+			delete[] pszProRelate;
+		}
+		else
+		{
+			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AllProRelate"] = 1;
+		}
+	}
+	else
+	{
+		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AllProRelate"] = 1;
+	}
+
+	return RETURN_NOERROR;
+}
