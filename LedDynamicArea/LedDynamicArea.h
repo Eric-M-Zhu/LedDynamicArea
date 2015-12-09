@@ -58,6 +58,10 @@ extern "C" {
 
 	LEDDYNAMICAREA_LIB_API int __stdcall Initialize();
 	LEDDYNAMICAREA_LIB_API int __stdcall Uninitialize();
+	LEDDYNAMICAREA_LIB_API int __stdcall AddScreen_Dynamic(int nControlType, int nScreenNo, int nSendMode,
+		int nWidth, int nHeight, int nScreenType, int nPixelMode, const char *pCom, int nBaud, const char *pSocketIP, int nSocketPort,
+		int nServerMode, const char *pBarcode, const char *pNetworkID, const char *pServerIP, int nServerPort,
+		const char *pServerAccessUser, const char *pServerAccessPassword, const char *pCommandDataFile);
 
 #undef LEDDYNAMICAREA_LIB_API
 
