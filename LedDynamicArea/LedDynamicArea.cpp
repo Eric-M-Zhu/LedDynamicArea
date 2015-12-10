@@ -6,7 +6,7 @@
 #include "MyDataType.h"
 #include "../jsoncpp/json.h"
 
-#include <list>
+#include <vector>
 
 #pragma comment(lib, "../Debug/jsoncpp.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -17,7 +17,7 @@ Json::Value g_ControllerList_Obj;
 Json::Value g_Controller_Supary;
 static Json::Value devicelist_root;
 static Json::Value devicelist_ja;
-static std::list<PtagSendThread> g_lstSendThread;
+static std::vector<PtagSendThread> g_lstSendThread;
 
 /*------------------------------------------------------------------------------ -
 过程名:    Initialize
@@ -51,7 +51,7 @@ int __stdcall Initialize()
 int __stdcall Uninitialize()
 {
 	WSACleanup();
-	for (std::list<PtagSendThread>::iterator iter = g_lstSendThread.begin(); iter != g_lstSendThread.end(); ++iter)
+	for (std::vector<PtagSendThread>::iterator iter = g_lstSendThread.begin(); iter != g_lstSendThread.end(); ++iter)
 	{
 		delete *iter;
 	}
@@ -334,5 +334,132 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AllProRelate"] = 1;
 	}
 
+	return RETURN_NOERROR;
+}
+
+/*------------------------------------------------------------------------------ -
+过程名:    AddScreenDynamicAreaText
+	向动态库中指定显示屏的指定动态区域添加信息文本；该函数不与显示屏通讯。
+	参数 :
+nScreenNo：显示屏屏号；该参数与AddScreen_Dynamic函数中的nScreenNo参数对应。
+nDYAreaID：动态区域编号；该参数与AddScreenDynamicArea函数中的nDYAreaID参数对应
+pText：添加的信息文件名称；目前只支持txt(支持ANSI、UTF - 8、Unicode等格式编码)、bmp的文件格式
+nShowSingle：文字信息是否单行显示；0：多行显示；1：单行显示；显示该参数只有szFileName为txt格式文档时才有效；
+pFontName：文字信息显示字体；该参数只有szFileName为txt格式文档时才有效；
+nFontSize：文字信息显示字体的字号；该参数只有szFileName为txt格式文档时才有效；
+nBold：文字信息是否粗体显示；0：正常；1：粗体显示；该参数只有szFileName为txt格式文档时才有效；
+nFontColor：文字信息显示颜色；该参数只有szFileName为txt格式文档时才有效；
+nStunt：动态区域信息运行特技；
+00：随机显示
+01：静止显示
+02：快速打出
+03：向左移动
+04：向左连移
+05：向上移动
+06：向上连移
+07：闪烁
+08：飘雪
+09：冒泡
+10：中间移出
+11：左右移入
+12：左右交叉移入
+13：上下交叉移入
+14：画卷闭合
+15：画卷打开
+16：向左拉伸
+17：向右拉伸
+18：向上拉伸
+19：向下拉伸
+20：向左镭射
+21：向右镭射
+22：向上镭射
+23：向下镭射
+24：左右交叉拉幕
+25：上下交叉拉幕
+26：分散左拉
+27：水平百页
+28：垂直百页
+29：向左拉幕
+30：向右拉幕
+31：向上拉幕
+32：向下拉幕
+33：左右闭合
+34：左右对开
+35：上下闭合
+36：上下对开
+37：向右移动
+38：向右连移
+39：向下移动
+40：向下连移
+nRunSpeed：动态区域信息运行速度
+nShowTime：动态区域信息显示时间；单位：10ms
+返回值 : 详见返回状态代码定义。
+	------------------------------------------------------------------------------ - */
+
+int __stdcall AddScreenDynamicAreaText(int nScreenNo, int nDYAreaID,
+	const char *pText, int nShowSingle, const char *pFontName, int nFontSize,
+	int nBold, int nFontColor, int nStunt, int nRunSpeed, int nShowTime)
+{
+	int nScreenOrd, nDYAreaOrd;
+	PtagSendThread ptmptagSendThread;
+	std::string szFileName;
+	std::string szFontName;
+	UINT ntmpFileStyle;
+	std::string Ext;
+	Json::Value newAreaText;
+
+	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+	if (nScreenOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_SCREENNO;
+	}
+
+	if ((g_lstSendThread.size() > (size_t)nScreenOrd) && (nScreenOrd >= 0))
+	{
+		ptmptagSendThread = g_lstSendThread[nScreenOrd];
+		if (ptmptagSendThread->bSending)
+		{
+			return RETURN_ERROR_NOW_SENDING;
+		}
+	}
+
+	nDYAreaOrd = GetSelScreenDYAreaOrd(nDYAreaID, devicelist_ja[nScreenOrd]["Screen_lstDYArea"]);
+	if (nDYAreaOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_DYNAMIC_AREA;
+	}
+	szFileName = pText;
+	szFontName = pFontName;
+	if (nShowSingle == 1)
+		ntmpFileStyle = FILE_SHOWSTYLE_SINGLE;
+	else
+		ntmpFileStyle = FILE_SHOWSTYLE_NORMAL;
+
+	newAreaText["File_Name"] = szFileName; //文本
+	newAreaText["File_Style"] = FILE_TYPE_TEXT; //文本
+	newAreaText["File_ShowStyle"] = ntmpFileStyle; //文本显示方式
+	newAreaText["File_FontName"] = szFontName; // 字体名称
+	newAreaText["File_Bold"] = nBold; //字体是否粗体
+	newAreaText["File_FontSize"] = nFontSize; //字体字号
+	newAreaText["File_FontColor"] = nFontColor; //字体颜色
+	newAreaText["File_PageCount"] = 0; //转换成的数据页
+	newAreaText["File_Speed"] = nRunSpeed; //文件速度
+	newAreaText["File_Stunt"] = nStunt; //文件特技方式
+	newAreaText["File_OutsStunt"] = 0; //退出方式
+	newAreaText["File_Showtime"] = nShowTime; //文件停留时间
+	newAreaText["File_ShowCount"] = 1; //重复播放次数
+	newAreaText["File_Reserved1"] = 0; //保留参数
+	newAreaText["File_Reserved2"] = 0; //保留参数
+	newAreaText["File_Reserved3"] = 0; //保留参数
+	newAreaText["File_Reserved4"] = 0; //保留参数
+	newAreaText["File_Reserved5"] = 0; //保留参数
+	newAreaText["File_Reserved6"] = 0; //保留参数
+	newAreaText["File_Reserved7"] = 0; //保留参数
+	devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["Area_lstfile"].append(newAreaText);
+
+//{$IFDEF DEBUG}
+//SaveScreenInfoToFile;
+//{$ENDIF}
+	
 	return RETURN_NOERROR;
 }

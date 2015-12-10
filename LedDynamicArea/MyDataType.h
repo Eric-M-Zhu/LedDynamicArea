@@ -1217,3 +1217,5 @@ void GetController_DecomposeType(int nControllerType, BYTE &nTypeValue1, BYTE &n
 Json::Value GetDefaultController(BYTE &nProtocolVer, UINT &nControllerType);
 UINT GetControllerType(Json::Value Controller_obj);
 UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine);
+int GetSelScreenArrayOrd(int nScreenNo, Json::Value &Screen_Ja);
+int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja);

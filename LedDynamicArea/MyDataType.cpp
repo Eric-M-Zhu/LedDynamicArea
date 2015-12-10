@@ -144,3 +144,34 @@ UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine)
 		return 1;
 	}
 }
+
+int GetSelScreenArrayOrd(int nScreenNo, Json::Value &Screen_Ja)
+{
+	int Result = -1;
+
+	for (UINT I = 1; I < Screen_Ja.size(); ++I)
+	{
+		if (Screen_Ja[I - 1]["Com_address"].asInt() == nScreenNo)
+		{
+			Result = I - 1;
+			break;
+		}
+	}
+
+	return Result;
+}
+
+int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja) //根据动态区域编号得到动态区区域列表中的序号。
+{
+	int Result = -1;
+	for (UINT I = 1; I < DYArea_Ja.size(); ++I)
+	{
+		if (DYArea_Ja[I - 1]["DY_AreaID"].asInt() == nDYAreaID)
+		{
+			Result = I - 1;
+			break;
+		}
+	}
+
+	return Result;
+}

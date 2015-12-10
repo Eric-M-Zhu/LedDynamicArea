@@ -65,6 +65,9 @@ extern "C" {
 	LEDDYNAMICAREA_LIB_API int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, int nTimeOut, int nAllProRelate,
 		const char *pProRelateList, int nPlayPriority, int nAreaX, int nAreaY, int nAreaWidth, int nAreaHeight,
 		int nAreaFMode, int nAreaFLine, int nAreaFColor, int nAreaFStunt, int nAreaFRunSpeed, int nAreaFMoveStep);
+	LEDDYNAMICAREA_LIB_API int __stdcall AddScreenDynamicAreaText(int nScreenNo, int nDYAreaID,
+		const char *pText, int nShowSingle, const char *pFontName, int nFontSize,
+		int nBold, int nFontColor, int nStunt, int nRunSpeed, int nShowTime);
 
 #undef LEDDYNAMICAREA_LIB_API
 
