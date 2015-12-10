@@ -1,5 +1,6 @@
 #pragma once
 
+#include <windows.h>
 #include "../jsoncpp/json.h"
 
 const int FIND_SERIAL_PING_WAITOUT = 500; //ping命令的串口等待时间。
@@ -7,10 +8,10 @@ const int FIND_NETWORK_PING_WAITOUT = 500; //ping命令的网口等待时间。
 
 //------------------------------------------------------------------------------
 // 物理层协议版本号
-const unsigned char PROTOCOLVER_THIRD_CONTROL = 0x00;
-const unsigned char PROTOCOLVER_FOURTH_CONTROL = 0x04;
-const unsigned char PROTOCOLVER_FIFTH_CONTROL = 0x05;
-const unsigned char PROTOCOLVER_FIFTH_DYNAMIC = 0xF0;
+const BYTE PROTOCOLVER_THIRD_CONTROL = 0x00;
+const BYTE PROTOCOLVER_FOURTH_CONTROL = 0x04;
+const BYTE PROTOCOLVER_FIFTH_CONTROL = 0x05;
+const BYTE PROTOCOLVER_FIFTH_DYNAMIC = 0xF0;
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -34,9 +35,9 @@ const int GPRS_FRAMELENMAX = 8; //GPRS模式最大传输字节除以16
 
 //------------------------------------------------------------------------------
 // 加密方式
-const unsigned char ENCRYPTION_NONE = 0x96; //明码模式
-const unsigned char ENCRYPTION_STATIC = 1; //默认密码加密模式
-const unsigned char ENCRYPTION_USER = 2; //用户密码加密模式
+const BYTE ENCRYPTION_NONE = 0x96; //明码模式
+const BYTE ENCRYPTION_STATIC = 1; //默认密码加密模式
+const BYTE ENCRYPTION_USER = 2; //用户密码加密模式
 const int ENCRYPTION_LENGTH = 112; //密钥加密长度
 //------------------------------------------------------------------------------
 
@@ -44,10 +45,10 @@ const int USB_FIFTH_PARAMETERS_FILECOUNT = 11; //当前5代USB控制卡有11个参数文件
 
 //------------------------------------------------------------------------------
 // 控制器类型
-const unsigned char CONTROLLER_TYPE_FOURTH = 0x40; //判断3代卡、4代卡的起始值
+const BYTE CONTROLLER_TYPE_FOURTH = 0x40; //判断3代卡、4代卡的起始值
 
-const unsigned char CONTROLLER_TYPE_4VERSION2 = 0xF0;
-const unsigned char CONTROLLER_TYPE_4VERSION3 = 0xEF;
+const BYTE CONTROLLER_TYPE_4VERSION2 = 0xF0;
+const BYTE CONTROLLER_TYPE_4VERSION3 = 0xEF;
 const unsigned short CONTROLLER_TYPE_WILDCARD = 0xFFFE; //控制器类型通配符
 const unsigned short CONTROLLER_TYPE_3T = 0x10;
 const unsigned short CONTROLLER_TYPE_3A = 0x20;
@@ -124,7 +125,7 @@ const int STUNT_MOVE_DOWN = 39; //向下移动
 const int STUNT_CONTINUOUS_MOVE_DOWN = 40; //向下连移
 //------------------------------------------------------------------------------
 
-const int AreaMovieRunSpeed[16] = { 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 1 }; // 用于每一动画的运行帧速率
+const UINT AreaMovieRunSpeed[16] = { 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 1 }; // 用于每一动画的运行帧速率
 
 //------------------------------------------------界面上所有的combobox进行参数设置
 const std::string COMBOBOX_TYPE_Pro_FrameStunt[7] = { "Flicker", "Clockwise rotation", "Counterclockwise rotation",
@@ -138,7 +139,7 @@ const std::string COMBOBOX_TYPE_Device_OE[2] = { "Low", "High" }; //OE极性
 const std::string COMBOBOX_TYPE_Device_RowOrder[3] = { "Normal", "+1", "-1" }; //行顺序
 const std::string COMBOBOX_TYPE_Device_MirrorMode[2] = { "Normal", "Mirror" }; //数据流向
 
-const int BaudRate[2] = { 9600, 57600 };
+const UINT BaudRate[2] = { 9600, 57600 };
 const int SCREEN_ADDRESS_LISTCOUNT = 5;
 const int PRO_FRAME_LENGTH = 32; //节目流水边框图案属性为的定长为32.
 const int PRO_FRAME_MAX_HEIGHT = 8; //节目流水边框图案最大高度.
@@ -403,48 +404,48 @@ const int AREA_TYPE_TIMECLOCK = 10;
 
 //------------------------------------------------------------------------------
 // 特技列表
-const unsigned char AREA_STUNT_RANDOM = 0x00; //0x00 – 随机显示
-const unsigned char AREA_STUNT_STATIC = 0x01; //0x01 – 静止显示
-const unsigned char AREA_STUNT_DIRECTSHOW = 0x02; //0x02 – 快速打出
-const unsigned char AREA_STUNT_LMOVE = 0x03; //0x03 – 向左移动
-const unsigned char AREA_STUNT_LCONTIMOVE = 0x04; //0x04 – 向左连移
-const unsigned char AREA_STUNT_UMOVE = 0x05; //0x05 – 向上移动
-const unsigned char AREA_STUNT_UCONTIMOVE = 0x06; //0x06 – 向上连移
-const unsigned char AREA_STUNT_FICKER = 0x07; //0x07 – 闪烁
-const unsigned char AREA_STUNT_SNOWING = 0x08; //0x08 – 飘雪
-const unsigned char AREA_STUNT_BUBBING = 0x09; //0x09 – 冒泡
-const unsigned char AREA_STUNT_MIDMOVE = 0x0A; //0x0a – 中间移出
-const unsigned char AREA_STUNT_LRMOVE = 0x0B; //0x0b – 左右移入
-const unsigned char AREA_STUNT_LRCROSSMOVE = 0x0C; //0x0c – 左右交叉移入
-const unsigned char AREA_STUNT_UDCROSSMOVE = 0x0D; //0x0d – 上下交叉移入
-const unsigned char AREA_STUNT_SCROLLCLOSE = 0x0E; //0x0e – 画卷闭合
-const unsigned char AREA_STUNT_SCROLLOPEN = 0x0F; //0x0f – 画卷打开
-const unsigned char AREA_STUNT_LSTRETCH = 0x10; //0x10 – 向左拉伸
-const unsigned char AREA_STUNT_RSTRETCH = 0x11; //0x11 – 向右拉伸
-const unsigned char AREA_STUNT_USTRETCH = 0x12; //0x12 – 向上拉伸
-const unsigned char AREA_STUNT_DSTRETCH = 0x13; //0x13 – 向下拉伸
-const unsigned char AREA_STUNT_LLASER = 0x14; //0x14 – 向左镭射
-const unsigned char AREA_STUNT_RLASER = 0x15; //0x15 – 向右镭射
-const unsigned char AREA_STUNT_ULASER = 0x16; //0x16 – 向上镭射
-const unsigned char AREA_STUNT_DLASER = 0x17; //0x17 – 向下镭射
-const unsigned char AREA_STUNT_LRCROSSCURTAIN = 0x18; //0x18 – 左右交叉拉幕
-const unsigned char AREA_STUNT_UDCROSSCURTAIN = 0x19; //0x19 – 上下交叉拉幕
-const unsigned char AREA_STUNT_DISPERSELCURTAIN = 0x1A; //0x1a – 分散左拉
-const unsigned char AREA_STUNT_HORLAYER = 0x1B; //0x1b – 水平百页
-const unsigned char AREA_STUNT_VERLAYER = 0x1C; //0x1c – 垂直百页
-const unsigned char AREA_STUNT_LCURTAIN = 0x1D; //0x1d – 向左拉幕
-const unsigned char AREA_STUNT_RCURTAIN = 0x1E; //0x1e – 向右拉幕
-const unsigned char AREA_STUNT_UCURTAIN = 0x1F; //0x1f – 向上拉幕
-const unsigned char AREA_STUNT_DCURTAIN = 0x20; //0x20 – 向下拉幕
-const unsigned char AREA_STUNT_LRCLOSE = 0x21; //0x21 – 左右闭合
-const unsigned char AREA_STUNT_LROPEN = 0x22; //0x22 – 左右对开
-const unsigned char AREA_STUNT_UDCLOSE = 0x23; //0x23 – 上下闭合
-const unsigned char AREA_STUNT_UPOPEN = 0x24; //0x24 – 上下对开
-const unsigned char AREA_STUNT_RMOVE = 0x25; //0x25 – 向右移动
-const unsigned char AREA_STUNT_RCONTIMOVE = 0x26; //0x26 - 向右连移
-const unsigned char AREA_STUNT_DMOVE = 0x27; //0x27 – 向下移动
-const unsigned char AREA_STUNT_DCONTIMOVE = 0x28; //0x28 - 向下连移
-const unsigned char AREA_STUNT_MOVIE = 0xFE; //动画模式
+const BYTE AREA_STUNT_RANDOM = 0x00; //0x00 – 随机显示
+const BYTE AREA_STUNT_STATIC = 0x01; //0x01 – 静止显示
+const BYTE AREA_STUNT_DIRECTSHOW = 0x02; //0x02 – 快速打出
+const BYTE AREA_STUNT_LMOVE = 0x03; //0x03 – 向左移动
+const BYTE AREA_STUNT_LCONTIMOVE = 0x04; //0x04 – 向左连移
+const BYTE AREA_STUNT_UMOVE = 0x05; //0x05 – 向上移动
+const BYTE AREA_STUNT_UCONTIMOVE = 0x06; //0x06 – 向上连移
+const BYTE AREA_STUNT_FICKER = 0x07; //0x07 – 闪烁
+const BYTE AREA_STUNT_SNOWING = 0x08; //0x08 – 飘雪
+const BYTE AREA_STUNT_BUBBING = 0x09; //0x09 – 冒泡
+const BYTE AREA_STUNT_MIDMOVE = 0x0A; //0x0a – 中间移出
+const BYTE AREA_STUNT_LRMOVE = 0x0B; //0x0b – 左右移入
+const BYTE AREA_STUNT_LRCROSSMOVE = 0x0C; //0x0c – 左右交叉移入
+const BYTE AREA_STUNT_UDCROSSMOVE = 0x0D; //0x0d – 上下交叉移入
+const BYTE AREA_STUNT_SCROLLCLOSE = 0x0E; //0x0e – 画卷闭合
+const BYTE AREA_STUNT_SCROLLOPEN = 0x0F; //0x0f – 画卷打开
+const BYTE AREA_STUNT_LSTRETCH = 0x10; //0x10 – 向左拉伸
+const BYTE AREA_STUNT_RSTRETCH = 0x11; //0x11 – 向右拉伸
+const BYTE AREA_STUNT_USTRETCH = 0x12; //0x12 – 向上拉伸
+const BYTE AREA_STUNT_DSTRETCH = 0x13; //0x13 – 向下拉伸
+const BYTE AREA_STUNT_LLASER = 0x14; //0x14 – 向左镭射
+const BYTE AREA_STUNT_RLASER = 0x15; //0x15 – 向右镭射
+const BYTE AREA_STUNT_ULASER = 0x16; //0x16 – 向上镭射
+const BYTE AREA_STUNT_DLASER = 0x17; //0x17 – 向下镭射
+const BYTE AREA_STUNT_LRCROSSCURTAIN = 0x18; //0x18 – 左右交叉拉幕
+const BYTE AREA_STUNT_UDCROSSCURTAIN = 0x19; //0x19 – 上下交叉拉幕
+const BYTE AREA_STUNT_DISPERSELCURTAIN = 0x1A; //0x1a – 分散左拉
+const BYTE AREA_STUNT_HORLAYER = 0x1B; //0x1b – 水平百页
+const BYTE AREA_STUNT_VERLAYER = 0x1C; //0x1c – 垂直百页
+const BYTE AREA_STUNT_LCURTAIN = 0x1D; //0x1d – 向左拉幕
+const BYTE AREA_STUNT_RCURTAIN = 0x1E; //0x1e – 向右拉幕
+const BYTE AREA_STUNT_UCURTAIN = 0x1F; //0x1f – 向上拉幕
+const BYTE AREA_STUNT_DCURTAIN = 0x20; //0x20 – 向下拉幕
+const BYTE AREA_STUNT_LRCLOSE = 0x21; //0x21 – 左右闭合
+const BYTE AREA_STUNT_LROPEN = 0x22; //0x22 – 左右对开
+const BYTE AREA_STUNT_UDCLOSE = 0x23; //0x23 – 上下闭合
+const BYTE AREA_STUNT_UPOPEN = 0x24; //0x24 – 上下对开
+const BYTE AREA_STUNT_RMOVE = 0x25; //0x25 – 向右移动
+const BYTE AREA_STUNT_RCONTIMOVE = 0x26; //0x26 - 向右连移
+const BYTE AREA_STUNT_DMOVE = 0x27; //0x27 – 向下移动
+const BYTE AREA_STUNT_DCONTIMOVE = 0x28; //0x28 - 向下连移
+const BYTE AREA_STUNT_MOVIE = 0xFE; //动画模式
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -856,11 +857,363 @@ const std::string stylearr[] = {
 "ampm_list", "week_list", "bp_list", "js_list", "jr_list", "ymd_list", "hns_list" };
 //-----------------------------------------------------------------------
 
-void CreateFrameArray(int singleColorCount, int multiColorCount);
+//type
+//
+//TPoints = array of TPoint;
+//PPoints = ^TPoints;
+//
+
+typedef enum
+{
+	seInteger,
+	seString,
+	seBoolean
+} TDataType;
+
+typedef enum
+{
+	cdttxtf = 0,
+	cdttxts = 1,
+	cdtgrid = 2,
+	cdttime = 3,
+	cdttimeclear = 4,
+	cdttimesize = 5,
+	cdttimeimage = 6, 
+	cdtotherimage = 7, 
+	cdtnormaltimedata = 8, 
+	cdtchonodata = 9,
+	cdtymdlist = 10, 
+	cdtweeklist = 11, 
+	cdthnslist = 12, 
+	cdtnormaltimeimage = 13,
+	cdtchonoimage = 14, 
+	cdtgridimage = 15, 
+	cdtlunardata = 16, 
+	cdtlunarimage = 17,
+	cdtclockdata = 18, 
+	cdtclockimage = 19, 
+	cdttxtfimage = 20, 
+	cdttxtsimage = 21,
+	cdttimeauto = 22, 
+	cdtlunarauto = 23, 
+	cdtchonoauto = 24
+} TCopyDataType;
+
+typedef struct
+{
+	std::string szCom;
+	UINT nComBaud;
+	UINT nComDataBits;
+	UINT nComStopBits;
+	UINT nComParity;
+	UINT nSendUnit;
+	UINT nUnitSleepValue;
+	UINT nInputSize;
+	UINT nOutputSize;
+} tagCommRecord, *PtagCommRecord;
+
+typedef struct
+{
+	char *xname;
+	int xleft;
+	int xtop;
+	int xwidth;
+	int xheight;
+	char *xstyle;
+} tagSampleRecord, *PtagSampleRecord;
+
+typedef struct
+{
+	int nWidth;
+	int nHeight;
+} tagAreaSize;
+
+typedef struct
+{
+	BYTE nScreen_Scan; //扫描方式;1/16:0x10;1/8:0x08;1/4:0x04;1/2:0x02;静态:0x01
+	UINT nData_FlowLength; //数据流向描述长度
+	std::string szData_Flow; //数据流向描述
+	UINT nData_Flow_MemoLength; //备注信息长度
+	std::string szData_Flow_Memo; //备注信息
+	BYTE nData_Row_Per_Data; //一路数据带几行
+	BYTE nData_Decoder_Uen; //138译码是否使能
+	BYTE nData_U_Mode; //U型模式；默认为0:直行；1:U型模式
+	BYTE nData_Col_Flod_Mode; //折行模式；0:直行；1:2列折行；2：4列折行；3:8列折行
+	BYTE nData_Wu; //最小循环单元宽度。单位为byte
+	BYTE nData_Hu; //最小循环单元高度。单位为位。
+	BYTE nData_WtMax; //转换后每个最小单元的宽度。单位为byte
+	BYTE nData_Con_Table_Length; //地址转换表长度
+	char pData_Con_Table[256]; //地址转换表
+	BYTE nReserved1; //保留字1
+	BYTE nReserved2; //保留字2
+	BYTE nReserved3; //保留字3
+	BYTE nReserved4; //保留字4
+	BYTE nReserved5; //保留字5
+	BYTE nReserved6; //保留字6
+	BYTE nReserved7; //保留字7
+} tagScreenFlowItem, *ptagScreenFlowItem;
+
+//发送状态参数返回值。
+typedef struct
+{
+	UINT nPercentValue; //发送百分比。
+	std::string szMessagestr; //发送状态显示字符串
+} tagSendStatus, *PtagSendStatus;
+
+//发送线程结构体
+typedef struct
+{
+	UINT nSingleOrMulti; //单机、多机通讯模式  0：单机；1：多机
+	UINT nIndex; //在显示列表中的序号。        只有当nSingleOrMulti=0时该参数才有效。
+	UINT nScreenOrd; //显示屏序号；
+	HANDLE hdlResultForm; //返回窗口的句柄
+	std::string szScreenSrc; //显示屏名称
+							 //    SendThread: TCommunicate; //发送线程
+	bool bSending; //True:正在发送过程中；False:目前为空闲状态；
+	UINT nSendCmd; //发送类型
+	BYTE nFileType; //如果发送的是文件，读取文件文件类型。
+	std::string szReadBuf; //返回的数据
+	UINT nReadLength; //返回数据长度。
+	bool bReadSaveAs; //读回的数据是否保存；//False:不保存；True:保存
+	std::string szReadFile; //返回数据保存的文件名
+	BYTE nSendedStatus; //发送完成并且成功标志 :0:正在发送中，且没有完成；1：发送完成，但没有发送成功；2：发送完成且成功。 发送完成后要删除该结构指针的；3：发送ping命令返回发现参数不对应。
+	UINT nErrorNumber; //发送错误代码编码；针对NOACK返回错误代码
+} tagSendThread, *PtagSendThread;
+
+typedef struct
+{
+	UINT nParentIndex; //父节点序号
+	std::string szScreenSrc; //显示屏名称
+} tagScreenNodeData, *PtagScreenNodeData;
+
+typedef struct
+{
+	std::string szSendbuf;
+	UINT nSendLength;
+	UINT nSendnSectors; //计算出当前节目所占扇区。
+	std::string szSendFile; //发送的节目文件名称
+	std::string szSendCRC; //发送的节目文件CRC32校验值。
+	bool bNeedSend; //默认需要发送；True
+	std::string szSendMessage;
+} tagSendInfo, *PtagSendInfo;
+
+typedef struct
+{
+	std::string szQueryFile; //接收到节目文件名称
+	UINT nQueryFileLength; //接收到的节目文件长度
+	std::string szQueryCRC; //接收的节目文件CRC32校验值。
+	bool bNeedDelete; //默认需要删除True；读出的文件校验一致时不用删除文件；其它的文件一致、校验不一致，读出的文件PC机不存在时删除文件。
+} tagReadDir, *PtagReadDir;
+
+//串口结构
+typedef struct
+{
+	HANDLE CommPort;
+	std::string szCommName; //串口的编号
+	UINT nCommBaud; //串口波特率
+	UINT nCommDataBits; //串口数据位
+	UINT nCommStopBits; //串口停止位
+	UINT nCommParity; //串口校验位
+	UINT nPackageDataLength; //发送每包数据大小；单位：字节
+	UINT nPackageSleep; //发送每包数据成功后与发送下一包数据的等待时间；单位：毫秒
+	UINT nSendUnit; //发送一次数据的单元长度
+	UINT nUnitSleepValue; //发送一次单元长度数据的停留时间,单位毫秒
+	UINT nReadWaitTimeOut; //读回数据的最大等待时间；单位毫秒
+	UINT nInputSize; //接收缓冲区大小
+	UINT nOutputSize; //发送缓冲区大小
+	UINT nErrReSendTimes;
+	UINT nFrameLenMax;
+} tagSerialComm, *PtagSerialComm;
+
+//网络结构
+typedef struct
+{
+	UINT Network_Mode; //0:单机直连；1：固定IP模式；2：服务器模式。
+	UINT nServerMode; //0:服务器模式未启动；1：服务器模式启动。
+	std::string szServerMode_ID; //服务器模式时的网络ID编号。
+	std::string Network_IP; //网络IP地址
+	UINT Network_Port; //网络端口
+	SOCKET Network_Skt; //Socket套接字
+	UINT nPackageDataLength; //发送每包数据大小；单位：字节
+	UINT nPackageSleep; //发送每包数据成功后与发送下一包数据的等待时间；单位：毫秒
+	UINT nSendUnit; //发送一次数据的单元长度
+	UINT nUnitSleepValue; //发送一次单元长度数据的停留时间,单位毫秒
+	UINT nReadWaitTimeOut; //读回数据的最大等待时间；单位毫秒
+	UINT nErrReSendTimes;
+	UINT nFrameLenMax;
+
+	//中转服务器使用
+	UINT Network_HwdId; //网络句柄，唯一值
+	std::string Barcodeid; //二维码
+	std::string Usename; //用户名
+	std::string Password; //密码
+	BYTE errorid; //错误编号
+	UINT GPRSMODE; //gprs模式 0是2g   1是3g
+	bool start_send; //默认为false
+} tagNetwork, *PtagNetwork;
+
+//GPRS结构
+typedef struct
+{
+	UINT GPRS_Mode; //0:BX-GPRS模式。
+	std::string GPRS_ID; //GPRS终端编号
+					 //    GPRS_UnitSize: Cardinal; //单位的分包大小
+					 //    Gprs_UnitTime: Cardinal; //单位的分包发送间隔
+	UINT nPackageDataLength; //发送每包数据大小；单位：字节
+	UINT nPackageSleep; //发送每包数据成功后与发送下一包数据的等待时间；单位：毫秒
+	UINT nSendUnit; //发送一次数据的单元长度
+	UINT nUnitSleepValue; //发送一次单元长度数据的停留时间,单位毫秒
+	UINT nReadWaitTimeOut; //读回数据的最大等待时间；单位毫秒
+	UINT nErrReSendTimes;
+	UINT nFrameLenMax;
+} tagGPRS, *PtagGPRS;
+
+typedef struct
+{
+	BYTE nCommunicationType; //0:串口模式；1：网口模式；2：GPRS通讯模式
+	tagSerialComm tag_SerialComm; //串口接口。
+	tagNetwork tag_Network; //网络接口
+	tagGPRS tag_GPRS; //GPRS接口
+} tagCommunication, *PtagCommunication;
+
+//物理层结构，用于动态区域的
+typedef struct
+{
+	UINT DstAddr; ///目标地址
+	UINT SrcAddr; ////源地址
+	UINT ProtocolVer; ////协议栈版本;通过此字节来判断是3代还是4代控制卡。3代卡协议版本为$00；4代卡的协议版本为$04
+	UINT Reserved1; //备用字1
+	UINT DeviceType; ////设备类型   3代卡1个字节，4代卡2个字节。
+	UINT Reserved2; //备用字2
+	UINT Reserved3; //备用字2
+	UINT Reserved4; //备用字2
+	UINT Reserved5; //备用字2
+	UINT Datalen; ////帧长度
+} tagstruct_PHY1Header, *Ptagstruct_PHY1Header;
+
+//物理层结构，用于一般的协议
+typedef struct
+{
+	UINT DstAddr; ///目标地址
+	UINT SrcAddr; ////源地址
+	UINT ProtocolVer; ////协议栈版本;通过此字节来判断是3代还是4代控制卡。3代卡协议版本为$00；4代卡的协议版本为$04
+	UINT ProtecolType; ////协议类型
+	UINT DeviceType; ////设备类型   3代卡1个字节，4代卡2个字节。
+	UINT PHYType; ////物理传输类型
+	UINT Reserved1; //备用字1
+	UINT MsgSeq; ////帧ID号
+	UINT Reserved2; //备用字2
+	UINT FrameLenMax; ////支持PHY1层转义后数据的最大长度 ；1byte
+	UINT EncryptionType; ////数据加密模式；$96：明码模式，不加密；$01：默认模式；采用固定密码模式加密；$02：用户自定义模式，自定义密码6bytes
+	UINT RandomNumber; //加密随机数；1个字节；该字节取值为0~200；取到CRC16数组的起始位置取3项组成6个字节。组成异或加密字符。
+	char Secret[6]; //PC发送数据时用户采用自定义或默认加密后此字段填充加密密匙；明码无效字节；PC接收数据时，该域接收数据位无效值(控制卡无需发送加密密匙给PC)。
+	UINT Datalen; ////帧长度
+	UINT DataChecksum; ////帧数据域CRC16
+	UINT HeaderChecksum; /////帧头校验，异或操作
+} tagstruct_PHY1Header_5th, *Ptagstruct_PHY1Header_5th;
+
+//定义多机通讯通讯列表
+typedef struct
+{
+	UINT nScreenOrd; //在devicelist_ja设备列表中的序号。
+	std::string szScreen_src; //显示屏编号。对应devicelist_ja中的Screen_src字段。
+	UINT nSendCmd; //集群发送命令字；
+	UINT nSended; //集群发送完成标志；$FF：无需发送；1：已经发送完成；0：未发送完成；2：正在发送过程中。
+	UINT nSendMode; //屏幕的通讯类型，默认为串口通信
+	BYTE nCom_port; //当发送模式为串口模式时，该控制卡的串口号。
+} tagMultiSendRecord, *PtagMultiSendRecord;
+
+//服务器模式下ACK的LookUp结构。
+typedef struct
+{
+	std::string szServerAccessPassword;
+	std::string szIPAddress;
+	std::string szSubnetMask;
+	std::string szGateway;
+	UINT nPort;
+	std::string szMac;
+	std::string szNetwork_ID;
+} tagServerModeLookUpRecord, *PtagServerModeLookUpRecord;
+
+typedef struct
+{
+	SOCKET socket; //Socket编号。
+	sockaddr_in addr;
+	std::string szNetworkID; //网络编号
+	std::string szRecvBuf;
+	UINT gbytes;
+	UINT nRecvLength;
+	bool bLogin; //是否登录
+	UINT timecnt;
+	UINT nNetworkOrd; //序号
+} Client_Record, *PClient_Record;
+
+typedef struct
+{
+	BYTE nCom_port; //串口号。
+	bool bBusyStatus; //串口状态。False：空闲状态；True：忙碌状态。
+} tagCommStatusRecord, *PtagCommStatusRecord;
+
+typedef struct
+{
+	std::string IP; //IP地址
+	int port1; //端口1地址  BX-GPRS
+	int port2; //端口2地址  zw-GPRS
+	int port3; //端口2地址  QT-GPRS
+	int languageid; //语言的显示
+	int sendtime; //发送的超时时间和握手的超时时间
+	int refresh; //上线检测刷新时间
+	bool useuser; //使用用户登陆的功能
+	std::string urltime; //网络校时地址
+	bool autotime; //自动运行校时
+	bool noblank; //使用不黑屏幕的方式  首尾连移
+	bool singalsend; //使用单发还是群发
+	bool bTiming_Communicaion; //是否定时发送信息。
+	UINT nTiming_Communication_CMD; //定时发送命令。
+	UINT nTiming_Communication_Interval; //定时发送间隔。
+	std::string ApplicationTitle;
+	bool bShowHelpMenu;
+} SysParameter;
+
+typedef struct
+{
+	std::string szRELBuf;
+	UINT nRELLength;
+	UINT nRELAddress;
+} tagUSBFirmwareRecord, *PtagUSBFirmwareRecord;
+
+typedef enum
+{
+	seOpenCommError //打开串口失败
+	, seSendError //发送数据失败
+	, SeNoAnswer //没有应答
+	, seAnswerError //应答失败
+	, seSrcAddrError //应答源地址(显示屏地址)地址信息错误；应该与发送的目标地址信息一样。
+	, seDstAddrError //应答目标地址(计算机发送端)地址信息错误；应该与发送的源地址信息一样。
+	, seProtocolVerError //协议栈版本不一致且不兼容 ；应该与发送的版本一致或者兼容。
+	, seProtecolTypeError //协议栈类型不一致导致错误 ；应该与发送的类型一致
+	, seDeviceTypeError //设备类型不一致导致错误   ；应该与发送的类型一致
+	, sePHYTypeError //物理层类型不一致导致错误 ；应该与发送的类型一致
+	, seMsgSeqError //消息序号不一致导致错误   ；应该等于发送的消息序号加上$8000
+	, seOK //发送成功
+	, seNoneSerialProt //未设定串口错误
+	, seInvalid_Socket //创建Socket失败
+	, seSocket_Error //Socket连接错误
+	, seSocket_OK //Socket正常。
+	, seUnCompatbile //Firmware版本不兼容；
+
+					 //中转服务器消息
+	, seTranitSocket_LinkError //连接中转服务器失败
+	, seTranit_Error //与中转服务器通信失败
+	, seTranit_OK //与中转服务器通信成功
+} TSendError;
+
+void CreateFrameArray(UINT singleColorCount, UINT multiColorCount);
 void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary);
 
 int GetSelScreenArrayOrd(int nScreenNo, const Json::Value &Screen_Ja);
-Json::Value GetControllerObject(const Json::Value &Controller_Supary, int nControllerType, unsigned char &nProtocolVer);
-void GetController_DecomposeType(int nControllerType, unsigned char &nTypeValue1, unsigned char &nTypeValue2);
-Json::Value GetDefaultController(unsigned char &nProtocolVer, int &nControllerType);
-int GetControllerType(Json::Value Controller_obj);
+Json::Value GetControllerObject(const Json::Value &Controller_Supary, UINT nControllerType, BYTE &nProtocolVer);
+void GetController_DecomposeType(int nControllerType, BYTE &nTypeValue1, BYTE &nTypeValue2);
+Json::Value GetDefaultController(BYTE &nProtocolVer, UINT &nControllerType);
+UINT GetControllerType(Json::Value Controller_obj);
+UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine);

@@ -10,22 +10,26 @@
 extern Json::Value g_ControllerList_Obj;
 extern Json::Value g_Controller_Supary;
 
-static DWORD *g_pSingleColorFrameBitmapIDs = NULL;
-static DWORD *g_pMultiColorFrameBitmapIDs = NULL;
+static UINT *g_aryProFrameSingleColorBmp = NULL;
+static UINT *g_aryProFrameMuliColorBmp = NULL;
+static UINT g_argProFrameSingleColorBmpCount = 0;
+static UINT g_argProFrameMuliColorBmpCount = 0;
 
-void CreateFrameArray(int singleColorCount, int multiColorCount)
+void CreateFrameArray(UINT singleColorCount, UINT multiColorCount)
 {
-	g_pSingleColorFrameBitmapIDs = new DWORD[singleColorCount];
-	for (int i = 0; i < singleColorCount; i++)
+	g_aryProFrameSingleColorBmp = new UINT[singleColorCount];
+	for (UINT i = 0; i < singleColorCount; i++)
 	{
-		g_pSingleColorFrameBitmapIDs[i] = IDB_SINGLECOLOR_1 + i;
+		g_aryProFrameSingleColorBmp[i] = IDB_SINGLECOLOR_1 + i;
 	}
+	g_argProFrameSingleColorBmpCount = singleColorCount;
 
-	g_pMultiColorFrameBitmapIDs = new DWORD[multiColorCount];
-	for (int i = 0; i < multiColorCount; i++)
+	g_aryProFrameMuliColorBmp = new UINT[multiColorCount];
+	for (UINT i = 0; i < multiColorCount; i++)
 	{
-		g_pMultiColorFrameBitmapIDs[i] = IDB_MULTICOLOR_1 + i;
+		g_aryProFrameMuliColorBmp[i] = IDB_MULTICOLOR_1 + i;
 	}
+	g_argProFrameMuliColorBmpCount = multiColorCount;
 }
 
 void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary)
@@ -39,7 +43,7 @@ void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_
 			LPVOID pData = LockResource(hg);
 			if (pData)
 			{
-				DWORD dwSize = SizeofResource(GetModuleHandle(L"LedDynamicArea.dll"), hResource);
+				UINT dwSize = SizeofResource(GetModuleHandle(L"LedDynamicArea.dll"), hResource);
 				Json::Reader reader;
 				reader.parse((char*)pData, (char*)pData + dwSize, ControllerList_Obj, false);
 				Controller_Supary = ControllerList_Obj["ProtocolVer_List"];
@@ -61,11 +65,11 @@ int GetSelScreenArrayOrd(int nScreenNo, const Json::Value &Screen_Ja)
 	return -1;
 }
 
-Json::Value GetControllerObject(const Json::Value &Controller_Supary, int nControllerType, unsigned char &nProtocolVer)
+Json::Value GetControllerObject(const Json::Value &Controller_Supary, UINT nControllerType, unsigned char &nProtocolVer)
 {
 	Json::Value Result;
 	unsigned char nTypeValue1, nTypeValue2;
-	int nDefControllerType;
+	UINT nDefControllerType;
 
 	GetController_DecomposeType(nControllerType, nTypeValue1, nTypeValue2);
 	for (UINT i = 0; i < Controller_Supary.size(); ++i)
@@ -100,7 +104,7 @@ void GetController_DecomposeType(int nControllerType, unsigned char &nTypeValue1
 	nTypeValue2 = (nControllerType >> 8) & 0xFF;
 }
 
-Json::Value GetDefaultController(unsigned char &nProtocolVer, int &nControllerType)
+Json::Value GetDefaultController(unsigned char &nProtocolVer, UINT &nControllerType)
 {
 	int nDefProtocolVerIndex = g_ControllerList_Obj["DefProtocolVerIndex"].asInt();
 	UINT nDefControllerIndex = g_Controller_Supary[nDefProtocolVerIndex]["DefControllerIndex"].asUInt();
@@ -117,8 +121,26 @@ Json::Value GetDefaultController(unsigned char &nProtocolVer, int &nControllerTy
 	return Controller_obj;
 }
 
-int GetControllerType(Json::Value Controller_obj)
+UINT GetControllerType(Json::Value Controller_obj)
 {
 	return ((Controller_obj["Type_Value_2"].asInt() << 8) & 0xFF00) +
 		(Controller_obj["Type_Value_1"].asInt() & 0xFF);
+}
+
+UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine)
+{
+	UNREFERENCED_PARAMETER(nDY_AreaFMode);
+
+	if (nDY_AreaFLine < g_argProFrameSingleColorBmpCount)
+	{
+		HBITMAP hBmp = LoadBitmap(GetModuleHandle(L"LedDynamicArea.dll"), MAKEINTRESOURCE(g_aryProFrameSingleColorBmp[nDY_AreaFLine]));
+		BITMAP bmp;
+		GetObject(hBmp, sizeof(BITMAP), &bmp);
+		DeleteObject(hBmp);
+		return bmp.bmHeight;
+	}
+	else
+	{
+		return 1;
+	}
 }

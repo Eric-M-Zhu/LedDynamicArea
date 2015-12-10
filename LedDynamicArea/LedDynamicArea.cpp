@@ -6,6 +6,8 @@
 #include "MyDataType.h"
 #include "../jsoncpp/json.h"
 
+#include <list>
+
 #pragma comment(lib, "../Debug/jsoncpp.lib")
 #pragma comment(lib, "ws2_32.lib")
 
@@ -15,6 +17,7 @@ Json::Value g_ControllerList_Obj;
 Json::Value g_Controller_Supary;
 static Json::Value devicelist_root;
 static Json::Value devicelist_ja;
+static std::list<PtagSendThread> g_lstSendThread;
 
 /*------------------------------------------------------------------------------ -
 ¹ý³ÌÃû:    Initialize
@@ -48,7 +51,11 @@ int __stdcall Initialize()
 int __stdcall Uninitialize()
 {
 	WSACleanup();
-	// TODO: Free send threads in list
+	for (std::list<PtagSendThread>::iterator iter = g_lstSendThread.begin(); iter != g_lstSendThread.end(); ++iter)
+	{
+		delete *iter;
+	}
+	g_lstSendThread.clear();
 	DeleteCriticalSection(&g_cs);
 	return RETURN_NOERROR;
 }
@@ -90,6 +97,7 @@ int __stdcall AddScreen_Dynamic(int nControlType, int nScreenNo, int nSendMode,
 	Json::Value Controller_obj;
 	Json::Value newScreen;
 	unsigned char nProtocolVer;
+	PtagSendThread pNewThread;
 	
 	if (nScreenOrd >= 0)
 	{
@@ -183,7 +191,20 @@ int __stdcall AddScreen_Dynamic(int nControlType, int nScreenNo, int nSendMode,
 	newScreen["Screen_Reserved8"] = "";
 	newScreen["Screen_lstDYArea"] = Json::arrayValue;
 	devicelist_ja.append(newScreen);
-	// TODO: new thread
+
+	pNewThread = new tagSendThread();
+	if (pNewThread)
+	{
+		memset(pNewThread, 0, sizeof(tagSendThread));
+		pNewThread->szScreenSrc = tmpSrc;
+	}
+	else
+	{
+		return RETURN_ERROR_OTHER;
+	}
+
+	g_lstSendThread.push_back(pNewThread);
+
 	return RETURN_NOERROR;
 }
 
@@ -264,9 +285,9 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 		{
 			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"] = 0;
 		}
-		/*devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFWidth'] : =
-			GetSelFrameWidth(devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFMode']
-				, devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFLine']);*/
+		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFWidth"] = 
+			GetSelFrameWidth(devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"].asUInt(),
+				devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"].asUInt());
 	}
 	else if (devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"].asInt() == 1)
 	{
@@ -274,9 +295,9 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 		{
 			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"] = 0;
 		}
-		/*devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFWidth'] : =
-			GetSelFrameWidth(devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFMode']
-				, devicelist_ja[nScreenOrd].A['Screen_lstDYArea'][nDYAreaOrd].I['DY_AreaFLine']);*/
+		devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFWidth"] = 
+			GetSelFrameWidth(devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFMode"].asUInt(),
+				devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AreaFLine"].asUInt());
 	}
 	else
 	{
