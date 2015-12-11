@@ -68,6 +68,11 @@ extern "C" {
 	LEDDYNAMICAREA_LIB_API int __stdcall AddScreenDynamicAreaText(int nScreenNo, int nDYAreaID,
 		const char *pText, int nShowSingle, const char *pFontName, int nFontSize,
 		int nBold, int nFontColor, int nStunt, int nRunSpeed, int nShowTime);
+	LEDDYNAMICAREA_LIB_API int __stdcall AddScreenDynamicAreaFile(int nScreenNo, int nDYAreaID,
+		const char *pFileName, int nShowSingle, const char *pFontName, int nFontSize, int nBold, int nFontColor,
+		int nStunt, int nRunSpeed, int nShowTime);
+	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreen_Dynamic(int nScreenNo);
+	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreenDynamicArea(int nScreenNo, int nDYAreaID);
 
 #undef LEDDYNAMICAREA_LIB_API
 
