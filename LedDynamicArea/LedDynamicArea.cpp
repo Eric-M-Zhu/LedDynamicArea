@@ -694,6 +694,50 @@ int __stdcall DeleteScreenDynamicArea(int nScreenNo, int nDYAreaID)
 	return RETURN_NOERROR;
 }
 
+/*------------------------------------------------------------------------------ -
+过程名:    DeleteScreenDynamicAreaFile
+	删除动态库中指定显示屏指定的动态区域指定文件信息；该函数不与显示屏通讯。
+	参数 :
+nScreenNo：显示屏屏号；该参数与AddScreen_Dynamic函数中的nScreenNo参数对应。
+nDYAreaID：动态区域编号；该参数与AddScreenDynamicArea函数中的nDYAreaID参数对应
+nFileOrd：动态区域的指定文件的文件序号；该序号按照文件添加顺序，从0顺序递增，如删除中间的文件，后面的文件序号自动填充。
+返回值 : 详见返回状态代码定义
+	------------------------------------------------------------------------------ - */
+
+int __stdcall DeleteScreenDynamicAreaFile(int nScreenNo, int nDYAreaID, int nFileOrd)
+{
+	int nScreenOrd, nDYAreaOrd;
+	PtagSendThread ptmptagSendThread;
+	Json::Value removedScreenDynamicAreaFile;
+
+	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+	if (nScreenOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_SCREENNO;
+	}
+
+	if ((g_lstSendThread.size() > (size_t)nScreenOrd) && (nScreenOrd >= 0))
+	{
+		ptmptagSendThread = g_lstSendThread[nScreenOrd];
+		if (ptmptagSendThread->bSending)
+		{
+			return RETURN_ERROR_NOW_SENDING;
+		}
+	}
+
+	nDYAreaOrd = GetSelScreenDYAreaOrd(nDYAreaID, devicelist_ja[nScreenOrd]["Screen_lstDYArea"]);
+	if (nDYAreaOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_DYNAMIC_AREA;
+	}
+	if ((size_t)nFileOrd >= devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["Area_lstfile"].size())
+	{
+		return RETURN_ERROR_NOFIND_AREA;
+	}
+	devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["Area_lstfile"].removeIndex(nFileOrd, &removedScreenDynamicAreaFile);
+	return RETURN_NOERROR;
+}
+
 static void SaveScreenInfoToFile()
 {
 	Json::FastWriter writer;

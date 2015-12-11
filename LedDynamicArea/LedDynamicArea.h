@@ -73,6 +73,7 @@ extern "C" {
 		int nStunt, int nRunSpeed, int nShowTime);
 	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreen_Dynamic(int nScreenNo);
 	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreenDynamicArea(int nScreenNo, int nDYAreaID);
+	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreenDynamicAreaFile(int nScreenNo, int nDYAreaID, int nFileOrd);
 
 #undef LEDDYNAMICAREA_LIB_API
 
