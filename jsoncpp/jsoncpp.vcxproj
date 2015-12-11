@@ -138,25 +138,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="autolink.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="features.h" />
-    <ClInclude Include="forwards.h" />
-    <ClInclude Include="json.h" />
-    <ClInclude Include="json_batchallocator.h" />
-    <ClInclude Include="reader.h" />
-    <ClInclude Include="value.h" />
-    <ClInclude Include="writer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="json_internalarray.inl" />
-    <None Include="json_internalmap.inl" />
-    <None Include="json_valueiterator.inl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="json_reader.cpp" />
     <ClCompile Include="json_value.cpp" />
     <ClCompile Include="json_writer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="reader.h" />
+    <ClInclude Include="value.h" />
+    <ClInclude Include="writer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
