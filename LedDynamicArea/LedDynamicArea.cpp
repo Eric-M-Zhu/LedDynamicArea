@@ -6,8 +6,9 @@
 #include "MyDataType.h"
 #include "../jsoncpp/json.h"
 
-#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <vector>
 
 #pragma comment(lib, "../Debug/jsoncpp.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -616,7 +617,49 @@ int __stdcall AddScreenDynamicAreaFile(int nScreenNo, int nDYAreaID,
 	return RETURN_NOERROR;
 }
 
+/*------------------------------------------------------------------------------ -
+过程名:    DeleteScreen_Dynamic
+	删除动态库中指定显示屏的所有信息；该函数不与显示屏通讯。
+	参数 :
+nScreenNo：显示屏屏号；该参数与AddScreen_Dynamic函数中的nScreenNo参数对应。
+返回值 : 详见返回状态代码定义
+	------------------------------------------------------------------------------ - */
+
+int __stdcall DeleteScreen_Dynamic(int nScreenNo)
+{
+	int nScreenOrd;
+	PtagSendThread ptmptagSendThread;
+	std::string v;
+	char screenOrdText[8];
+	Json::Value removedScreen;
+	
+	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+	v = _itoa(nScreenOrd, screenOrdText, 10);
+	v += "-";
+	if (nScreenOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_SCREENNO;
+	}
+
+	if ((g_lstSendThread.size() > (size_t)nScreenOrd) && (nScreenOrd >= 0))
+	{
+		ptmptagSendThread = g_lstSendThread[nScreenOrd];
+		if (ptmptagSendThread->bSending)
+		{
+			return RETURN_ERROR_NOW_SENDING;
+		}
+	}
+	
+	devicelist_ja.removeIndex(nScreenOrd, &removedScreen);
+	return RETURN_NOERROR;
+}
+
 static void SaveScreenInfoToFile()
 {
-
+	Json::FastWriter writer;
+	std::string jsonFileContent = writer.write(devicelist_root);
+	std::ofstream ofs;
+	ofs.open("screenlist.json");
+	ofs << jsonFileContent;
+	ofs.close();
 }
