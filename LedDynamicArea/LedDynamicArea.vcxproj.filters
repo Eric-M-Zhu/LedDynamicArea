@@ -24,12 +24,48 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Unit_build.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Global_Data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Global_Function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Json_String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CRC16.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CRC32.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedDynamicArea.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MyDataType.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit_build.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Global_Function.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CRC16.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CRC32.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

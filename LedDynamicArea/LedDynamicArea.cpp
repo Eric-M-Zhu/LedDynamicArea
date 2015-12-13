@@ -1,25 +1,19 @@
+#include "stdafx.h"
 #include "LedDynamicArea.h"
 
-#include <ctime>
-#include <windows.h>
-
 #include "MyDataType.h"
-#include "../jsoncpp/json.h"
-
-#include <algorithm>
-#include <fstream>
-#include <vector>
 
 #pragma comment(lib, "../Debug/jsoncpp.lib")
 #pragma comment(lib, "ws2_32.lib")
 
 static CRITICAL_SECTION g_cs;
 static WSADATA wsaData;
+static SOCKET g_socket;
 Json::Value g_ControllerList_Obj;
 Json::Value g_Controller_Supary;
 static Json::Value devicelist_root;
 static Json::Value devicelist_ja;
-static std::vector<PtagSendThread> g_lstSendThread;
+static vector<PtagSendThread> g_lstSendThread;
 
 static void SaveScreenInfoToFile();
 
@@ -55,7 +49,7 @@ int __stdcall Initialize()
 int __stdcall Uninitialize()
 {
 	WSACleanup();
-	for (std::vector<PtagSendThread>::iterator iter = g_lstSendThread.begin(); iter != g_lstSendThread.end(); ++iter)
+	for (vector<PtagSendThread>::iterator iter = g_lstSendThread.begin(); iter != g_lstSendThread.end(); ++iter)
 	{
 		delete *iter;
 	}
@@ -254,6 +248,9 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 	int nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
 	int nDYAreaOrd;
 	Json::Value newDynamicArea;
+	string szProRelate;
+	list<string> S;
+	DWORD I;
 
 	if (nScreenOrd < 0)
 	{
@@ -311,26 +308,17 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 
 	if (nAllProRelate == 0)
 	{
-		char *pszProRelate = new char[strlen(pProRelateList)];
+		szProRelate = pProRelateList;
+		S = SplitString(szProRelate, ",");
 
-		if (pszProRelate)
+		for (list<string>::iterator iter = S.begin(); iter != S.end(); ++iter)
 		{
-			char *pToken = NULL;
-
-			strcpy(pszProRelate, pProRelateList);
-			pToken = strtok(pszProRelate, ",");
-			while (pToken)
+			if (StrIsInt(*iter))
 			{
 				Json::Value proRelateID;
-				proRelateID["RelateProID"] = atoi(pToken);
+				proRelateID["RelateProID"] = *iter;
 				devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_ProRelateList"].append(proRelateID);
-				pToken = strtok(NULL, ",");
 			}
-			delete[] pszProRelate;
-		}
-		else
-		{
-			devicelist_ja[nScreenOrd]["Screen_lstDYArea"][nDYAreaOrd]["DY_AllProRelate"] = 1;
 		}
 	}
 	else
@@ -406,10 +394,10 @@ int __stdcall AddScreenDynamicAreaText(int nScreenNo, int nDYAreaID,
 {
 	int nScreenOrd, nDYAreaOrd;
 	PtagSendThread ptmptagSendThread;
-	std::string szFileName;
-	std::string szFontName;
+	string szFileName;
+	string szFontName;
 	UINT ntmpFileStyle;
-	std::string Ext;
+	string Ext;
 	Json::Value newAreaText;
 
 	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
@@ -533,11 +521,11 @@ int __stdcall AddScreenDynamicAreaFile(int nScreenNo, int nDYAreaID,
 {
 	int nScreenOrd, nDYAreaOrd;
 	PtagSendThread ptmptagSendThread;
-	std::string szFileName;
-	std::string szFontName;
+	string szFileName;
+	string szFontName;
 	int v6;
 	UINT ntmpFileStyle;
-	std::string Ext;
+	string Ext;
 	Json::Value newAreaFile;
 
 	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
@@ -564,7 +552,7 @@ int __stdcall AddScreenDynamicAreaFile(int nScreenNo, int nDYAreaID,
 	szFontName = pFontName;
 		
 	Ext = szFileName.substr(szFileName.find_last_of('.'));
-	std::transform(Ext.begin(), Ext.end(), Ext.begin(), ::toupper);
+	transform(Ext.begin(), Ext.end(), Ext.begin(), ::toupper);
 	if (Ext == ".BMP") //BMP文件
 	{
 		v6 = FILE_TYPE_BMP;
@@ -629,7 +617,7 @@ int __stdcall DeleteScreen_Dynamic(int nScreenNo)
 {
 	int nScreenOrd;
 	PtagSendThread ptmptagSendThread;
-	std::string v;
+	string v;
 	char screenOrdText[8];
 	Json::Value removedScreen;
 	
@@ -738,11 +726,124 @@ int __stdcall DeleteScreenDynamicAreaFile(int nScreenNo, int nDYAreaID, int nFil
 	return RETURN_NOERROR;
 }
 
+/*------------------------------------------------------------------------------ -
+过程名:    SendDynamicAreaInfoCommand
+	发送动态库中指定显示屏指定的动态区域信息到显示屏；该函数与显示屏通讯。
+	参数 :
+nScreenNo：显示屏屏号；该参数与AddScreen_Dynamic函数中的nScreenNo参数对应。
+nDYAreaID：动态区域编号；该参数与AddScreenDynamicArea函数中的nDYAreaID参数对应
+返回值 : 详见返回状态代码定义
+	------------------------------------------------------------------------------ - */
+
+int __stdcall SendDynamicAreaInfoCommand(int nScreenNo, int nDYAreaID)
+{
+	return RETURN_NOERROR;
+}
+//	int nScreenOrd, nDYAreaOrd;
+//	PtagSendThread ptmptagSendThread;
+//	string szSendBuf;
+//	UINT nSendLength, ntmpSendCmd, ntmpSendFileType;
+//	tagstruct_PHY1Header srt_PHY1Header;
+//	//lstSendPrograms: TList;
+//	ofstream fp;
+//	int Result;
+//
+//	__try
+//	{
+//		Result = RETURN_ERROR_OTHER; //其它错误
+//		EnterCriticalSection(&g_cs);
+//		__try
+//		{
+//			nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+//			if (nScreenOrd == -1)
+//			{
+//				return RETURN_ERROR_NOFIND_SCREENNO;
+//			}
+//
+//			if (g_lstSendThread.size() <= nScreenOrd)
+//			{
+//				return RETURN_ERROR_OTHER;
+//			}
+//			
+//		ptmptagSendThread = g_lstSendThread[nScreenOrd];
+//		if (ptmptagSendThread->bSending)
+//		{
+//			return RETURN_ERROR_NOW_SENDING;
+//		}
+//
+//		nDYAreaOrd = GetSelScreenDYAreaOrd(nDYAreaID, devicelist_ja[nScreenOrd]["Screen_lstDYArea"]);
+//		if (nDYAreaOrd == -1)
+//		{
+//			return RETURN_ERROR_NOFIND_DYNAMIC_AREA;
+//		}
+//		
+//		szSendBuf = MakeDynamicAreaInfo(nScreenOrd, nDYAreaOrd, devicelist_ja, nSendLength);
+//
+//		ntmpSendCmd = SEND_DYNAMIC_AREA_INFO;
+//		ntmpSendFileType = 0xFF;
+//
+//		memset(&srt_PHY1Header, 0, sizeof(srt_PHY1Header));
+//		srt_PHY1Header.DstAddr = 1;
+//		srt_PHY1Header.SrcAddr = 32768;
+//		srt_PHY1Header.ProtocolVer = PROTOCOLVER_FIFTH_DYNAMIC;
+//		srt_PHY1Header.Datalen = 1024;
+//
+//		switch (devicelist_ja[nScreenOrd]["Screen_SendMode"].asUInt())
+//		{
+//		case SEND_MODE_NETWORK:
+//		case SEND_MODE_Server_2G:
+//		case SEND_MODE_Server_3G:
+//			srt_PHY1Header.DstAddr = CONTROLLER_ADDRESS_WILDCARD;
+//			break;
+//		case SEND_MODE_SAVEFILE:
+//			{
+//				ofstream ofs;
+//				ofs.open(devicelist_ja[nScreenOrd]["Screen_CommandDataFile"].asString());
+//				ofs.close();
+//			}
+//			break;
+//		default:
+//			break;
+//		}
+//
+//		if devicelist_ja[nScreenOrd]["Screen_SendMode"]
+//in[SEND_MODE_NET, SEND_MODE_GPRS, SEND_MODE_WIFI, SEND_MODE_Server_2G, SEND_MODE_Server_3G] then
+//srt_PHY1Header.DstAddr : = CONTROLLER_ADDRESS_WILDCARD
+//else if devicelist_ja[nScreenOrd].I['Screen_SendMode'] = SEND_MODE_SAVEFILE then
+//begin
+//try
+//AssignFile(fp, devicelist_ja[nScreenOrd].S['Screen_CommandDataFile']);
+//Rewrite(fp, 1);
+//BlockWrite(fp, szSendBuf[1], Length(szSendBuf));
+//finally
+//CloseFile(fp);
+//Result: = RETURN_NOERROR;
+//end;
+//Exit;
+//end
+//else
+//srt_PHY1Header.DstAddr : = devicelist_ja[nScreenOrd].I['Com_address'];
+//srt_PHY1Header.DeviceType : = devicelist_ja[nScreenOrd].I['Screen_control'];
+//finally
+//LeaveCriticalSection(CS);
+//end;
+//ptmptagSendThread.bSending : = true;
+//try
+//Result : = CreateSendThreadList(SEND_SINGLE_COMMUNICATION, $FF, nScreenOrd, Application.Handle
+//	, ptmptagSendThread, devicelist_ja, devicelist_ja[nScreenOrd].I['Screen_SendMode'],
+//	srt_PHY1Header, ntmpSendCmd, ntmpSendFileType, '', szSendBuf, nSendLength, lstSendPrograms, Application.Handle, False, '');
+//finally
+//ptmptagSendThread.bSending : = False;
+//end;
+//except
+//end
+//end;
+
 static void SaveScreenInfoToFile()
 {
 	Json::FastWriter writer;
-	std::string jsonFileContent = writer.write(devicelist_root);
-	std::ofstream ofs;
+	string jsonFileContent = writer.write(devicelist_root);
+	ofstream ofs;
 	ofs.open("screenlist.json");
 	ofs << jsonFileContent;
 	ofs.close();

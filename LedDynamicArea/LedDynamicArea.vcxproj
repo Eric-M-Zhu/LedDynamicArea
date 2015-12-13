@@ -83,8 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_USRDLL;LEDDYNAMICAREA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -147,13 +146,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CRC16.h" />
+    <ClInclude Include="CRC32.h" />
+    <ClInclude Include="Global_Data.h" />
+    <ClInclude Include="Global_Function.h" />
+    <ClInclude Include="Json_String.h" />
     <ClInclude Include="LedDynamicArea.h" />
     <ClInclude Include="MyDataType.h" />
+    <ClInclude Include="Phy01.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Unit_build.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CRC16.cpp" />
+    <ClCompile Include="CRC32.cpp" />
+    <ClCompile Include="Global_Function.cpp" />
     <ClCompile Include="LedDynamicArea.cpp" />
     <ClCompile Include="MyDataType.cpp" />
+    <ClCompile Include="Phy01.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Unit_build.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LedDynamicArea.rc" />

@@ -1,19 +1,45 @@
+#include "stdafx.h"
 #include "MyDataType.h"
-
-#include <string>
-#include <vector>
-
-#include <Windows.h>
 
 #include "resource.h"
 
 extern Json::Value g_ControllerList_Obj;
 extern Json::Value g_Controller_Supary;
 
-static UINT *g_aryProFrameSingleColorBmp = NULL;
-static UINT *g_aryProFrameMuliColorBmp = NULL;
+
 static UINT g_argProFrameSingleColorBmpCount = 0;
 static UINT g_argProFrameMuliColorBmpCount = 0;
+
+SysParameter Syssetup;
+BYTE g_aryCRC16Byte[512];
+string g_szCRC16Str;
+static UINT *g_aryProFrameSingleColorBmp = NULL;
+static UINT *g_aryProFrameMuliColorBmp = NULL;
+tagCommStatusRecord g_arytagCommStatusRecord;
+string g_szAppPath;
+
+bool StrIsInt(string Source)
+{
+	if (Source.size() == 0)
+	{
+		return false;
+	}
+	else
+	{
+		for (size_t i = 0; i < Source.size(); ++i)
+		{
+			if ((Source[i] < '0') || (Source[i] > '9'))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+}
+
+//------------------------------------------------------------------------------
+// 2012-12-30³ÌÐòÓÅ»¯
 
 void CreateFrameArray(UINT singleColorCount, UINT multiColorCount)
 {
@@ -174,4 +200,24 @@ int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja) //¸ù¾Ý¶¯Ì¬ÇøÓò±
 	}
 
 	return Result;
+}
+
+list<string> SplitString(string Source, string Deli)
+{
+	list<string> result;
+	char *pBuffer = new char[Source.size() + 1];
+	char *pToken = NULL;
+
+	strcpy(pBuffer, Source.c_str());
+	pToken = strtok(pBuffer, Deli.c_str());
+
+	while (pToken)
+	{
+		result.push_back(pToken);
+		pToken = strtok(NULL, Deli.c_str());
+	}
+
+	delete[] pBuffer;
+
+	return result;
 }

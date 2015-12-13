@@ -1,8 +1,5 @@
 #pragma once
 
-#include <windows.h>
-#include "../jsoncpp/json.h"
-
 const int FIND_SERIAL_PING_WAITOUT = 500; //ping命令的串口等待时间。
 const int FIND_NETWORK_PING_WAITOUT = 500; //ping命令的网口等待时间。
 
@@ -128,30 +125,30 @@ const int STUNT_CONTINUOUS_MOVE_DOWN = 40; //向下连移
 const UINT AreaMovieRunSpeed[16] = { 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 1 }; // 用于每一动画的运行帧速率
 
 //------------------------------------------------界面上所有的combobox进行参数设置
-const std::string COMBOBOX_TYPE_Pro_FrameStunt[7] = { "Flicker", "Clockwise rotation", "Counterclockwise rotation",
+const string COMBOBOX_TYPE_Pro_FrameStunt[7] = { "Flicker", "Clockwise rotation", "Counterclockwise rotation",
 	"Flicker and clockwise rotation", "Flicker and counterclockwise rotation", "Colors alternating", "Static" }; //边框的运行方式
-const std::string COMBOBOX_TYPE_Pro_FrameSpeed[16] = {
+const string COMBOBOX_TYPE_Pro_FrameSpeed[16] = {
 	"1(Fastest)", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16(Slowest)" }; // 边框的运行速度
-const std::string COMBOBOX_TYPE_Device_SendMode[3] = { "Serial communication", "Network Communication", "GPRS Communication" }; //发送模式
-const std::string COMBOBOX_TYPE_Device_Color[3] = { "Single color", "Two colors", "Three colors" }; //颜色
-const std::string COMBOBOX_TYPE_Device_DA[2] = { "Negative", "Positive" }; //DA极性
-const std::string COMBOBOX_TYPE_Device_OE[2] = { "Low", "High" }; //OE极性
-const std::string COMBOBOX_TYPE_Device_RowOrder[3] = { "Normal", "+1", "-1" }; //行顺序
-const std::string COMBOBOX_TYPE_Device_MirrorMode[2] = { "Normal", "Mirror" }; //数据流向
+const string COMBOBOX_TYPE_Device_SendMode[3] = { "Serial communication", "Network Communication", "GPRS Communication" }; //发送模式
+const string COMBOBOX_TYPE_Device_Color[3] = { "Single color", "Two colors", "Three colors" }; //颜色
+const string COMBOBOX_TYPE_Device_DA[2] = { "Negative", "Positive" }; //DA极性
+const string COMBOBOX_TYPE_Device_OE[2] = { "Low", "High" }; //OE极性
+const string COMBOBOX_TYPE_Device_RowOrder[3] = { "Normal", "+1", "-1" }; //行顺序
+const string COMBOBOX_TYPE_Device_MirrorMode[2] = { "Normal", "Mirror" }; //数据流向
 
 const UINT BaudRate[2] = { 9600, 57600 };
 const int SCREEN_ADDRESS_LISTCOUNT = 5;
 const int PRO_FRAME_LENGTH = 32; //节目流水边框图案属性为的定长为32.
 const int PRO_FRAME_MAX_HEIGHT = 8; //节目流水边框图案最大高度.
-const std::string USER_PASSWORD_ADMIN = "888";
-const std::string USER_PASSWORD_GUEST = "168";
-const std::string USER_PASSWORD_SUPER = "onbonbx";
+const string USER_PASSWORD_ADMIN = "888";
+const string USER_PASSWORD_GUEST = "168";
+const string USER_PASSWORD_SUPER = "onbonbx";
 const int GROUP_MAX_LEVEL = 5; //分组的最大级别数。从0开始。
 const int AREA_SHOWTIME_BASIC = 50; //目前控制器的停留时间为10毫秒；但图文、字幕区域的基本单位为0.5秒；因此此处为500/10=50；
-const std::string SERIAL_PORT_NONE = "COM0"; //无串口标志；当设定为该串口是提示用户选择串口
+const string SERIAL_PORT_NONE = "COM0"; //无串口标志；当设定为该串口是提示用户选择串口
 const int CONTROLLER_ADDRESS_WILDCARD = 0xFFFE; //控制器地址通配符
-const std::string NET_UDP_BROADCAST = "255.255.255.255"; //用于计算机网络直连情况下UDP的直连IP地址。
-const std::string NET_AUTO_MAC = "00-FF-FE"; //自动生成MAC地址的前三段；
+const string NET_UDP_BROADCAST = "255.255.255.255"; //用于计算机网络直连情况下UDP的直连IP地址。
+const string NET_AUTO_MAC = "00-FF-FE"; //自动生成MAC地址的前三段；
 const int PROGRAM_FRAME_MAX_WIDTH = 8; //流水边框最大值
 const int COMPORT_MAX_READ_LENGTH = 4096; //从串口最大读取一包数据长度。
 const int COMPORT_MAX_READ_SLEEP_UNIT = 5; //从串口最大读取一包数据长度等待时间单位；毫秒。
@@ -284,11 +281,11 @@ const int FIRMWARE_UPDATE_OTHER = 50000;
 
 //------------------------------------------------------------------------------
 // USB资源存放目录
-const std::string USB_DISK_DIRCECTORY = "onbonbx";
-const std::string USB_DISK_OPTION_FILE = "bxconfig.bin";
-const std::string USB_DISK_PROGRAM_FILE = "bxdata.dat";
-const std::string USB_DISK_BXSET_FILE = "bxset.bin";
-const std::string USB_DISK_SET0_FILE = "SET0";
+const string USB_DISK_DIRCECTORY = "onbonbx";
+const string USB_DISK_OPTION_FILE = "bxconfig.bin";
+const string USB_DISK_PROGRAM_FILE = "bxdata.dat";
+const string USB_DISK_BXSET_FILE = "bxset.bin";
+const string USB_DISK_SET0_FILE = "SET0";
 //------------------------------------------------------------------------------
 
 const int MOVIE_AREA_SINGLE_FILE_MAX_LENGTH = 150 * 1024; //单个动画文件的最大数据量为150Kbytes
@@ -497,14 +494,14 @@ const int FILE_TYPE_TEXT = 15; //TEXT文本
 
 //------------------------------------------------------------------------------
 // 固定文件名称
-const std::string SEND_FIXEDFILE_PARAMETER = "C000";
-const std::string SEND_FIXEDFILE_SCREENSCAN = "S000";
-const std::string SEND_FIXEDFILE_FIRMWARE = "F001";
-const std::string SEND_FIXEDFILE_FIRMWARE2 = "F003";
-const std::string SEND_FIXEDFILE_FACTORYFIRMWARE = "F000";
-const std::string SEND_FIXEDFILE_FACTORYFIRMWARE2 = "F002";
-const std::string SEND_FIXEDFILE_INFORMATION = "I000";
-const std::string SEND_FIXEDFILE_LOGO = "A001"; //LOGO文件名称
+const string SEND_FIXEDFILE_PARAMETER = "C000";
+const string SEND_FIXEDFILE_SCREENSCAN = "S000";
+const string SEND_FIXEDFILE_FIRMWARE = "F001";
+const string SEND_FIXEDFILE_FIRMWARE2 = "F003";
+const string SEND_FIXEDFILE_FACTORYFIRMWARE = "F000";
+const string SEND_FIXEDFILE_FACTORYFIRMWARE2 = "F002";
+const string SEND_FIXEDFILE_INFORMATION = "I000";
+const string SEND_FIXEDFILE_LOGO = "A001"; //LOGO文件名称
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -643,8 +640,8 @@ const int ERR_OTHER = 0xFE; //Other Error;
 
 //------------------------------------------------------------------------------
 // 不同区域、不同控制卡的特技列表
-const std::string SINGLE_TEXT_STUNT[1] = { "Continuous move left" };
-const std::string BX3T_BMPTEXT_STUNT[] = { "Random" //随机显示
+const string SINGLE_TEXT_STUNT[1] = { "Continuous move left" };
+const string BX3T_BMPTEXT_STUNT[] = { "Random" //随机显示
 	, "Static" //静态
 	, "Direct show" //快速打出
 	, "Move Left" //向左移动
@@ -687,7 +684,7 @@ const std::string BX3T_BMPTEXT_STUNT[] = { "Random" //随机显示
 //    , "Continuum Move Down" //向下连移
 };
 
-const std::string BX3A_BMPTEXT_STUNT[] = { "Random" //随机显示
+const string BX3A_BMPTEXT_STUNT[] = { "Random" //随机显示
 	, "Static" //静态
 	, "Direct show" //快速打出
 	, "Move Left" //向左移动
@@ -729,7 +726,7 @@ const std::string BX3A_BMPTEXT_STUNT[] = { "Random" //随机显示
 	, "Move Down" //向下移动
 	, "Continuum Move Down" }; //向下连移
 
-const std::string BXOTHER_A_BMPTEXT_STUNT[] = { "Random" //随机显示
+const string BXOTHER_A_BMPTEXT_STUNT[] = { "Random" //随机显示
 					, "Static" //静态
 					, "Direct show" //快速打出
 					, "Move Left" //向左移动
@@ -771,7 +768,7 @@ const std::string BXOTHER_A_BMPTEXT_STUNT[] = { "Random" //随机显示
 					, "Move Down" //向下移动
 					, "Continuum Move Down" }; //向下连移
 
-const std::string BXOTHER_BMPTEXT_STUNT[] = { "Random" //随机显示
+const string BXOTHER_BMPTEXT_STUNT[] = { "Random" //随机显示
 										 , "Static" //静态
 										 , "Direct show" //快速打出
 										 , "Move Left" //向左移动
@@ -834,25 +831,25 @@ const int clred = 0;
 const int cllime = 1;
 const int clYellow = 2;
 const int Colors[3] = { clred, cllime, clYellow }; //
-const std::string ymdlist[] = {
+const string ymdlist[] = {
 	"2003年12月30日", "00年12月30日", "12/30/2000", "2000/12/30", "00-12-30", "00.12.30",
 	"12月30日", "12.30.2000", "2000-12-30", "30 12 2000", "30:12:2000", "30:00:00",
 	"2000", "12", "30" };
-const std::string ymdreallist[] = {
+const string ymdreallist[] = {
 "[Y1]年[M1]月[D1]日", "[Y2]年[M1]月[D1]日", "[M1]/[D1]/[Y1]", "[Y1]/[M1]/[D1]",
 "[Y2]-[M1]-[D1]", "[Y2].[M1].[D1]", "[M1]月[D1]日", "[M1].[D1].[Y1]",
 "[Y1]-[M1]-[D1]", "[D1] [M1] [Y1]", "[D1]:[M1]:[Y1]", "[D1]:[M1]:[Y2]",
 "[Y1]", "[M1]", "[D1]" };
-const std::string weeklist[] = { "星期一", "Wednesday", "Tues" };
-const std::string timelist[] = {
+const string weeklist[] = { "星期一", "Wednesday", "Tues" };
+const string timelist[] = {
 	"20时59分59秒", "20時59分59秒", "20:59:59", "20 59 59", "8 59 59", "20时59分",
 	"20時59分", "20:59", "上午", "AM", "20(时)", "59(分)", "59(秒)", "上午 8:59",
 	"AM 8:59", "8:59 AM", "AM 8 59", "8 59 AM", "8:59 上午" };
-const std::string timereallist[] = {
+const string timereallist[] = {
 	"[H1]时[N1]分[S1]秒", "[H1]時[N1]分[S1]秒", "[H1]:[N1]:[S1]", "[H1] [N1] [S1]", "[H2] [N1] [S1]",
 	"[H1]时[N1]分", "[H1]時[N1]分", "[H1]:[N1]", "[P1]", "[P2]", "[H1]", "[N1]", "[S1]", "[P1] [H2]:[N1]",
 	"[P2] [H2]:[N1]", "[H2]:[N1] [P2]", "[P2] [H2] [N1]", "[H2] [N1] [P2]", "[H2]:[N1] [P1]" };
-const std::string stylearr[] = {
+const string stylearr[] = {
 "year_list", "month_list", "day_list", "hour_list", "minute_list", "second_list",
 "ampm_list", "week_list", "bp_list", "js_list", "jr_list", "ymd_list", "hns_list" };
 //-----------------------------------------------------------------------
@@ -901,7 +898,7 @@ typedef enum
 
 typedef struct
 {
-	std::string szCom;
+	string szCom;
 	UINT nComBaud;
 	UINT nComDataBits;
 	UINT nComStopBits;
@@ -932,9 +929,9 @@ typedef struct
 {
 	BYTE nScreen_Scan; //扫描方式;1/16:0x10;1/8:0x08;1/4:0x04;1/2:0x02;静态:0x01
 	UINT nData_FlowLength; //数据流向描述长度
-	std::string szData_Flow; //数据流向描述
+	string szData_Flow; //数据流向描述
 	UINT nData_Flow_MemoLength; //备注信息长度
-	std::string szData_Flow_Memo; //备注信息
+	string szData_Flow_Memo; //备注信息
 	BYTE nData_Row_Per_Data; //一路数据带几行
 	BYTE nData_Decoder_Uen; //138译码是否使能
 	BYTE nData_U_Mode; //U型模式；默认为0:直行；1:U型模式
@@ -957,7 +954,7 @@ typedef struct
 typedef struct
 {
 	UINT nPercentValue; //发送百分比。
-	std::string szMessagestr; //发送状态显示字符串
+	string szMessagestr; //发送状态显示字符串
 } tagSendStatus, *PtagSendStatus;
 
 //发送线程结构体
@@ -967,15 +964,15 @@ typedef struct
 	UINT nIndex; //在显示列表中的序号。        只有当nSingleOrMulti=0时该参数才有效。
 	UINT nScreenOrd; //显示屏序号；
 	HANDLE hdlResultForm; //返回窗口的句柄
-	std::string szScreenSrc; //显示屏名称
+	string szScreenSrc; //显示屏名称
 							 //    SendThread: TCommunicate; //发送线程
 	bool bSending; //True:正在发送过程中；False:目前为空闲状态；
 	UINT nSendCmd; //发送类型
 	BYTE nFileType; //如果发送的是文件，读取文件文件类型。
-	std::string szReadBuf; //返回的数据
+	string szReadBuf; //返回的数据
 	UINT nReadLength; //返回数据长度。
 	bool bReadSaveAs; //读回的数据是否保存；//False:不保存；True:保存
-	std::string szReadFile; //返回数据保存的文件名
+	string szReadFile; //返回数据保存的文件名
 	BYTE nSendedStatus; //发送完成并且成功标志 :0:正在发送中，且没有完成；1：发送完成，但没有发送成功；2：发送完成且成功。 发送完成后要删除该结构指针的；3：发送ping命令返回发现参数不对应。
 	UINT nErrorNumber; //发送错误代码编码；针对NOACK返回错误代码
 } tagSendThread, *PtagSendThread;
@@ -983,25 +980,25 @@ typedef struct
 typedef struct
 {
 	UINT nParentIndex; //父节点序号
-	std::string szScreenSrc; //显示屏名称
+	string szScreenSrc; //显示屏名称
 } tagScreenNodeData, *PtagScreenNodeData;
 
 typedef struct
 {
-	std::string szSendbuf;
+	string szSendbuf;
 	UINT nSendLength;
 	UINT nSendnSectors; //计算出当前节目所占扇区。
-	std::string szSendFile; //发送的节目文件名称
-	std::string szSendCRC; //发送的节目文件CRC32校验值。
+	string szSendFile; //发送的节目文件名称
+	string szSendCRC; //发送的节目文件CRC32校验值。
 	bool bNeedSend; //默认需要发送；True
-	std::string szSendMessage;
+	string szSendMessage;
 } tagSendInfo, *PtagSendInfo;
 
 typedef struct
 {
-	std::string szQueryFile; //接收到节目文件名称
+	string szQueryFile; //接收到节目文件名称
 	UINT nQueryFileLength; //接收到的节目文件长度
-	std::string szQueryCRC; //接收的节目文件CRC32校验值。
+	string szQueryCRC; //接收的节目文件CRC32校验值。
 	bool bNeedDelete; //默认需要删除True；读出的文件校验一致时不用删除文件；其它的文件一致、校验不一致，读出的文件PC机不存在时删除文件。
 } tagReadDir, *PtagReadDir;
 
@@ -1009,7 +1006,7 @@ typedef struct
 typedef struct
 {
 	HANDLE CommPort;
-	std::string szCommName; //串口的编号
+	string szCommName; //串口的编号
 	UINT nCommBaud; //串口波特率
 	UINT nCommDataBits; //串口数据位
 	UINT nCommStopBits; //串口停止位
@@ -1030,8 +1027,8 @@ typedef struct
 {
 	UINT Network_Mode; //0:单机直连；1：固定IP模式；2：服务器模式。
 	UINT nServerMode; //0:服务器模式未启动；1：服务器模式启动。
-	std::string szServerMode_ID; //服务器模式时的网络ID编号。
-	std::string Network_IP; //网络IP地址
+	string szServerMode_ID; //服务器模式时的网络ID编号。
+	string Network_IP; //网络IP地址
 	UINT Network_Port; //网络端口
 	SOCKET Network_Skt; //Socket套接字
 	UINT nPackageDataLength; //发送每包数据大小；单位：字节
@@ -1044,9 +1041,9 @@ typedef struct
 
 	//中转服务器使用
 	UINT Network_HwdId; //网络句柄，唯一值
-	std::string Barcodeid; //二维码
-	std::string Usename; //用户名
-	std::string Password; //密码
+	string Barcodeid; //二维码
+	string Usename; //用户名
+	string Password; //密码
 	BYTE errorid; //错误编号
 	UINT GPRSMODE; //gprs模式 0是2g   1是3g
 	bool start_send; //默认为false
@@ -1056,7 +1053,7 @@ typedef struct
 typedef struct
 {
 	UINT GPRS_Mode; //0:BX-GPRS模式。
-	std::string GPRS_ID; //GPRS终端编号
+	string GPRS_ID; //GPRS终端编号
 					 //    GPRS_UnitSize: Cardinal; //单位的分包大小
 					 //    Gprs_UnitTime: Cardinal; //单位的分包发送间隔
 	UINT nPackageDataLength; //发送每包数据大小；单位：字节
@@ -1116,7 +1113,7 @@ typedef struct
 typedef struct
 {
 	UINT nScreenOrd; //在devicelist_ja设备列表中的序号。
-	std::string szScreen_src; //显示屏编号。对应devicelist_ja中的Screen_src字段。
+	string szScreen_src; //显示屏编号。对应devicelist_ja中的Screen_src字段。
 	UINT nSendCmd; //集群发送命令字；
 	UINT nSended; //集群发送完成标志；$FF：无需发送；1：已经发送完成；0：未发送完成；2：正在发送过程中。
 	UINT nSendMode; //屏幕的通讯类型，默认为串口通信
@@ -1126,21 +1123,21 @@ typedef struct
 //服务器模式下ACK的LookUp结构。
 typedef struct
 {
-	std::string szServerAccessPassword;
-	std::string szIPAddress;
-	std::string szSubnetMask;
-	std::string szGateway;
+	string szServerAccessPassword;
+	string szIPAddress;
+	string szSubnetMask;
+	string szGateway;
 	UINT nPort;
-	std::string szMac;
-	std::string szNetwork_ID;
+	string szMac;
+	string szNetwork_ID;
 } tagServerModeLookUpRecord, *PtagServerModeLookUpRecord;
 
 typedef struct
 {
 	SOCKET socket; //Socket编号。
 	sockaddr_in addr;
-	std::string szNetworkID; //网络编号
-	std::string szRecvBuf;
+	string szNetworkID; //网络编号
+	string szRecvBuf;
 	UINT gbytes;
 	UINT nRecvLength;
 	bool bLogin; //是否登录
@@ -1156,7 +1153,7 @@ typedef struct
 
 typedef struct
 {
-	std::string IP; //IP地址
+	string IP; //IP地址
 	int port1; //端口1地址  BX-GPRS
 	int port2; //端口2地址  zw-GPRS
 	int port3; //端口2地址  QT-GPRS
@@ -1164,20 +1161,20 @@ typedef struct
 	int sendtime; //发送的超时时间和握手的超时时间
 	int refresh; //上线检测刷新时间
 	bool useuser; //使用用户登陆的功能
-	std::string urltime; //网络校时地址
+	string urltime; //网络校时地址
 	bool autotime; //自动运行校时
 	bool noblank; //使用不黑屏幕的方式  首尾连移
 	bool singalsend; //使用单发还是群发
 	bool bTiming_Communicaion; //是否定时发送信息。
 	UINT nTiming_Communication_CMD; //定时发送命令。
 	UINT nTiming_Communication_Interval; //定时发送间隔。
-	std::string ApplicationTitle;
+	string ApplicationTitle;
 	bool bShowHelpMenu;
 } SysParameter;
 
 typedef struct
 {
-	std::string szRELBuf;
+	string szRELBuf;
 	UINT nRELLength;
 	UINT nRELAddress;
 } tagUSBFirmwareRecord, *PtagUSBFirmwareRecord;
@@ -1208,14 +1205,40 @@ typedef enum
 	, seTranit_OK //与中转服务器通信成功
 } TSendError;
 
-void CreateFrameArray(UINT singleColorCount, UINT multiColorCount);
-void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary);
+//DWORD GetStrInt(string Str);
+bool StrIsInt(string Source);
+list<string> SplitString(string Source, string Deli);
+//COLORREF GetColorOrdToColorValue(DWORD nColorOrd);
+//void streamToBmp(ifstream Stream, DWORD Width, DWORD Height, DWORD ColorDepth, DWORD OffBits, HBITMAP &Bmp);
 
+//function GetNewProgramID(tmpProject_ja: TSuperArray) : Cardinal; //得到当前显示屏节目的默认名称。
+//function GetNewAreaID(tmpProject_ja: TSuperArray; nProID: Cardinal; nAreaType: Cardinal) : Cardinal; //得到当前节目内区域的默认名称。
+//function GetScreenColorType(nScreenColor: Cardinal) : Cardinal; //通过显示屏颜色序号得到显示屏的类型编码
+//function GetScreenColor(nScreenColorType: Cardinal) : Cardinal; //通过显示屏的类型编码得到显示屏颜色序号。
+//procedure GetProgramFrameColorBmp(canv: TCanvas; nWidth, nHeight, nColorOrd: Cardinal);
+//procedure DeleteDir(sDirectory: string);
+//function GetValidString(const Source, Ch: string) : string;
+void CreateFrameArray(UINT singleColorCount, UINT multiColorCount);
+UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine);
+//; var arySingleColorBmp: array of TBitmap;var aryMuliColorBmp: array of TBitmap);
+//procedure RestartApplication(bIsRunAgain: Boolean); // 重启软件
 int GetSelScreenArrayOrd(int nScreenNo, const Json::Value &Screen_Ja);
+int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja);
+//procedure SaveCurUSBOptive(nDataFormat, nSetParameter, nSetScanConfigurations, nAdjustLight, nTimerSwitch
+//	, nFirmwareUpdate, nProgramUpdate, nCorrectTime: Byte;
+//nAdvanceMinute, nAdvanceSecond: Byte; szSetupFile: WideString);
+
+//function GetBmpPixelFormat(nPx: Byte) : TPixelFormat;
+//procedure DoEvents;
+
+void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary);
 Json::Value GetControllerObject(const Json::Value &Controller_Supary, UINT nControllerType, BYTE &nProtocolVer);
-void GetController_DecomposeType(int nControllerType, BYTE &nTypeValue1, BYTE &nTypeValue2);
+//function GetControllerObject(Controller_Supary: TSuperArray;
+//const nProtocolVerOrd, nControllerTypeOrd: Cardinal;
+//var nProtocolVer : Byte) : ISuperObject; overload;
+void GetController_DecomposeType(int nControllerType, BYTE &nTypeValue1, BYTE &nTypeValue2);//通过控制卡型号得到控制卡的分解型号
 Json::Value GetDefaultController(BYTE &nProtocolVer, UINT &nControllerType);
 UINT GetControllerType(Json::Value Controller_obj);
-UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine);
-int GetSelScreenArrayOrd(int nScreenNo, Json::Value &Screen_Ja);
-int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja);
+
+//function UnicodeToAnsi(const s : string; const nLength : Cardinal) : string;
+//procedure SaveToFile(Text:string; Filename:String);
