@@ -11,7 +11,7 @@ void GetCRC32Check(const char *pData, DWORD nLength, DWORD &wcrcValue)
 	DWORD i;
 	BYTE nData;
 
-	for (i = 1; i < nLength; ++i)
+	for (i = 0; i < nLength; ++i)
 	{
 		nData = BYTE(*pData);
 		++pData;

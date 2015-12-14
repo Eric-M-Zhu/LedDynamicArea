@@ -250,7 +250,6 @@ int __stdcall AddScreenDynamicArea(int nScreenNo, int nDYAreaID, int nRunMode, i
 	Json::Value newDynamicArea;
 	string szProRelate;
 	list<string> S;
-	DWORD I;
 
 	if (nScreenOrd < 0)
 	{

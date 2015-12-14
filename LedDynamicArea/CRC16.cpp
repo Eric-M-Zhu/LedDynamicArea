@@ -9,9 +9,9 @@ void GetCRC(BYTE data, WORD &crc)
 void GetCRCCheck(const char *pData, DWORD nLength, WORD &wcrcValue)
 {
 	DWORD i;
-	DWORD nData;
+	BYTE nData;
 
-	for (i = 1; i < nLength; ++i)
+	for (i = 0; i < nLength; ++i)
 	{
 		nData = BYTE(*pData);
 		++pData;
