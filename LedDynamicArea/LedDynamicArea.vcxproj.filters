@@ -45,6 +45,12 @@
     <ClInclude Include="CRC32.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Phy01.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendCommUnit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedDynamicArea.cpp">
@@ -66,6 +72,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CRC32.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Phy01.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SendCommUnit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

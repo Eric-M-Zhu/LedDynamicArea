@@ -155,6 +155,7 @@
     <ClInclude Include="MyDataType.h" />
     <ClInclude Include="Phy01.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SendCommUnit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Unit_build.h" />
   </ItemGroup>
@@ -165,6 +166,7 @@
     <ClCompile Include="LedDynamicArea.cpp" />
     <ClCompile Include="MyDataType.cpp" />
     <ClCompile Include="Phy01.cpp" />
+    <ClCompile Include="SendCommUnit.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Unit_build.cpp" />
   </ItemGroup>

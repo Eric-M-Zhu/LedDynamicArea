@@ -6,6 +6,7 @@
 // Windows м╥нд╪Ч: 
 #include <windows.h>
 #include <winsock2.h>
+#include <tchar.h>
 
 #include <algorithm>
 #include <ctime>
