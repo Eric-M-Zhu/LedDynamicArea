@@ -5,7 +5,7 @@
 bool OpenSerialComm(tagSerialComm tag_SerialComm);
 bool CloseSerialComm(tagSerialComm tag_SerialComm);
 
-DWORD SendCommData(tagSerialComm tag_SerialComm, tagstruct_PHY1Header m_srt_PHY1Header, const char *pSendBuf, DWORD nSendLength,
+DWORD SendCommData(tagSerialComm tag_SerialComm, tagstruct_PHY1Header &m_srt_PHY1Header, const char *pSendBuf, DWORD nSendLength,
 	tagstruct_PHY1Header &m_srt_ReadPHY1Header, char *pReadBuf, DWORD &nReadLength);
 
 //GetReadInfo:从串口读到显示屏信息。ComPort：串口控件；nSleepValue:最大等待时间，单位毫秒；nSleepUnit：单位等待时间，单位毫秒；nReadLength：读到的数据长度；返回读到的数据。

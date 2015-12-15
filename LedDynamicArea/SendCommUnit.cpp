@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SendCommUnit.h"
+#include "Phy01.h"
 
 void EnumComPorts(list<string> &Ports)
 {
@@ -95,7 +96,7 @@ string GetReadInfo(HANDLE ComPort, DWORD nSleepValue, DWORD nSleepUnit, DWORD &n
 	DWORD n, nMaxReadLength, ncurReadLength;
 	char *Answer;
 	string Result;
-	COMMTIMEOUTS commTimeouts;
+	//COMMTIMEOUTS commTimeouts;
 
 	Result = "";
 	n = 0;
@@ -105,11 +106,11 @@ string GetReadInfo(HANDLE ComPort, DWORD nSleepValue, DWORD nSleepUnit, DWORD &n
 	nMaxReadLength = COMPORT_MAX_READ_LENGTH;
 	nCirculCount = nSleepValue / nSleepUnit;
 
-	GetCommTimeouts(ComPort, &commTimeouts);
-	commTimeouts.ReadIntervalTimeout = 0;
-	commTimeouts.ReadTotalTimeoutMultiplier = 0;
-	commTimeouts.ReadTotalTimeoutConstant = nSleepUnit;
-	SetCommTimeouts(ComPort, &commTimeouts);
+	//GetCommTimeouts(ComPort, &commTimeouts);
+	//commTimeouts.ReadIntervalTimeout = 0;
+	//commTimeouts.ReadTotalTimeoutMultiplier = 0;
+	//commTimeouts.ReadTotalTimeoutConstant = nSleepUnit;
+	//SetCommTimeouts(ComPort, &commTimeouts);
 
 	Answer = new char[nMaxReadLength];
 	if (Answer)
@@ -191,89 +192,82 @@ bool CloseSerialComm(tagSerialComm tag_SerialComm)
 	}
 }
 
+DWORD SendCommData(tagSerialComm tag_SerialComm, tagstruct_PHY1Header &m_srt_PHY1Header, const char *pSendBuf, DWORD nSendLength,
+	tagstruct_PHY1Header &m_srt_ReadPHY1Header, char *pReadBuf, DWORD &nReadLength)
+{
+	DWORD NumberOfWrite, Writting, NumberOfSend;
+	string Answer, Data;
+	DWORD nMaxReadLength;
+	string szAllSendBuf, szSendbuf;
+	string szReadBuf;
+	DWORD n;
+	DWORD m;
+	DWORD Result = 0;
+	COMMTIMEOUTS commTimeouts;
 
-				 // function SendCommData(tag_SerialComm: tagSerialComm; m_srt_PHY1Header: tagstruct_PHY1Header;
-			  //pSendBuf: pChar; nSendLength: Cardinal;
-				 // var m_srt_ReadPHY1Header : tagstruct_PHY1Header; pReadBuf: PChar; var nReadLength : Cardinal) : Cardinal;
-				 // var
-					//  NumberOfWrite, Writting, NumberOfSend: Cardinal;
-				 // Answer, Data      : string;
-			  //nMaxReadLength: Cardinal;
-				 // szAllSendBuf, szSendbuf: string;
-			  //szReadBuf: string;
-			  //n: Cardinal;
-			  //m: Cardinal;
-				 // begin
-					//  Result : = 0;
-				 // for m : = 1 to nSendLength do
-					//  begin
-					//  szSendbuf : = szSendbuf + pSendBuf^;
-				 // inc(pSendBuf);
-				 // end;
-				 // if tag_SerialComm.CommPort <> nil then
-					//  begin
-					//  GetAllPhy1Data(m_srt_PHY1Header, @szSendBuf[1], Length(szSendBuf), szAllSendBuf);
 
-				 // //串口设置////////////////////////
-				 // try
-					//  NumberOfWrite : = Length(szAllSendBuf);
-			  //nMaxReadLength: = 2048; // NumberOfWrite * 2;
-			  //Writting: = 1;
-				 // if NumberOfWrite >= tag_SerialComm.nSendUnit then
-					//  NumberOfSend : = tag_SerialComm.nSendUnit //须分块传送,一次一块,每块128字节
-				 // else NumberOfSend : = NumberOfWrite;
-				 // repeat
-					//  tag_SerialComm.CommPort.Write(szAllSendBuf[Writting], NumberofSend);
-			  //NumberOfWrite: = NumberOfWrite - NumberofSend;
-			  //Writting: = Writting + NumberofSend;
-				 // if NumberOfWrite < NumberOfSend then
-					//  NumberOfSend : = numberOfWrite;
-				 // Sleep(tag_SerialComm.nUnitSleepValue);
-				 // until(NumberOfWrite <= 0);
+	szSendbuf.append(pSendBuf, nSendLength);
+	if (tag_SerialComm.CommPort != INVALID_HANDLE_VALUE)
+	{
+		GetAllPhy1Data(m_srt_PHY1Header, pSendBuf, nSendLength, szAllSendBuf);
 
-			  //Data: = GetReadInfo(tag_SerialComm.CommPort, tag_SerialComm.nReadWaitTimeOut, COMPORT_MAX_READ_SLEEP_UNIT, nMaxReadLength);
-				 // if Length(Data) > 0 then
-					//  begin
-					//  szReadBuf : = GetReadPhy1Data(Data, m_srt_ReadPHY1Header, n);
-				 // if m_srt_PHY1Header.SrcAddr <> m_srt_ReadPHY1Header.DstAddr then
-					//  n : = ORD(seDstAddrError)
-				 // else if m_srt_PHY1Header.DstAddr <> m_srt_ReadPHY1Header.SrcAddr then
-					//  n : = ORD(seSrcAddrError)
-				 // else if m_srt_PHY1Header.ProtocolVer <> m_srt_ReadPHY1Header.ProtocolVer then
-					//  n : = ORD(seProtocolVerError);
-			  //nReadLength: = length(szReadBuf);
-				 // for m : = 1 to nReadLength do
-					//  begin
-					//  pReadBuf^ : = szReadBuf[m];
-				 // inc(pReadBuf);
-				 // end;
-				 // if n = Ord(SeNoAnswer) then
-					//  begin
-					//  Result : = ORD(SeNoAnswer);
-				 // end
-				 // else if n = Ord(seAnswerError) then
-					//  begin
-					//  Result : = ORD(seAnswerError);
-				 // end
-				 // else if n = Ord(seOK) then
-					//  begin
-					//  Result : = ORD(seOK);
-				 // end
-				 // else
-					//  begin
-					//  Result : = n;
-				 // end;
-				 // end
-				 // else if Length(Data) = 0 then
-					//  begin
-					//  Result : = ORD(SeNoAnswer);
-				 // end;
-				 // except
-					//  Result : = ORD(seOpenCommError);
-				 // end;
-				 // end
-				 // else
-					//  begin
-					//  Result : = ORD(seNoneSerialProt);
-				 // end;
-				 // end;
+		commTimeouts.ReadIntervalTimeout = 0;
+		commTimeouts.ReadTotalTimeoutMultiplier = 0;
+		commTimeouts.ReadTotalTimeoutConstant = tag_SerialComm.nReadWaitTimeOut;
+		commTimeouts.WriteTotalTimeoutMultiplier = 0;
+		commTimeouts.WriteTotalTimeoutConstant = 5000;
+		SetCommTimeouts(tag_SerialComm.CommPort, &commTimeouts);
+
+		NumberOfSend = 0;
+		NumberOfWrite = szAllSendBuf.size();
+
+		while (NumberOfWrite > 0)
+		{
+			DWORD writtenLength;
+			NumberOfSend = min(NumberOfWrite, tag_SerialComm.nSendUnit);
+			if (WriteFile(tag_SerialComm.CommPort, szAllSendBuf.c_str() + szAllSendBuf.size() - NumberOfWrite, NumberOfSend, &writtenLength, NULL))
+			{
+				if (NumberOfWrite > writtenLength)
+				{
+					NumberOfWrite -= writtenLength;
+				}
+				else
+				{
+					NumberOfWrite = 0;
+				}
+			}
+		}
+
+		Data = GetReadInfo(tag_SerialComm.CommPort, tag_SerialComm.nReadWaitTimeOut, COMPORT_MAX_READ_SLEEP_UNIT, nMaxReadLength);
+		if (Data.size() > 0)
+		{
+			szReadBuf = GetReadPhy1Data(Data, m_srt_PHY1Header, n);
+			if (m_srt_PHY1Header.SrcAddr != m_srt_ReadPHY1Header.DstAddr)
+			{
+				n = seDstAddrError;
+			}
+			else if (m_srt_PHY1Header.DstAddr != m_srt_ReadPHY1Header.SrcAddr)
+			{
+				n = seSrcAddrError;
+			}
+			else if (m_srt_PHY1Header.ProtocolVer != m_srt_ReadPHY1Header.ProtocolVer)
+			{
+				n = seProtocolVerError;
+			}
+			nReadLength = szReadBuf.size();
+			memcpy(pReadBuf, szReadBuf.c_str(), nReadLength);
+
+			Result = n;
+		}
+		else
+		{
+			Result = SeNoAnswer;
+		}
+	}
+	else
+	{
+		Result = seNoneSerialProt;
+	}
+
+	return Result;
+}
