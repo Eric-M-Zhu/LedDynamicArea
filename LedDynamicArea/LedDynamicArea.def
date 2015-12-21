@@ -1,0 +1,18 @@
+LIBRARY   LedDynamicArea
+
+EXPORTS
+Initialize
+Uninitialize
+AddScreen_Dynamic
+AddScreenDynamicArea
+AddScreenDynamicAreaText
+AddScreenDynamicAreaFile
+DeleteScreen_Dynamic
+DeleteScreenDynamicArea
+DeleteScreenDynamicAreaFile
+SendDeleteDynamicAreasCommand
+SendUpdateDynamicAreaPageInfoCommand
+SendDeleteDynamicAreaPageCommand
+SendDynamicAreaInfoCommand
+StartServer
+StopServer

@@ -1,9 +1,9 @@
 #ifndef _LEDDYNAMICAREA_H
 #define _LEDDYNAMICAREA_H
 
-#ifdef __cplusplus
+//#ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+//#endif // __cplusplus
 
 #ifdef _USRDLL
 #define LEDDYNAMICAREA_LIB_API __declspec(dllexport)
@@ -75,11 +75,19 @@ extern "C" {
 	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreenDynamicArea(int nScreenNo, int nDYAreaID);
 	LEDDYNAMICAREA_LIB_API int __stdcall DeleteScreenDynamicAreaFile(int nScreenNo, int nDYAreaID, int nFileOrd);
 
+	LEDDYNAMICAREA_LIB_API int __stdcall SendDynamicAreaInfoCommand(int nScreenNo, int nDYAreaID);
+	LEDDYNAMICAREA_LIB_API int __stdcall SendDeleteDynamicAreasCommand(int nScreenNo, int nDelAllDYArea, char *pDYAreaIDList);
+	LEDDYNAMICAREA_LIB_API int __stdcall SendUpdateDynamicAreaPageInfoCommand(int nScreenNo, int nDYAreaID, int nFileOrd, int nPageOrd);
+	LEDDYNAMICAREA_LIB_API int __stdcall SendDeleteDynamicAreaPageCommand(int nScreenNo, int nDYAreaID, char *pDYAreaPageOrdList);
+	LEDDYNAMICAREA_LIB_API int __stdcall StartServer(int nSendMode, char *pServerIP, int nServerPort);
+	LEDDYNAMICAREA_LIB_API int __stdcall StopServer(int nSendMode);
+
+
 #undef LEDDYNAMICAREA_LIB_API
 
-#ifdef __cplusplus
+//#ifdef __cplusplus
 }
-#endif // __cplusplus
+//#endif // __cplusplus
 
 #endif // _LEDDYNAMICAREA_H
 

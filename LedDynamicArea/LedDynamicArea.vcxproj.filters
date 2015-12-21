@@ -51,6 +51,15 @@
     <ClInclude Include="SendCommUnit.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CommunicateClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendSocketUnit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedDynamicArea.cpp">
@@ -78,6 +87,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SendCommUnit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommunicateClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SendINfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SendSocketUnit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -300,5 +318,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\ControllerList.json" />
+    <None Include="LedDynamicArea.def">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

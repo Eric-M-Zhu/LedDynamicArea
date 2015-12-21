@@ -86,13 +86,14 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_USRDLL;LEDDYNAMICAREA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_USRDLL;LEDDYNAMICAREA_EXPORTS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>LedDynamicArea.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CommunicateClass.h" />
     <ClInclude Include="CRC16.h" />
     <ClInclude Include="CRC32.h" />
     <ClInclude Include="Global_Data.h" />
@@ -156,10 +158,13 @@
     <ClInclude Include="Phy01.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SendCommUnit.h" />
+    <ClInclude Include="SendInfo.h" />
+    <ClInclude Include="SendSocketUnit.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Unit_build.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommunicateClass.cpp" />
     <ClCompile Include="CRC16.cpp" />
     <ClCompile Include="CRC32.cpp" />
     <ClCompile Include="Global_Function.cpp" />
@@ -167,6 +172,8 @@
     <ClCompile Include="MyDataType.cpp" />
     <ClCompile Include="Phy01.cpp" />
     <ClCompile Include="SendCommUnit.cpp" />
+    <ClCompile Include="SendINfo.cpp" />
+    <ClCompile Include="SendSocketUnit.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Unit_build.cpp" />
   </ItemGroup>
@@ -246,6 +253,7 @@
     <Image Include="Res\SingleColor_9.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LedDynamicArea.def" />
     <None Include="Res\ControllerList.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

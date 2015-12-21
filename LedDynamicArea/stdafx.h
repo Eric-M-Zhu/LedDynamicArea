@@ -14,6 +14,7 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <map>
 
 #include "../jsoncpp/json.h"
 
