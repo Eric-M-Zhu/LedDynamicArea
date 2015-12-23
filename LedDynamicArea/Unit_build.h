@@ -146,7 +146,7 @@ string MakeScreenLOGOValue(Json::Value Screen_Supary, DWORD nScreenOrd, DWORD &n
 
 DWORD GetPageSize(DWORD nAllWidth, DWORD nHeight, DWORD nPx);
 
-void TranCanvToInfo(TBitmap Bmp, const char *pInfoBuf,
+void TranCanvToInfo(LPBYTE Bmp, string &pInfoBuf,
 	DWORD nLeft, DWORD nWidth, DWORD nHeight, DWORD nPx, DWORD nMkStyle, DWORD nPixType,
 	DWORD nControllerType, bool &bInvalidData);
 

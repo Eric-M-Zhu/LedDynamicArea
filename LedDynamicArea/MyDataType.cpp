@@ -235,3 +235,18 @@ list<string> SplitString(string Source, string Deli)
 
 	return result;
 }
+
+BYTE GetBmpPixelFormat(BYTE nPx)
+{
+	switch (nPx)
+	{
+	case SCREEN_COLOR_SINGLE:
+	case SCREEN_COLOR_DOUBLE:
+	case SCREEN_COLOR_THREE:
+		return 4;
+	case SCREEN_COLOR_FULLCOLOR:
+		return 24;
+	default:
+		return 4;
+	}
+}

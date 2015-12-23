@@ -1228,7 +1228,7 @@ int GetSelScreenDYAreaOrd(int nDYAreaID, Json::Value &DYArea_Ja);
 //	, nFirmwareUpdate, nProgramUpdate, nCorrectTime: Byte;
 //nAdvanceMinute, nAdvanceSecond: Byte; szSetupFile: WideString);
 
-//function GetBmpPixelFormat(nPx: Byte) : TPixelFormat;
+BYTE GetBmpPixelFormat(BYTE nPx);
 void DoEvents();
 
 void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary);

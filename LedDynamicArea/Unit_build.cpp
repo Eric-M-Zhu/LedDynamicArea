@@ -118,9 +118,9 @@ list<string> SplitString(const string &Source, const string &Deli)
 //SCREEN_COLOR_SINGLE, SCREEN_COLOR_DOUBLE, SCREEN_COLOR_THREE:
 //	begin
 //		iRightBit  = 0;
-//	if ((nLeft + nWidth) mod nPixType <> 0) then
-//		iRightBit  = nPixType - ((nLeft + nWidth) mod nPixType); //右边起始字节的多余位数
-//iLeftBit = nLeft mod nPixType; //左边起始字节的多余位数
+//	if ((nLeft + nWidth) % nPixType != 0) then
+//		iRightBit  = nPixType - ((nLeft + nWidth) % nPixType); //右边起始字节的多余位数
+//iLeftBit = nLeft % nPixType; //左边起始字节的多余位数
 //nAllWidth = iLeftBit + nWidth + iRightBit;
 //nDimensions = nAllWidth * nHeight;
 //bitsRed = TBits.Create;
@@ -160,7 +160,7 @@ list<string> SplitString(const string &Source, const string &Deli)
 //		bRed  = ColR > 127;
 //	if (bRed = True) then
 //		btmpInvalidData  = False;
-//	end;
+//	}
 //	if (nPx = SCREEN_COLOR_DOUBLE) then
 //		begin
 //		if (nMkStyle = DOUBLE_COLOR_PIXTYPE_1) then //双基色，R+G
@@ -180,19 +180,19 @@ list<string> SplitString(const string &Source, const string &Deli)
 //		bGreen  = ColG > 127;
 //	if (bGreen = True) then
 //		btmpInvalidData  = False;
-//	end;
+//	}
 //	if (nPx = SCREEN_COLOR_THREE) then
 //		begin
 //		bBlue  = ColB > 127;
 //	if (bBlue = True) then
 //		btmpInvalidData  = False;
-//	end;
+//	}
 //	bitsRed[nIndex]  = not bRed;
 //	bitsGreen[nIndex]  = not bGreen;
 //	bitsBlue[nIndex]  = not bBlue;
 //	Inc(nIndex);
-//	end;
-//	end;
+//	}
+//	}
 //	if (nPx = SCREEN_COLOR_THREE) then
 //		begin
 //		for I  = 1 to nDimensions div 8 do
@@ -209,7 +209,7 @@ list<string> SplitString(const string &Source, const string &Deli)
 //			 Inc(pInfoBuf);
 //			 pInfoBuf^  = char(byBlue);
 //			 Inc(pInfoBuf);
-//			 end;
+//			 }
 //			 end
 //	else if (nPx = SCREEN_COLOR_DOUBLE) then
 //				 begin
@@ -223,7 +223,7 @@ list<string> SplitString(const string &Source, const string &Deli)
 //		 Inc(pInfoBuf);
 //		 pInfoBuf^  = char(byGreen);
 //		 Inc(pInfoBuf);
-//		 end;
+//		 }
 //		 end
 //	else if (nPx = SCREEN_COLOR_SINGLE) then
 //			 begin
@@ -233,13 +233,13 @@ list<string> SplitString(const string &Source, const string &Deli)
 //					 + Ord(bitsRed[(I - 1) * 8 + 4]) shl 3 + Ord(bitsRed[(I - 1) * 8 + 5]) shl 2 + Ord(bitsRed[(I - 1) * 8 + 6]) shl 1 + Ord(bitsRed[(I - 1) * 8 + 7]);
 //			 pInfoBuf^  = char(byRed);
 //			 Inc(pInfoBuf);
-//			 end;
-//			 end;
+//			 }
+//			 }
 //			 FreeAndNil(bitsRed);
 //			 FreeAndNil(bitsGreen);
 //			 FreeAndNil(bitsBlue);
 //		 bInvalidData = btmpInvalidData;
-//			 end;
+//			 }
 //		 SCREEN_COLOR_FULLCOLOR:
 //			 begin
 //				 nAllWidth  = nWidth;
@@ -250,7 +250,7 @@ list<string> SplitString(const string &Source, const string &Deli)
 //				 p  = bmp.ScanLine[h - 1];
 //			 for W  = 1 to nAllWidth do
 //				 begin
-//				 if (p[(W - 1) * 2 + 1] <> 0) or (p[(W - 1) * 2] <> 0) then
+//				 if (p[(W - 1) * 2 + 1] != 0) or (p[(W - 1) * 2] != 0) then
 //					 btmpInvalidData  = False;
 //			 //双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
 //
@@ -259,11 +259,11 @@ list<string> SplitString(const string &Source, const string &Deli)
 //			 pInfoBuf^  = char(p[(W - 1) * 2 + 1] and 0xFF); //高字节
 //			 Inc(pInfoBuf);
 //
-//			 end;
-//			 end;
+//			 }
+//			 }
 //		 bInvalidData = btmpInvalidData;
 //			 DoEvents;
-//			 end;
+//			 }
 //		 SCREEN_COLOR_TWO_COLOR_GRAY:
 //			 begin
 //				 nAllWidth  = nWidth;
@@ -274,7 +274,7 @@ list<string> SplitString(const string &Source, const string &Deli)
 //				 p  = bmp.ScanLine[h - 1];
 //			 for W  = 1 to nAllWidth do
 //				 begin
-//				 if (p[(W - 1) * 2 + 1] <> 0) or (p[(W - 1) * 2] <> 0) then
+//				 if (p[(W - 1) * 2 + 1] != 0) or (p[(W - 1) * 2] != 0) then
 //					 btmpInvalidData  = False;
 //			 //双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
 //		 nFullColorPixelData = p[(W - 1) * 2] + (p[(W - 1) * 2 + 1] shl 8) and $FF00;
@@ -287,14 +287,121 @@ list<string> SplitString(const string &Source, const string &Deli)
 //			 Inc(pInfoBuf);
 //			 pInfoBuf^  = char((nFullColorPixelData shr 8) and $FF); //高字节
 //			 Inc(pInfoBuf);
-//			 end;
-//			 end;
+//			 }
+//			 }
 //		 bInvalidData = btmpInvalidData;
 //			 DoEvents;
-//			 end;
-//			 end;
-//			 end;
+//			 }
+//			 }
+//			 }
 
+DWORD calpagesize(DWORD left, DWORD width, DWORD nPx, DWORD nKardPixType)
+{
+	DWORD nStartPoint, nEndPoint;
+	DWORD nEndSpace, nStartSpace, nAllWidth;
+	DWORD Result;
+
+	switch (nPx)
+	{
+	case SCREEN_COLOR_SINGLE:
+	case SCREEN_COLOR_DOUBLE:
+	case SCREEN_COLOR_THREE:
+		/////////////////////////协议的头
+		nStartPoint = nKardPixType; //左边有效位数。
+		if ((left % nKardPixType) != 0)
+			nStartPoint = nKardPixType - left % nKardPixType;
+
+		nEndPoint = nKardPixType; //右边的有效位数
+		if ((left + width) % nKardPixType != 0)
+			nEndPoint = (left + width) % nKardPixType;
+
+		nStartSpace = left % nKardPixType; //左边的无效位数；
+
+		nEndSpace = 0; //右边的无效位数
+		if ((left + width) % nKardPixType != 0)
+			nEndSpace = nKardPixType - (left + width) % nKardPixType;
+
+		nAllWidth = width + nStartSpace + nEndSpace; //得到转换后的实际宽度
+		Result = nAllWidth;
+		break;
+	case SCREEN_COLOR_FULLCOLOR:
+		Result = width;
+		break;
+	}
+
+	return Result;
+}
+
+string MakeNULLArea(string szAreaName, DWORD w, DWORD h, DWORD x, DWORD nPx, DWORD nMkStyle, DWORD nKardPixType,
+	DWORD nScreenStyle, DWORD nStunt, DWORD nOutStunt, DWORD nRunSpeed, DWORD nShowTime,
+	DWORD nShowCount, DWORD nReserved1, DWORD nReserved2, DWORD nReserved3, DWORD nReserved4, DWORD nReserved5,
+	DWORD nReserved6, DWORD nReserved7)
+{
+	LPBYTE mBmpPage;
+	string szBmpTextBuf;
+	DWORD nAllWidth, nPageSize;
+	DWORD nCurAddress;
+	DWORD ncurPageAllLength;
+	string szcurPagebuf;
+	bool bInvalidData;
+	HWND hDestopWnd = GetDesktopWindow();
+	HDC hDesktopDC = GetWindowDC(hDestopWnd);
+	HDC hMemoryDC = CreateCompatibleDC(hDesktopDC);
+	BITMAPINFO bmpInfo;
+	int bytesPerLine = (w * 3 + 1) / 2 * 2;
+
+	nAllWidth = calpagesize(x, w, nPx, nKardPixType);
+	memset(&bmpInfo, 0, sizeof(BITMAPINFOHEADER));
+	bmpInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bmpInfo.bmiHeader.biWidth = w;
+	bmpInfo.bmiHeader.biHeight = h;
+	bmpInfo.bmiHeader.biPlanes = 1;
+	bmpInfo.bmiHeader.biSizeImage = bytesPerLine * h;
+	bmpInfo.bmiHeader.biBitCount = 24;
+
+	HBITMAP hCanvasBmp = CreateDIBSection(hMemoryDC, &bmpInfo, DIB_RGB_COLORS, (void**)&mBmpPage, NULL, 0);
+	HBITMAP hOldBmp = (HBITMAP)SelectObject(hMemoryDC, hCanvasBmp);
+	HBRUSH hBlackBrush = CreateSolidBrush(RGB(0, 0, 0));
+	RECT rect = { 0, 0, w, h };
+	HFONT hFont = CreateFont(10, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, TEXT("Tahoma"));
+
+	FillRect(hMemoryDC, &rect, hBlackBrush);
+	SetTextColor(hMemoryDC, RGB(255, 0, 0));
+	SelectObject(hMemoryDC, hFont);
+	TextOutA(hMemoryDC, 0, 0, szAreaName.c_str(), szAreaName.size());
+
+	szcurPagebuf = "";
+	szcurPagebuf.push_back(char(0)); //数据类型
+	szcurPagebuf.push_back(char(nStunt));
+	szcurPagebuf.push_back(char(nOutStunt));
+	szcurPagebuf.push_back(char(nRunSpeed));
+	szcurPagebuf.push_back(char(nShowTime & 0xFF));
+	szcurPagebuf.push_back(char((nShowTime >> 8) & 0xFF));
+	szcurPagebuf.push_back(char(nShowCount));
+	szcurPagebuf.push_back(char(nReserved1)); //保留字
+	szcurPagebuf.push_back(char(nReserved2)); //保留字
+	szcurPagebuf.push_back(char(nReserved3)); //保留字
+	szcurPagebuf.push_back(char(nReserved4)); //保留字
+	szcurPagebuf.push_back(char(nReserved5)); //保留字
+	szcurPagebuf.push_back(char(nReserved6));; //保留字
+
+	nCurAddress= szcurPagebuf.size();
+	nPageSize= GetPageSize(nAllWidth, h, nPx);
+	//SetLength(szcurPagebuf, nCurAddress + nPageSize);
+	//Inc(nCurAddress);
+	TranCanvToInfo(mBmpPage, szcurPagebuf, x, w, h, nPx, nMkStyle,
+		nKardPixType, nScreenStyle, bInvalidData);
+	ncurPageAllLength = szcurPagebuf.size();
+
+	szBmpTextBuf.push_back((char)(ncurPageAllLength & 0xFF));
+	szBmpTextBuf.push_back((char)((ncurPageAllLength >> 8) & 0xFF));
+	szBmpTextBuf.push_back((char)((ncurPageAllLength >> 16) & 0xFF));
+	szBmpTextBuf.push_back((char)((ncurPageAllLength >> 24) & 0xFF));
+	szBmpTextBuf.append(szcurPagebuf);
+
+	return szBmpTextBuf;
+}
 
 string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Screen_ja,
 	DWORD nSendLength)
