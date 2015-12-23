@@ -15,8 +15,8 @@ typedef DWORD TBitmap;
 const string stylelist[] = { "tm_year", "tm_month", "tm_day", "tm_hour",
 "tm_minute", "tm_second", "tm_apm", "tm_week", "tm_bp", "tm_js", "tm_jr",
 "tm_ymd", "tm_hns", "tm_txt" };
-const string stylearr[] = { "year_list", "month_list", "day_list", "hour_list", "minute_list", "second_list",
-"ampm_list", "week_list", "bp_list", "js_list", "jr_list", "ymd_list", "hns_list" };
+//const string stylearr[] = { "year_list", "month_list", "day_list", "hour_list", "minute_list", "second_list",
+//"ampm_list", "week_list", "bp_list", "js_list", "jr_list", "ymd_list", "hns_list" };
 const string Decimal[] = { "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
 const string Roman[] = { "XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI" };
 
@@ -52,10 +52,10 @@ string MakebmpTxt(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_Sc
 	DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle, TRVStyle t_rvstyle,
 	TTntMemo t_memo, TRVReportHelper t_RVReportHelper, Json::Value AreaFile_Obj,
 	DWORD nX, DWORD nY, DWORD nWidth, DWORD nHeight, DWORD &nFilePageCount); //打开txt文本文件 ,其中包含外部打开，是否使用单行或多行
-//string MakebmpText(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_ScreenColor,
-//	DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle, TRVStyle t_rvstyle,
-//	TTntMemo t_memo, TRVReportHelper t_RVReportHelper, Json::Value AreaFile_Obj,
-//	DWORD nX, DWORD nY, DWORD nWidth, DWORD nHeight, DWORD  &nFilePageCount); //文本
+string MakebmpText(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_ScreenColor,
+	DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle, TRVStyle t_rvstyle,
+	TTntMemo t_memo, TRVReportHelper t_RVReportHelper, Json::Value AreaFile_Obj,
+	DWORD nX, DWORD nY, DWORD nWidth, DWORD nHeight, DWORD  &nFilePageCount); //文本
 
 string MakebmpRTF(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_ScreenColor,
 	DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle,

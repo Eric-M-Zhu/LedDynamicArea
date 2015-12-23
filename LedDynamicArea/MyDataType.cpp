@@ -91,6 +91,20 @@ int GetSelScreenArrayOrd(int nScreenNo, const Json::Value &Screen_Ja)
 	return -1;
 }
 
+void DoEvents()
+{
+	MSG Msg;
+
+	while (PeekMessage(&Msg, NULL, 0, 0, 1))
+	{
+		if (Msg.message != 18)
+		{
+			TranslateMessage(&Msg);
+			DispatchMessage(&Msg);
+		}
+	}
+}
+
 Json::Value GetControllerObject(const Json::Value &Controller_Supary, UINT nControllerType, unsigned char &nProtocolVer)
 {
 	Json::Value Result;
