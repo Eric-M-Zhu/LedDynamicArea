@@ -2,6 +2,7 @@
 #include "Unit_build.h"
 
 #include "MyDataType.h"
+#include "TranInfo.h"
 
 #define NumCharSets 19
 
@@ -299,7 +300,7 @@ DWORD calpagesize(DWORD left, DWORD width, DWORD nPx, DWORD nKardPixType)
 {
 	DWORD nStartPoint, nEndPoint;
 	DWORD nEndSpace, nStartSpace, nAllWidth;
-	DWORD Result;
+	DWORD Result = width;
 
 	switch (nPx)
 	{
@@ -362,7 +363,7 @@ string MakeNULLArea(string szAreaName, DWORD w, DWORD h, DWORD x, DWORD nPx, DWO
 	HBITMAP hCanvasBmp = CreateDIBSection(hMemoryDC, &bmpInfo, DIB_RGB_COLORS, (void**)&mBmpPage, NULL, 0);
 	HBITMAP hOldBmp = (HBITMAP)SelectObject(hMemoryDC, hCanvasBmp);
 	HBRUSH hBlackBrush = CreateSolidBrush(RGB(0, 0, 0));
-	RECT rect = { 0, 0, w, h };
+	RECT rect = { 0, 0, (LONG)w, (LONG)h };
 	HFONT hFont = CreateFont(10, 0, 0, 0, FW_DONTCARE, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
 		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, TEXT("Tahoma"));
 
@@ -399,6 +400,13 @@ string MakeNULLArea(string szAreaName, DWORD w, DWORD h, DWORD x, DWORD nPx, DWO
 	szBmpTextBuf.push_back((char)((ncurPageAllLength >> 16) & 0xFF));
 	szBmpTextBuf.push_back((char)((ncurPageAllLength >> 24) & 0xFF));
 	szBmpTextBuf.append(szcurPagebuf);
+
+	SelectObject(hMemoryDC, hOldBmp);
+	DeleteObject(hBlackBrush);
+	DeleteObject(hFont);
+	DeleteObject(hCanvasBmp);
+	DeleteDC(hMemoryDC);
+	ReleaseDC(hDestopWnd, hDesktopDC);
 
 	return szBmpTextBuf;
 }
@@ -521,13 +529,13 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 			{
 				switch (Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]["File_Style"].asUInt())
 				{
-				case FILE_TYPE_BMP:
-				case FILE_TYPE_JPG:
-					szTWSendBuf = szTWSendBuf + MakebmpJPGBMP(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels, nScreenPixType, nScreenStyle
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开图片文件，主要是外部打开
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
+				//case FILE_TYPE_BMP:
+				//case FILE_TYPE_JPG:
+				//	szTWSendBuf = szTWSendBuf + MakebmpJPGBMP(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels, nScreenPixType, nScreenStyle
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开图片文件，主要是外部打开
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
 				//case FILE_TYPE_GIF:
 				//	szTWSendBuf = szTWSendBuf + MakebmpGIF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels, nScreenPixType, nScreenStyle
 				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
@@ -600,7 +608,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 
 	Result = "";
 	Result.push_back((char)(1));
-	Result.push_back((char)0xA7);
+	Result.push_back((char)(BYTE)0xA7);
 	Result.push_back((char)(0));
 	Result.push_back((char)(0));
 	Result.push_back((char)(0));
@@ -618,39 +626,39 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 	return Result;
 }
 
-string MakebmpJPGBMP(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight
-	, DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType
-	, DWORD thrd_ScreenStyle, Json::Value AreaFile_Obj, DWORD nX, DWORD nY, DWORD nWidth
-	, DWORD nHeight, DWORD &nFilePageCount)
-{
-	string sztmpSendbuf;
-	DWORD nRealityRunSpeed, nDefaultRunSpeed;
-	DWORD ntmpFilePageCount, nRealPageCount;
-
-	nRealPageCount = 1;
-	nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
-		, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
-		, AreaFile_Obj["File_Speed"].asUInt()
-		, nDefaultRunSpeed);
-
-	sztmpSendbuf = MakebmpImage(AreaFile_Obj["File_Name"].asCString(), nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
-		, AreaFile_Obj["File_Stunt"].asUInt()
-		, AreaFile_Obj["File_OutsStunt"].asUInt()
-		, nRealityRunSpeed
-		, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
-		, AreaFile_Obj["File_ShowCount"].asUInt()
-		, AreaFile_Obj["File_Reserved1"].asUInt()
-		, AreaFile_Obj["File_Reserved2"].asUInt()
-		, AreaFile_Obj["File_Reserved3"].asUInt()
-		, AreaFile_Obj["File_Reserved4"].asUInt()
-		, AreaFile_Obj["File_Reserved5"].asUInt()
-		, AreaFile_Obj["File_Reserved6"].asUInt()
-		, AreaFile_Obj["File_Reserved7"].asUInt()
-		, nRealPageCount);
-	nFilePageCount = nRealPageCount;
-
-	return sztmpSendbuf;
-}
+//string MakebmpJPGBMP(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight
+//	, DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType
+//	, DWORD thrd_ScreenStyle, Json::Value AreaFile_Obj, DWORD nX, DWORD nY, DWORD nWidth
+//	, DWORD nHeight, DWORD &nFilePageCount)
+//{
+//	string sztmpSendbuf;
+//	DWORD nRealityRunSpeed, nDefaultRunSpeed;
+//	DWORD ntmpFilePageCount, nRealPageCount;
+//
+//	nRealPageCount = 1;
+//	nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+//		, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
+//		, AreaFile_Obj["File_Speed"].asUInt()
+//		, nDefaultRunSpeed);
+//
+//	sztmpSendbuf = MakebmpImage(AreaFile_Obj["File_Name"].asCString(), nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+//		, AreaFile_Obj["File_Stunt"].asUInt()
+//		, AreaFile_Obj["File_OutsStunt"].asUInt()
+//		, nRealityRunSpeed
+//		, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+//		, AreaFile_Obj["File_ShowCount"].asUInt()
+//		, AreaFile_Obj["File_Reserved1"].asUInt()
+//		, AreaFile_Obj["File_Reserved2"].asUInt()
+//		, AreaFile_Obj["File_Reserved3"].asUInt()
+//		, AreaFile_Obj["File_Reserved4"].asUInt()
+//		, AreaFile_Obj["File_Reserved5"].asUInt()
+//		, AreaFile_Obj["File_Reserved6"].asUInt()
+//		, AreaFile_Obj["File_Reserved7"].asUInt()
+//		, nRealPageCount);
+//	nFilePageCount = nRealPageCount;
+//
+//	return sztmpSendbuf;
+//}
 
 // --- Do not port this function now because don't know how to do--- //
 //string MakebmpRVF(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels
@@ -798,3 +806,205 @@ string MakebmpJPGBMP(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight
 //				Result= str2;
 //				nFilePageCount= nRealPageCount;
 //					end;
+
+//string MakebmpImage(string filename, DWORD w, DWORD h, DWORD x, DWORD nPx, DWORD nMkStyle,
+//	DWORD nKardPixType, DWORD nScreenStyle, DWORD nStunt, DWORD nOutStunt, DWORD nRunSpeed
+//	, DWORD nShowTime, DWORD nShowCount, DWORD nReserved1, DWORD nReserved2, DWORD nReserved3, DWORD nReserved4
+//	, DWORD nReserved5, DWORD nReserved6, DWORD nReserved7, DWORD &nRealPageCount)
+//{
+//	fstream fd;
+//	tmpBmp, mBmpPage, bmp: tbitmap;
+//FileHeader: TBitmapFileHeader;
+//InfoHeader: TBitmapInfoHeader;
+//szBmpTextBuf: string;
+//buf: array[0..1] of byte;
+//// MyJpg: TJpegImage;
+//realsp, nrepeatime: Cardinal;
+//nAllWidth, nPageSize: Cardinal;
+//nPageStyle: byte;
+//nCurAddress: Cardinal;
+//ncurPageAllLength: Cardinal;
+//szcurPagebuf: string;
+//graphics: IGPGraphics;
+//Image: IGPImage;
+//bInvalidData: Boolean;
+//sztmpFileName: Widestring;
+//fp: file;
+//I, J, nLength, nEncryptionLength: Cardinal;
+//szData, szEncryptionData, szEncryptionValue: string;
+//bGBX: Boolean;
+//begin
+//nAllWidth : = calpagesize(x, w, nPx, nKardPixType);
+//nPageStyle: = 0;
+//nrepeatime: = 0;
+//tmpBmp: = TBitmap.Create;
+////tmpBmp.PixelFormat := GetBmpPixelFormat(nPx);//pf4bit;
+//tmpBmp.Width : = w;
+//tmpBmp.height : = h;
+//tmpBmp.Canvas.Lock;
+//if WideFileExists(filename) then
+//begin
+//try
+//bGBX : = False;
+//sztmpFileName: = Copy(filename, 1, Length(filename) - 3) + 'GBX';
+//if WideFileExists(sztmpFileName) then
+//begin
+//AssignFile(fp, sztmpFileName);
+//try
+//Reset(fp, 1);
+//nLength: = FileSize(fp);
+//SetLength(szData, nLength);
+//BlockRead(fp, szData[1], nLength);
+//finally
+//CloseFile(fp);
+//end;
+//szEncryptionValue: = GIF_SECRET;
+//nEncryptionLength: = Length(szEncryptionValue);
+//szEncryptionData: = '';
+//for I : = 1 to nlength do
+//begin
+//J : = (I - 1) mod nEncryptionLength;
+//szEncryptionData: = szEncryptionData + Char(Byte(szData[I]) xor Byte(szEncryptionValue[J + 1]));
+//end;
+//sztmpFileName: = WideExtractFilePath(sztmpFileName) + 'GIF' + Format('%.4d', [YearOf(now)])
+//	+ Format('%.2d', [MonthOf(now)])
+//	+ Format('%.2d', [DayOf(now)])
+//	+ Format('%.2d', [HourOf(now)])
+//	+ Format('%.2d', [MinuteOf(now)])
+//	+ Format('%.2d', [SecondOf(now)])
+//	+ Format('%.3d', [MilliSecondOf(now)]);
+//			   AssignFile(fp, sztmpFileName);
+//			   try
+//				   Rewrite(fp, 1);
+//			   BlockWrite(fp, szEncryptionData[1], Length(szEncryptionData));
+//			   finally
+//				   CloseFile(fp);
+//			   end;
+//			   //FileSetAttr(sztmpFileName, faHidden);
+//		   bGBX: = True;
+//			   end
+//else
+//sztmpFileName : = filename;
+//
+//try
+//fd : = TtntFileStream.Create(sztmpFileName, fmShareDenyNone);
+//fd.Position : = 0;
+//fd.Position : = 0;
+//fd.Read(buf, 2);
+//fd.Position : = 0;
+//if (buf[0] = $42) and (buf[1] = $4D) then //bmp
+//begin
+//fd.Read(FileHeader, SizeOf(TBitmapFileHeader));
+//fd.Read(InfoHeader, SizeOf(TBitmapInfoHeader));
+//tmpBmp.Width : = InfoHeader.biWidth;
+//tmpBmp.Height : = InfoHeader.biheight;
+//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
+//streamToBmp(fd, tmpBmp.Width, tmpBmp.height, InfoHeader.biBitCount, FileHeader.bfOffBits, tmpBmp);
+//end else
+//if (buf[0] = $FF) and (buf[1] = $D8) then //jpg
+//begin
+//tmpBmp.Width : = w;
+//tmpBmp.height : = h;
+//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
+//Image: = TGPImage.Create(sztmpFileName);
+//bmp: = TBitmap.Create;
+//bmp.Canvas.Lock;
+////bmp.PixelFormat := GetBmpPixelFormat(nPx);//pf4bit;
+//bmp.Width : = Image.GetWidth;
+//bmp.height : = Image.GetHeight;
+//graphics: = TGPGraphics.Create(bmp.Canvas.Handle);
+//graphics.DrawImage(Image, 0, 0, bmp.Width, bmp.Height);
+//graphics: = nil;
+//Image: = nil;
+//tmpBmp.Canvas.StretchDraw(rect(0, 0, w, h), bmp);
+//bmp.Canvas.Unlock;
+//FreeAndNil(bmp);
+//end else //其他格式
+//begin
+//tmpBmp.Width : = w;
+//tmpBmp.height : = h;
+//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
+//end;
+//finally
+//fd.Position : = 0;
+//fd.Free;
+//end;
+//finally
+//if bGBX = True then
+//DeleteFile(sztmpFileName);
+//end;
+//end else
+//begin
+//tmpBmp.Width : = w;
+//tmpBmp.height : = h;
+//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Canvas.Font.Color : = clred;
+//tmpBmp.Canvas.Font.Size : = 9;
+//tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
+//tmpBmp.Canvas.TextOut(0, 0, 'NIL');
+//end;
+//
+//mBmpPage: = TBitmap.Create;
+////mBmpPage.PixelFormat :=GetBmpPixelFormat(nPx);// pf4bit;
+//mBmpPage.Width : = w;
+//mBmpPage.Height : = h;
+//mBmpPage.Canvas.Lock;
+//mBmpPage.Canvas.Brush.Color : = clBlack;
+//mBmpPage.Canvas.FillRect(Rect(0, 0, mBmpPage.Width, mBmpPage.Height));
+//mBmpPage.Canvas.StretchDraw(Rect(0, 0, w, h), tmpBmp);
+//
+//SetLength(szcurPagebuf, 0);
+//szcurPagebuf: = Char(nPageStyle) //数据类型
+//	+ Char(nStunt)
+//	+ Char(nOutStunt)
+//	+ Char(nRunSpeed)
+//	+ Char(nShowtime and $FF)
+//	+ Char((nShowtime shr 8) and $00FF)
+//	+ Char(nShowCount)
+//	+ Char(nReserved1) //保留字
+//	+ Char(nReserved2) //保留字
+//	+ Char(nReserved3) //保留字
+//	+ Char(nReserved4) //保留字
+//	+ Char(nReserved5) //保留字
+//	+ Char(nReserved6); //保留字
+//
+//nCurAddress: = Length(szcurPagebuf);
+//nPageSize: = GetPageSize(nAllWidth, h, nPx);
+//	SetLength(szcurPagebuf, nCurAddress + nPageSize);
+//	Inc(nCurAddress);
+//	//需要对无效页数据进行处理；图片区域无需处理 ；页数为1
+//nRealPageCount: = 1;
+//	TranCanvToInfo(mBmpPage, @szcurPagebuf[nCurAddress]
+//	, x, w, h, nPx, nMkStyle,
+//		nKardPixType, nScreenStyle, bInvalidData);
+//ncurPageAllLength: = length(szcurPagebuf);
+//szBmpTextBuf: = szBmpTextBuf + Char(ncurPageAllLength and $00FF)
+//	+ Char((ncurPageAllLength shr 8) and $00FF)
+//	+ Char((ncurPageAllLength shr 16) and $00FF)
+//	+ Char((ncurPageAllLength shr 24) and $00FF) + szcurPagebuf;
+//
+//			mBmpPage.Canvas.Unlock;
+//			tmpBmp.Canvas.Unlock;
+//			FreeAndNil(tmpBmp);
+//			FreeAndNil(mBmpPage);
+//		Result: = szBmpTextBuf;
+//end;
+
+DWORD GetPageSize(DWORD nAllWidth, DWORD nHeight, DWORD nPx)
+{
+	switch (nPx)
+	{
+	case SCREEN_COLOR_SINGLE:
+	case SCREEN_COLOR_DOUBLE: 
+	case SCREEN_COLOR_THREE:
+		return ((nAllWidth * nHeight) / 8) * nPx;
+		break;
+	case SCREEN_COLOR_FULLCOLOR:
+		return (nAllWidth * nHeight) * 2;
+	default:
+		return 0;
+	}
+}

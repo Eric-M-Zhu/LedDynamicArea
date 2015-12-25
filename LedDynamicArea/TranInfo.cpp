@@ -1,22 +1,23 @@
 #include "stdafx.h"
+#include "MyDataType.h"
 #include "TranInfo.h"
 
-extern Json::Value devicelist_ja;
-extern SYSTEMTIME StringToDatetime(string &DateStr);
+//extern Json::Value devicelist_ja;
+//extern SYSTEMTIME StringToDatetime(string &DateStr);
 
-string GetPowerONOFF(BYTE nPowerStatus, DWORD nProtocolVer, BYTE nRtnReq) //强制开关机命令信息
-{
-	string Result;
-	
-	Result.push_back((char)(0xA2));
-	Result.push_back((char)(05));
-	Result.push_back((char)(1));
-	Result.push_back((char)(0));
-	Result.push_back((char)(nPowerStatus));
-	if (nProtocolVer == PROTOCOLVER_FIFTH_CONTROL)
-		Result = (char)(nRtnReq) + Result;
-	return Result;
-}
+//string GetPowerONOFF(BYTE nPowerStatus, DWORD nProtocolVer, BYTE nRtnReq) //强制开关机命令信息
+//{
+//	string Result;
+//	
+//	Result.push_back((char)(0xA2));
+//	Result.push_back((char)(05));
+//	Result.push_back((char)(1));
+//	Result.push_back((char)(0));
+//	Result.push_back((char)(nPowerStatus));
+//	if (nProtocolVer == PROTOCOLVER_FIFTH_CONTROL)
+//		Result = (char)(nRtnReq) + Result;
+//	return Result;
+//}
 
 //string GetTimerONOFFInfo(Json::Value Screen_ja, DWORD nScreenOrd, DWORD nProtocolVer, BYTE nRtnReq) //定时开关机信息
 //{ 
@@ -1095,11 +1096,23 @@ SYSTEMTIME GetVersionDateTime(string szFirmWareVersion)
 
 DWORD GetControlStuntRealityRunSpeed(DWORD nWidth, DWORD nHeight, DWORD nScreenColor, DWORD nStuntIndex, DWORD nRunSpeed, DWORD &nDefaultRunSpeed)
 {
+	UNREFERENCED_PARAMETER(nWidth);
+	UNREFERENCED_PARAMETER(nHeight);
+	UNREFERENCED_PARAMETER(nScreenColor);
+	UNREFERENCED_PARAMETER(nStuntIndex);
+	UNREFERENCED_PARAMETER(nDefaultRunSpeed);
+
 	return nRunSpeed;
 }
 
 DWORD GetControlFrameStuntRealityRunSpeed(DWORD nWidth, DWORD nHeight, DWORD nScreenColor, DWORD nStuntIndex, DWORD nRunSpeed, DWORD &nDefaultRunSpeed)
 {
+	UNREFERENCED_PARAMETER(nWidth);
+	UNREFERENCED_PARAMETER(nHeight);
+	UNREFERENCED_PARAMETER(nScreenColor);
+	UNREFERENCED_PARAMETER(nStuntIndex);
+	UNREFERENCED_PARAMETER(nDefaultRunSpeed);
+
 	return nRunSpeed;
 }
 
@@ -1501,8 +1514,8 @@ string MakeDeleteDynamicAreas(string szDelAreaInfo, DWORD &nSendLength)
 	string Result;
 
 	Result += (char)(1);
-	Result += (char)(0xA7);
-	Result += (char)(0x01);
+	Result += (char)((BYTE)167);
+	Result += (char)((BYTE)1);
 	Result += (char)(0);
 	Result += (char)(0);
 	Result += szDelAreaInfo;
@@ -1515,8 +1528,8 @@ string MakeDeleteDynamicAreaPages(DWORD nDYAreaID, string szDelPageInfo, DWORD &
 {
 	string Result;
 	Result += (char)(1);
-	Result += (char)(0xA7);
-	Result += (char)(0x03);
+	Result += (char)((BYTE)167);
+	Result += (char)(3);
 	Result += (char)(0);
 	Result += (char)(0);
 	Result += (char)(nDYAreaID);

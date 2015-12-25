@@ -747,82 +747,84 @@ int __stdcall SendDynamicAreaInfoCommand(int nScreenNo, int nDYAreaID)
 	
 	//__try
 	//{
-		Result = RETURN_ERROR_OTHER; //其它错误
-		EnterCriticalSection(&g_cs);
+	Result = RETURN_ERROR_OTHER; //其它错误
+	EnterCriticalSection(&g_cs);
 		//__try
 		//{
-			nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
-			if (nScreenOrd == -1)
-			{
-				return RETURN_ERROR_NOFIND_SCREENNO;
-			}
+	nScreenOrd = GetSelScreenArrayOrd(nScreenNo, devicelist_ja);
+	if (nScreenOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_SCREENNO;
+	}
 
-			if (g_lstSendThread.size() <= nScreenOrd)
-			{
-				return RETURN_ERROR_OTHER;
-			}
+	if (g_lstSendThread.size() <= (size_t)nScreenOrd)
+	{
+		return RETURN_ERROR_OTHER;
+	}
 
-			ptmptagSendThread = g_lstSendThread[nScreenOrd];
-			if (ptmptagSendThread->bSending)
-			{
-				return RETURN_ERROR_NOW_SENDING;
-			}
+	ptmptagSendThread = g_lstSendThread[nScreenOrd];
+	if (ptmptagSendThread->bSending)
+	{
+		return RETURN_ERROR_NOW_SENDING;
+	}
 
-			nDYAreaOrd = GetSelScreenDYAreaOrd(nDYAreaID, devicelist_ja[nScreenOrd]["Screen_lstDYArea"]);
-			if (nDYAreaOrd == -1)
-			{
-				return RETURN_ERROR_NOFIND_DYNAMIC_AREA;
-			}
+	nDYAreaOrd = GetSelScreenDYAreaOrd(nDYAreaID, devicelist_ja[nScreenOrd]["Screen_lstDYArea"]);
+	if (nDYAreaOrd == -1)
+	{
+		return RETURN_ERROR_NOFIND_DYNAMIC_AREA;
+	}
 
-			// TODO: Uncomment following code
-			//szSendBuf = MakeDynamicAreaInfo(nScreenOrd, nDYAreaOrd, devicelist_ja, nSendLength);
+	// TODO: Uncomment following code
+	//szSendBuf = MakeDynamicAreaInfo(nScreenOrd, nDYAreaOrd, devicelist_ja, nSendLength);
 
-			ntmpSendCmd = SEND_DYNAMIC_AREA_INFO;
-			ntmpSendFileType = 0xFF;
+	ntmpSendCmd = SEND_DYNAMIC_AREA_INFO;
+	ntmpSendFileType = 0xFF;
 
-			memset(&srt_PHY1Header, 0, sizeof(srt_PHY1Header));
-			srt_PHY1Header.DstAddr = 1;
-			srt_PHY1Header.SrcAddr = 32768;
-			srt_PHY1Header.ProtocolVer = PROTOCOLVER_FIFTH_DYNAMIC;
-			srt_PHY1Header.Datalen = 1024;
+	memset(&srt_PHY1Header, 0, sizeof(srt_PHY1Header));
+	srt_PHY1Header.DstAddr = 1;
+	srt_PHY1Header.SrcAddr = 32768;
+	srt_PHY1Header.ProtocolVer = PROTOCOLVER_FIFTH_DYNAMIC;
+	srt_PHY1Header.Datalen = 1024;
 
-			switch (devicelist_ja[nScreenOrd]["Screen_SendMode"].asUInt())
-			{
-			case SEND_MODE_NETWORK:
-			case SEND_MODE_Server_2G:
-			case SEND_MODE_Server_3G:
-				srt_PHY1Header.DstAddr = CONTROLLER_ADDRESS_WILDCARD;
-				break;
-			case SEND_MODE_SAVEFILE:
-			{
-				ofstream ofs;
-				ofs.open(devicelist_ja[nScreenOrd]["Screen_CommandDataFile"].asString());
-				ofs.write(szSendBuf.c_str(), szSendBuf.size());
-				ofs.close();
-				Result = RETURN_NOERROR;
-				return Result;
-			}
-			default:
-				srt_PHY1Header.DstAddr = devicelist_ja[nScreenOrd]["Com_address"].asUInt();
-				srt_PHY1Header.DeviceType = devicelist_ja[nScreenOrd]["Screen_control"].asUInt();
-				break;
-			}
+	switch (devicelist_ja[nScreenOrd]["Screen_SendMode"].asUInt())
+	{
+	case SEND_MODE_NETWORK:
+	case SEND_MODE_Server_2G:
+	case SEND_MODE_Server_3G:
+		srt_PHY1Header.DstAddr = CONTROLLER_ADDRESS_WILDCARD;
+		break;
+	case SEND_MODE_SAVEFILE:
+	{
+		ofstream ofs;
+		ofs.open(devicelist_ja[nScreenOrd]["Screen_CommandDataFile"].asString());
+		ofs.write(szSendBuf.c_str(), szSendBuf.size());
+		ofs.close();
+		Result = RETURN_NOERROR;
+		return Result;
+	}
+	default:
+		srt_PHY1Header.DstAddr = devicelist_ja[nScreenOrd]["Com_address"].asUInt();
+		srt_PHY1Header.DeviceType = devicelist_ja[nScreenOrd]["Screen_control"].asUInt();
+		break;
+	}
 		//finally
 		//{
-			LeaveCriticalSection(&g_cs);
+	LeaveCriticalSection(&g_cs);
 		//}
 
-		ptmptagSendThread->bSending = true;
+	ptmptagSendThread->bSending = true;
 		//try
 			// TODO: Uncomment following code
 			/*Result = CreateSendThreadList(SEND_SINGLE_COMMUNICATION, 0xFF, nScreenOrd, Application.Handle
 				, ptmptagSendThread, devicelist_ja, devicelist_ja[nScreenOrd]["Screen_SendMode"].asUInt(),
 				srt_PHY1Header, ntmpSendCmd, ntmpSendFileType, "", szSendBuf, nSendLength, lstSendPrograms, Application.Handle, false, "");*/
 		//finally
-			ptmptagSendThread->bSending = false;
+	ptmptagSendThread->bSending = false;
 		//end;
 	/*except
 	}*/
+
+	return Result;
 }
 
 /*------------------------------------------------------------------------------ -
