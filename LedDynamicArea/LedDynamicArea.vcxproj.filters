@@ -60,6 +60,9 @@
     <ClInclude Include="SendSocketUnit.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TranInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedDynamicArea.cpp">
@@ -96,6 +99,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SendSocketUnit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TranInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

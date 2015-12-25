@@ -161,6 +161,7 @@
     <ClInclude Include="SendInfo.h" />
     <ClInclude Include="SendSocketUnit.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TranInfo.h" />
     <ClInclude Include="Unit_build.h" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClCompile Include="SendINfo.cpp" />
     <ClCompile Include="SendSocketUnit.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TranInfo.cpp" />
     <ClCompile Include="Unit_build.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -528,12 +528,12 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开图片文件，主要是外部打开
 					nTotlePagecount = nTotlePagecount + ntmpPageCount;
 					break;
-				case FILE_TYPE_GIF:
-					szTWSendBuf = szTWSendBuf + MakebmpGIF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels, nScreenPixType, nScreenStyle
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开GIF文件
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
+				//case FILE_TYPE_GIF:
+				//	szTWSendBuf = szTWSendBuf + MakebmpGIF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels, nScreenPixType, nScreenStyle
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开GIF文件
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
 				case FILE_TYPE_TXT:
 					szTWSendBuf = szTWSendBuf + MakebmpTxt(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
 						, nScreenPixType, nScreenStyle, t_rvstyle, t_memo, t_RVReportHelper
@@ -541,28 +541,28 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开txt文本文件 ,其中包含外部打开，是否使用单行或多行
 					nTotlePagecount = nTotlePagecount + ntmpPageCount;
 					break;
-				case FILE_TYPE_RTF:
-					szTWSendBuf = szTWSendBuf + MakebmpRTF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
-						, nScreenPixType, nScreenStyle, t_RVReportHelper
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开RTF文件，其中包含外部打开
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
-				case FILE_TYPE_TXTF:
-				case FILE_TYPE_TXTS:
-					szTWSendBuf = szTWSendBuf + MakebmpRVF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
-						, nScreenPixType, nScreenStyle, t_rvstyle, t_RVReportHelper
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开多行文本，单行文本RVF文t_rvstyle
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
-				case FILE_TYPE_TBF:
-					szTWSendBuf = szTWSendBuf + MakebmpGRID(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
-						, nScreenPixType, nScreenStyle, t_RVReportHelper
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开表格文件
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
+				//case FILE_TYPE_RTF:
+				//	szTWSendBuf = szTWSendBuf + MakebmpRTF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
+				//		, nScreenPixType, nScreenStyle, t_RVReportHelper
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开RTF文件，其中包含外部打开
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
+				//case FILE_TYPE_TXTF:
+				//case FILE_TYPE_TXTS:
+				//	szTWSendBuf = szTWSendBuf + MakebmpRVF(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
+				//		, nScreenPixType, nScreenStyle, t_rvstyle, t_RVReportHelper
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开多行文本，单行文本RVF文t_rvstyle
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
+				//case FILE_TYPE_TBF:
+				//	szTWSendBuf = szTWSendBuf + MakebmpGRID(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
+				//		, nScreenPixType, nScreenStyle, t_RVReportHelper
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开表格文件
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
 				case FILE_TYPE_TEXT:
 					szTWSendBuf = szTWSendBuf + MakebmpText(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
 						, nScreenPixType, nScreenStyle, t_rvstyle, t_memo, t_RVReportHelper
@@ -617,3 +617,184 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 	FreeAndNil(t_memo);*/
 	return Result;
 }
+
+string MakebmpJPGBMP(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight
+	, DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType
+	, DWORD thrd_ScreenStyle, Json::Value AreaFile_Obj, DWORD nX, DWORD nY, DWORD nWidth
+	, DWORD nHeight, DWORD &nFilePageCount)
+{
+	string sztmpSendbuf;
+	DWORD nRealityRunSpeed, nDefaultRunSpeed;
+	DWORD ntmpFilePageCount, nRealPageCount;
+
+	nRealPageCount = 1;
+	nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+		, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
+		, AreaFile_Obj["File_Speed"].asUInt()
+		, nDefaultRunSpeed);
+
+	sztmpSendbuf = MakebmpImage(AreaFile_Obj["File_Name"].asCString(), nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+		, AreaFile_Obj["File_Stunt"].asUInt()
+		, AreaFile_Obj["File_OutsStunt"].asUInt()
+		, nRealityRunSpeed
+		, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+		, AreaFile_Obj["File_ShowCount"].asUInt()
+		, AreaFile_Obj["File_Reserved1"].asUInt()
+		, AreaFile_Obj["File_Reserved2"].asUInt()
+		, AreaFile_Obj["File_Reserved3"].asUInt()
+		, AreaFile_Obj["File_Reserved4"].asUInt()
+		, AreaFile_Obj["File_Reserved5"].asUInt()
+		, AreaFile_Obj["File_Reserved6"].asUInt()
+		, AreaFile_Obj["File_Reserved7"].asUInt()
+		, nRealPageCount);
+	nFilePageCount = nRealPageCount;
+
+	return sztmpSendbuf;
+}
+
+// --- Do not port this function now because don't know how to do--- //
+//string MakebmpRVF(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels
+//	, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle, TRVStyle t_rvstyle, TRVReportHelper t_RVReportHelper,
+//	Json::Value AreaFile_Obj, DWORD nX, DWORD nY, DWORD nWidth, DWORD nHeight, DWORD &nFilePageCount) //手动添加的RVF文件
+//{
+//	fstream fd;
+//	DWORD realw, realh, nrealw;
+//	DWORD nPageSize, nAllWidth;
+//	DWORD ntmpPagecount;
+//	string str2;
+//	int i;
+//	DWORD nRealityRunSpeed, nDefaultRunSpeed;
+//	DWORD ntmpFilePageCount, nRealPageCount;
+//
+//	str2 = "";
+//	nRealPageCount= 0;
+///////////////////////////协议的头
+//	nAllWidth= calpagesize(nX, nWidth, thrd_ScreenColor, thrd_ScreenPixType);
+//	nPageSize= GetPageSize(nAllWidth, nHeight, thrd_ScreenColor) + 9;
+////算出每一页的数据的大小nPageSize
+//	t_RVReportHelper.RichView.Clear;
+//	t_RVReportHelper.RichView.DeleteUnusedStyles(true, true, true);
+//	if WideFileExists(AreaFile_Obj.S["File_Name"]) then //打开外部文件并判断RTF文件
+//	begin
+//	try
+//	fd = TtntFileStream.Create(AreaFile_Obj.S["File_Name"], fmShareDenyNone);
+//	fd.Position = 0;
+//	t_RVReportHelper.RichView.LoadRVFFromStream(fd);
+//	if AreaFile_Obj["File_ShowStyle"] = file_showstyle_single then
+//	begin
+//	for i = 0 to t_rvstyle.ParaStyles.Count - 1 do
+//	t_rvstyle.ParaStyles[i].Options = [rvpaoNoWrap, rvpaoDoNotWantReturns];
+//	end;
+//	finally
+//	fd.Free;
+//	end;
+//	end else //如果这个文本不存在，那么就直接拍一个黑屏，并显示NIL
+//	begin
+//	t_RVReportHelper.RichView.Clear;
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Color = clred;
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].FontName = "Tahoma";
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Size = 9;
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Unicode = True;
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].BackColor = clblack;
+//	t_RVReportHelper.RichView.AddNL(RVU_GetRawUnicode("NIL"), 0, 0);
+//	t_RVReportHelper.RichView.Format;
+//end;
+
+//if (AreaFile_Obj["File_ShowStyle"] = file_showstyle_single) then //单行的模式
+//begin
+//// realw :=
+//calRTFsingalpage(t_RVReportHelper, nWidth, nHeight, realw, realh, nrealw);
+//if ((realw mod nWidth) <> 0) or (realw = 0) then
+//ntmpFilePageCount = realw div nWidth + 1 else
+//ntmpFilePageCount = realw div nWidth;
+//FillPageInfo(t_RVReportHelper, nWidth, realh); //转换为图片
+//nRealityRunSpeed= GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+//, thrd_ScreenColor, AreaFile_Obj["File_Stunt"]
+//, AreaFile_Obj["File_Speed"]
+//, nDefaultRunSpeed);
+//	if AreaFile_Obj["File_Stunt"] = 38 then //向右连移
+//		str2 = str2 +
+//		MakeRightSigalImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+//			, AreaFile_Obj["File_Stunt"]
+//			, AreaFile_Obj["File_OutsStunt"]
+//			, nRealityRunSpeed
+//			, AreaFile_Obj["File_Showtime"] * AREA_SHOWTIME_BASIC
+//			, AreaFile_Obj["File_ShowCount"]
+//			, AreaFile_Obj["File_Reserved1"]
+//			, AreaFile_Obj["File_Reserved2"]
+//			, AreaFile_Obj["File_Reserved3"]
+//			, AreaFile_Obj["File_Reserved4"]
+//			, AreaFile_Obj["File_Reserved5"]
+//			, AreaFile_Obj["File_Reserved6"]
+//			, AreaFile_Obj["File_Reserved7"]
+//			, nrealw, False, nRealPageCount)
+//	else
+//		str2 = str2 +
+//		MakeSigalImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+//			, AreaFile_Obj["File_Stunt"]
+//			, AreaFile_Obj["File_OutsStunt"]
+//			, nRealityRunSpeed
+//			, AreaFile_Obj["File_Showtime"] * AREA_SHOWTIME_BASIC
+//			, AreaFile_Obj["File_ShowCount"]
+//			, AreaFile_Obj["File_Reserved1"]
+//			, AreaFile_Obj["File_Reserved2"]
+//			, AreaFile_Obj["File_Reserved3"]
+//			, AreaFile_Obj["File_Reserved4"]
+//			, AreaFile_Obj["File_Reserved5"]
+//			, AreaFile_Obj["File_Reserved6"]
+//			, AreaFile_Obj["File_Reserved7"]
+//			, nrealw, False, nRealPageCount);
+//	end else
+//		if AreaFile_Obj["File_Stunt"] = 6 then //向上连移
+//			begin
+//			FillPageInfoupscroll(t_RVReportHelper, nWidth, nHeight, ntmpPagecount);
+//ntmpFilePageCount= ntmpPagecount;
+//nRealityRunSpeed= GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+//	, thrd_ScreenColor, AreaFile_Obj["File_Stunt"]
+//	, AreaFile_Obj["File_Speed"]
+//	, nDefaultRunSpeed);
+//
+//			str2= str2 +
+//				MakePageImageupscroll(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+//					, AreaFile_Obj["File_Stunt"]
+//					, AreaFile_Obj["File_OutsStunt"]
+//					, nRealityRunSpeed
+//					, AreaFile_Obj["File_Showtime"] * AREA_SHOWTIME_BASIC
+//					, AreaFile_Obj["File_ShowCount"]
+//					, AreaFile_Obj["File_Reserved1"]
+//					, AreaFile_Obj["File_Reserved2"]
+//					, AreaFile_Obj["File_Reserved3"]
+//					, AreaFile_Obj["File_Reserved4"]
+//					, AreaFile_Obj["File_Reserved5"]
+//					, AreaFile_Obj["File_Reserved6"]
+//					, AreaFile_Obj["File_Reserved7"]
+//					, False, nRealPageCount);
+//					end
+//		else //其他的显示方式
+//						begin
+//			FillPageInfo(t_RVReportHelper, nWidth, nHeight);
+//ntmpFilePageCount= t_RVReportHelper.PagesCount;
+//nRealityRunSpeed= GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+//	, thrd_ScreenColor, AreaFile_Obj["File_Stunt"]
+//	, AreaFile_Obj["File_Speed"]
+//	, nDefaultRunSpeed);
+//
+//			str2= str2 +
+//				MakeDoubleImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+//					, AreaFile_Obj["File_Stunt"]
+//					, AreaFile_Obj["File_OutsStunt"]
+//					, nRealityRunSpeed
+//					, AreaFile_Obj["File_Showtime"] * AREA_SHOWTIME_BASIC
+//					, AreaFile_Obj["File_ShowCount"]
+//					, AreaFile_Obj["File_Reserved1"]
+//					, AreaFile_Obj["File_Reserved2"]
+//					, AreaFile_Obj["File_Reserved3"]
+//					, AreaFile_Obj["File_Reserved4"]
+//					, AreaFile_Obj["File_Reserved5"]
+//					, AreaFile_Obj["File_Reserved6"]
+//					, AreaFile_Obj["File_Reserved7"]
+//					, False, nRealPageCount);
+//					end;
+//				Result= str2;
+//				nFilePageCount= nRealPageCount;
+//					end;

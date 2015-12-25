@@ -11,8 +11,8 @@ static WSADATA wsaData;
 static SOCKET g_socket;
 Json::Value g_ControllerList_Obj;
 Json::Value g_Controller_Supary;
-static Json::Value devicelist_root;
-static Json::Value devicelist_ja;
+Json::Value devicelist_root;
+Json::Value devicelist_ja;
 static vector<PtagSendThread> g_lstSendThread;
 
 static void SaveScreenInfoToFile();

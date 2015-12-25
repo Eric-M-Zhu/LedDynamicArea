@@ -169,3 +169,5 @@ string MakebmpTextSinglePage(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight, DW
 
 string MakeDynamicAreaPageInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, DWORD nFileOrd, DWORD nPageOrd, Json::Value Screen_ja,
 	DWORD &nSendLength);
+
+SYSTEMTIME StringToDatetime(string &DateStr);
