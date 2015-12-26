@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <ctime>
 #include <fstream>
+#include <sstream>
 #include <list>
 #include <string>
 #include <vector>

@@ -96,211 +96,6 @@ list<string> SplitString(const string &Source, const string &Deli)
 	return result;
 }
 
-//void TranCanvToInfo(Bmp: TBitmap; pInfoBuf: pChar;
-//nLeft, nWidth, nHeight, nPx, nMkStyle, nPixType: Cardinal;
-//nControllerType: Cardinal; var bInvalidData : Boolean);
-//var
-//bitsRed, bitsGreen, bitsBlue: TBits;
-//nDimensions: Cardinal;
-//nIndex: Cardinal;
-//iLeftBit, iRightBit: Cardinal;
-//h, w              : Cardinal;
-//Col: TColor;
-//ColR, ColG, ColB  : Byte;
-//bRed, bGreen, bBlue: Boolean;
-//nAllWidth: Cardinal;
-//byRed, byGreen, byBlue: Cardinal;
-//I: Cardinal;
-//btmpInvalidData: Boolean;
-//nFullColorPixelData: Word;
-//p: PByteArray;
-//begin
-//bRed  = False;
-//bGreen = False;
-//bBlue = False;
-//btmpInvalidData = True;
-//nIndex = 0;
-//case nPx of
-//SCREEN_COLOR_SINGLE, SCREEN_COLOR_DOUBLE, SCREEN_COLOR_THREE:
-//	begin
-//		iRightBit  = 0;
-//	if ((nLeft + nWidth) % nPixType != 0) then
-//		iRightBit  = nPixType - ((nLeft + nWidth) % nPixType); //右边起始字节的多余位数
-//iLeftBit = nLeft % nPixType; //左边起始字节的多余位数
-//nAllWidth = iLeftBit + nWidth + iRightBit;
-//nDimensions = nAllWidth * nHeight;
-//bitsRed = TBits.Create;
-//	bitsRed.Size  = nDimensions;
-//bitsGreen = TBits.Create;
-//	bitsGreen.Size  = nDimensions;
-//bitsBlue = TBits.Create;
-//	bitsBlue.Size  = nDimensions;
-//	for h  = 1 to nHeight do
-//		begin
-//		for w  = 1 to nAllWidth do
-//			begin
-//			if ((w - 1 < iLeftBit) or (w - 1 >= (iLeftBit + nWidth))) then
-//				Col  = RGB(0, 0, 0)
-//			else
-//				Col  = Bmp.Canvas.Pixels[w - 1 - iLeftBit, h - 1];
-//ColR = GetRValue(Col);
-//ColG = GetGValue(Col);
-//ColB = GetBValue(Col);
-//	if (nPx = SCREEN_COLOR_DOUBLE) then
-//		begin
-//		if (nMkStyle = DOUBLE_COLOR_PIXTYPE_1) then //双基色，R+G
-//			bRed  = ColR > 127
-//		else //双基色，G+R
-//			bGreen  = ColR > 127;
-//	if (bRed = True) or (bGreen = True) then
-//		btmpInvalidData  = False;
-//	end
-//	else if (nPx = SCREEN_COLOR_SINGLE) then
-//		begin
-//		bRed  = ColR > 127;
-//	if (bRed = True) then
-//		btmpInvalidData  = False;
-//	end
-//	else if (nPx = SCREEN_COLOR_THREE) then
-//		begin
-//		bRed  = ColR > 127;
-//	if (bRed = True) then
-//		btmpInvalidData  = False;
-//	}
-//	if (nPx = SCREEN_COLOR_DOUBLE) then
-//		begin
-//		if (nMkStyle = DOUBLE_COLOR_PIXTYPE_1) then //双基色，R+G
-//			bGreen  = ColG > 127
-//		else //双基色，G+R
-//			bRed  = ColG > 127;
-//	if (bRed = True) or (bGreen = True) then
-//		btmpInvalidData  = False;
-//	end
-//	else if (nPx = SCREEN_COLOR_SINGLE) then
-//		begin
-//		bGreen  = ColG > 127;
-//	//单基色去绿色数据没有用处。因此不作判断
-//	end
-//	else if (nPx = SCREEN_COLOR_THREE) then
-//		begin
-//		bGreen  = ColG > 127;
-//	if (bGreen = True) then
-//		btmpInvalidData  = False;
-//	}
-//	if (nPx = SCREEN_COLOR_THREE) then
-//		begin
-//		bBlue  = ColB > 127;
-//	if (bBlue = True) then
-//		btmpInvalidData  = False;
-//	}
-//	bitsRed[nIndex]  = not bRed;
-//	bitsGreen[nIndex]  = not bGreen;
-//	bitsBlue[nIndex]  = not bBlue;
-//	Inc(nIndex);
-//	}
-//	}
-//	if (nPx = SCREEN_COLOR_THREE) then
-//		begin
-//		for I  = 1 to nDimensions div 8 do
-//			begin
-//			byRed  = Ord(bitsRed[(I - 1) * 8]) shl 7 + Ord(bitsRed[(I - 1) * 8 + 1]) shl 6 + Ord(bitsRed[(I - 1) * 8 + 2]) shl 5 + Ord(bitsRed[(I - 1) * 8 + 3]) shl 4
-//			+ Ord(bitsRed[(I - 1) * 8 + 4]) shl 3 + Ord(bitsRed[(I - 1) * 8 + 5]) shl 2 + Ord(bitsRed[(I - 1) * 8 + 6]) shl 1 + Ord(bitsRed[(I - 1) * 8 + 7]);
-//byGreen = Ord(bitsGreen[(I - 1) * 8]) shl 7 + Ord(bitsGreen[(I - 1) * 8 + 1]) shl 6 + Ord(bitsGreen[(I - 1) * 8 + 2]) shl 5 + Ord(bitsGreen[(I - 1) * 8 + 3]) shl 4
-//	+ Ord(bitsGreen[(I - 1) * 8 + 4]) shl 3 + Ord(bitsGreen[(I - 1) * 8 + 5]) shl 2 + Ord(bitsGreen[(I - 1) * 8 + 6]) shl 1 + Ord(bitsGreen[(I - 1) * 8 + 7]);
-//	 byBlue = Ord(bitsBlue[(I - 1) * 8]) shl 7 + Ord(bitsBlue[(I - 1) * 8 + 1]) shl 6 + Ord(bitsBlue[(I - 1) * 8 + 2]) shl 5 + Ord(bitsBlue[(I - 1) * 8 + 3]) shl 4
-//		 + Ord(bitsBlue[(I - 1) * 8 + 4]) shl 3 + Ord(bitsBlue[(I - 1) * 8 + 5]) shl 2 + Ord(bitsBlue[(I - 1) * 8 + 6]) shl 1 + Ord(bitsBlue[(I - 1) * 8 + 7]);
-//			 pInfoBuf^  = char(byRed);
-//			 Inc(pInfoBuf);
-//			 pInfoBuf^  = char(byGreen);
-//			 Inc(pInfoBuf);
-//			 pInfoBuf^  = char(byBlue);
-//			 Inc(pInfoBuf);
-//			 }
-//			 end
-//	else if (nPx = SCREEN_COLOR_DOUBLE) then
-//				 begin
-//		for I  = 1 to nDimensions div 8 do
-//			begin
-//			byRed  = Ord(bitsRed[(I - 1) * 8]) shl 7 + Ord(bitsRed[(I - 1) * 8 + 1]) shl 6 + Ord(bitsRed[(I - 1) * 8 + 2]) shl 5 + Ord(bitsRed[(I - 1) * 8 + 3]) shl 4
-//			+ Ord(bitsRed[(I - 1) * 8 + 4]) shl 3 + Ord(bitsRed[(I - 1) * 8 + 5]) shl 2 + Ord(bitsRed[(I - 1) * 8 + 6]) shl 1 + Ord(bitsRed[(I - 1) * 8 + 7]);
-//byGreen = Ord(bitsGreen[(I - 1) * 8]) shl 7 + Ord(bitsGreen[(I - 1) * 8 + 1]) shl 6 + Ord(bitsGreen[(I - 1) * 8 + 2]) shl 5 + Ord(bitsGreen[(I - 1) * 8 + 3]) shl 4
-//	+ Ord(bitsGreen[(I - 1) * 8 + 4]) shl 3 + Ord(bitsGreen[(I - 1) * 8 + 5]) shl 2 + Ord(bitsGreen[(I - 1) * 8 + 6]) shl 1 + Ord(bitsGreen[(I - 1) * 8 + 7]);
-//		 pInfoBuf^  = char(byRed);
-//		 Inc(pInfoBuf);
-//		 pInfoBuf^  = char(byGreen);
-//		 Inc(pInfoBuf);
-//		 }
-//		 end
-//	else if (nPx = SCREEN_COLOR_SINGLE) then
-//			 begin
-//				 for I  = 1 to nDimensions div 8 do
-//					 begin
-//					 byRed  = Ord(bitsRed[(I - 1) * 8]) shl 7 + Ord(bitsRed[(I - 1) * 8 + 1]) shl 6 + Ord(bitsRed[(I - 1) * 8 + 2]) shl 5 + Ord(bitsRed[(I - 1) * 8 + 3]) shl 4
-//					 + Ord(bitsRed[(I - 1) * 8 + 4]) shl 3 + Ord(bitsRed[(I - 1) * 8 + 5]) shl 2 + Ord(bitsRed[(I - 1) * 8 + 6]) shl 1 + Ord(bitsRed[(I - 1) * 8 + 7]);
-//			 pInfoBuf^  = char(byRed);
-//			 Inc(pInfoBuf);
-//			 }
-//			 }
-//			 FreeAndNil(bitsRed);
-//			 FreeAndNil(bitsGreen);
-//			 FreeAndNil(bitsBlue);
-//		 bInvalidData = btmpInvalidData;
-//			 }
-//		 SCREEN_COLOR_FULLCOLOR:
-//			 begin
-//				 nAllWidth  = nWidth;
-//		 nDimensions = nAllWidth * nHeight;
-//			 bmp.PixelFormat  = pf16bit;
-//			 for h  = 1 to nHeight do
-//				 begin
-//				 p  = bmp.ScanLine[h - 1];
-//			 for W  = 1 to nAllWidth do
-//				 begin
-//				 if (p[(W - 1) * 2 + 1] != 0) or (p[(W - 1) * 2] != 0) then
-//					 btmpInvalidData  = False;
-//			 //双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
-//
-//			 pInfoBuf^  = char(p[(W - 1) * 2]); //低字节
-//			 Inc(pInfoBuf);
-//			 pInfoBuf^  = char(p[(W - 1) * 2 + 1] and 0xFF); //高字节
-//			 Inc(pInfoBuf);
-//
-//			 }
-//			 }
-//		 bInvalidData = btmpInvalidData;
-//			 DoEvents;
-//			 }
-//		 SCREEN_COLOR_TWO_COLOR_GRAY:
-//			 begin
-//				 nAllWidth  = nWidth;
-//		 nDimensions = nAllWidth * nHeight;
-//			 bmp.PixelFormat  = pf16bit;
-//			 for h  = 1 to nHeight do
-//				 begin
-//				 p  = bmp.ScanLine[h - 1];
-//			 for W  = 1 to nAllWidth do
-//				 begin
-//				 if (p[(W - 1) * 2 + 1] != 0) or (p[(W - 1) * 2] != 0) then
-//					 btmpInvalidData  = False;
-//			 //双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
-//		 nFullColorPixelData = p[(W - 1) * 2] + (p[(W - 1) * 2 + 1] shl 8) and $FF00;
-//		 ColR = nFullColorPixelData shr 11;
-//		 ColG = (nFullColorPixelData shr 5) and $3F;
-//		 colB = nFullColorPixelData and $1F;
-//		 nFullColorPixelData = (colB shl 11) and $F800 + (ColG shl 5) and $07E0 + ColR;
-//
-//			 pInfoBuf^  = char(nFullColorPixelData and $FF); //低字节
-//			 Inc(pInfoBuf);
-//			 pInfoBuf^  = char((nFullColorPixelData shr 8) and $FF); //高字节
-//			 Inc(pInfoBuf);
-//			 }
-//			 }
-//		 bInvalidData = btmpInvalidData;
-//			 DoEvents;
-//			 }
-//			 }
-//			 }
-
 DWORD calpagesize(DWORD left, DWORD width, DWORD nPx, DWORD nKardPixType)
 {
 	DWORD nStartPoint, nEndPoint;
@@ -576,13 +371,13 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开表格文件
 				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
 				//	break;
-				case FILE_TYPE_TEXT:
-					szTWSendBuf = szTWSendBuf + MakebmpText(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
-						, nScreenPixType, nScreenStyle, t_rvstyle, t_memo, t_RVReportHelper
-						, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
-						, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开txt文本文件 ,其中包含外部打开，是否使用单行或多行
-					nTotlePagecount = nTotlePagecount + ntmpPageCount;
-					break;
+				//case FILE_TYPE_TEXT:
+				//	szTWSendBuf = szTWSendBuf + MakebmpText(nScreenWidth, nScreenHeight, nScreenColor, nScreenPixels
+				//		, nScreenPixType, nScreenStyle, t_rvstyle, t_memo, t_RVReportHelper
+				//		, Screen_ja[(int)nScreenOrd]["Screen_lstDYArea"][(int)nDYAreaOrd]["Area_lstfile"][(int)J]
+				//		, nRealX, nRealY, nRealW, nRealH, ntmpPageCount); //打开txt文本文件 ,其中包含外部打开，是否使用单行或多行
+				//	nTotlePagecount = nTotlePagecount + ntmpPageCount;
+				//	break;
 				}
 			}
 		}
@@ -707,7 +502,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Color = clred;
 //	t_RVReportHelper.RichView.Style.TextStyles.Items[0].FontName = "Tahoma";
 //	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Size = 9;
-//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Unicode = True;
+//	t_RVReportHelper.RichView.Style.TextStyles.Items[0].Unicode = true;
 //	t_RVReportHelper.RichView.Style.TextStyles.Items[0].BackColor = clblack;
 //	t_RVReportHelper.RichView.AddNL(RVU_GetRawUnicode("NIL"), 0, 0);
 //	t_RVReportHelper.RichView.Format;
@@ -740,7 +535,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //			, AreaFile_Obj["File_Reserved5"]
 //			, AreaFile_Obj["File_Reserved6"]
 //			, AreaFile_Obj["File_Reserved7"]
-//			, nrealw, False, nRealPageCount)
+//			, nrealw, false, nRealPageCount)
 //	else
 //		str2 = str2 +
 //		MakeSigalImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
@@ -756,7 +551,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //			, AreaFile_Obj["File_Reserved5"]
 //			, AreaFile_Obj["File_Reserved6"]
 //			, AreaFile_Obj["File_Reserved7"]
-//			, nrealw, False, nRealPageCount);
+//			, nrealw, false, nRealPageCount);
 //	end else
 //		if AreaFile_Obj["File_Stunt"] = 6 then //向上连移
 //			begin
@@ -781,7 +576,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //					, AreaFile_Obj["File_Reserved5"]
 //					, AreaFile_Obj["File_Reserved6"]
 //					, AreaFile_Obj["File_Reserved7"]
-//					, False, nRealPageCount);
+//					, false, nRealPageCount);
 //					end
 //		else //其他的显示方式
 //						begin
@@ -806,7 +601,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //					, AreaFile_Obj["File_Reserved5"]
 //					, AreaFile_Obj["File_Reserved6"]
 //					, AreaFile_Obj["File_Reserved7"]
-//					, False, nRealPageCount);
+//					, false, nRealPageCount);
 //					end;
 //				Result= str2;
 //				nFilePageCount= nRealPageCount;
@@ -850,7 +645,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //if WideFileExists(filename) then
 //begin
 //try
-//bGBX  = False;
+//bGBX  = false;
 //sztmpFileName = Copy(filename, 1, Length(filename) - 3) + 'GBX';
 //if WideFileExists(sztmpFileName) then
 //begin
@@ -886,7 +681,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //				   CloseFile(fp);
 //			   end;
 //			   //FileSetAttr(sztmpFileName, faHidden);
-//		   bGBX = True;
+//		   bGBX = true;
 //			   end
 //else
 //sztmpFileName  = filename;
@@ -938,7 +733,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //fd.Free;
 //end;
 //finally
-//if bGBX = True then
+//if bGBX = true then
 //DeleteFile(sztmpFileName);
 //end;
 //end else
@@ -1056,7 +851,7 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 	else
 	{
 		GetRealDYAreaLocation(Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd], nRealX, nRealY, nRealW, nRealH);
-		nFrame_DispStype = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFStunt"].asUInt();
+		nFrame_DispStype = (BYTE)Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFStunt"].asUInt();
 
 		if (nFrame_DispStype == 6) //因为在PC软件中屏蔽掉了“红绿交替转动”特技。因此当边框特技为6是设定为固定显示。
 			nFrame_DispStype = 7;
@@ -1079,8 +874,8 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 		BYTE *pBmpBits2 = NULL;
 		HBRUSH hBlackBrush = CreateSolidBrush(RGB(0, 0, 0));
 		HPEN hRedPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
-		RECT rect = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
-		RECT rect2 = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
+		RECT rect;
+		RECT rect2;
 
 		memset(&bi, 0, sizeof(BITMAPINFO));
 		bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
@@ -1089,6 +884,9 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 		bi.bmiHeader.biBitCount = 24;
 		bi.bmiHeader.biSizeImage = (bi.bmiHeader.biWidth * 3 + 1) / 2 * 2;
 		bi.bmiHeader.biPlanes = 1;
+
+		rect = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
+		rect2 = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
 
 		bmp = CreateDIBSection(hMemoryDC, &bi, DIB_RGB_COLORS, (void**)&pBmpBits, NULL, 0);
 		bmp2 = NULL;
@@ -1135,7 +933,7 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 
 				FillRect(hMemoryDC2, &rect2, hBlackBrush);
 
-				for (size_t n = 0; n < rect2.bottom; n++)
+				for (n = 0; n < (DWORD)rect2.bottom; n++)
 				{
 					MoveToEx(hMemoryDC2, 0, n, NULL);
 					LineTo(hMemoryDC2, rect2.right / 2, n);
@@ -1195,7 +993,7 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 
 				FillRect(hMemoryDC2, &rect, hBlackBrush);
 
-				for (size_t n = 0; n < bi.bmiHeader.biHeight; n++)
+				for (n = 0; n < (DWORD)bi.bmiHeader.biHeight; n++)
 				{
 					MoveToEx(hMemoryDC2, 0, n, NULL);
 					LineTo(hMemoryDC2, bi.bmiHeader.biWidth / 2, n);
@@ -1222,8 +1020,8 @@ string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
 		StretchBlt(hMemoryDC, 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight,
 			hMemoryDC2, rect2.left, rect2.top, rect2.right, rect2.bottom, SRCCOPY);
 		nDataLength = GetPageSize(PRO_FRAME_LENGTH, rect.bottom, Screen_Obj["Screen_color"].asUInt());
-		TranCanvToInfo(bmp, szFrameData
-			, 0, bmp.Width, bmp.Height, Screen_Obj["Screen_color"].asUInt()
+		TranCanvToInfo(pBmpBits, szFrameData
+			, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight, Screen_Obj["Screen_color"].asUInt()
 			, Screen_Obj["Screen_pixels"].asUInt(),
 			Screen_Obj["Screen_nPixType"].asUInt()
 			, Screen_Obj["Screen_nPixType"].asUInt(), bInvalidData);
@@ -1263,3 +1061,588 @@ void GetProgramFrameColorBmp(BYTE *pBits, DWORD nWidth, DWORD nHeight, DWORD nCo
 			}
 		}
 }
+
+void TranCanvToInfo(LPBYTE Bmp, string &pInfoBuf,
+	DWORD nLeft, DWORD nWidth, DWORD nHeight, DWORD nPx, DWORD nMkStyle, DWORD nPixType,
+	DWORD nControllerType, bool &bInvalidData)
+{
+	BYTE *bitsRed, *bitsGreen, *bitsBlue;
+	DWORD nDimensions;
+	DWORD nIndex;
+	DWORD iLeftBit, iRightBit;
+	DWORD h, w;
+	COLORREF Col;
+	BYTE ColR, ColG, ColB;
+	bool bRed, bGreen, bBlue;
+	DWORD nAllWidth;
+	DWORD byRed, byGreen, byBlue;
+	DWORD I;
+	bool btmpInvalidData;
+	WORD nFullColorPixelData;
+	BYTE *p;
+	int bytesPerLine = (nWidth * 3 + 1) / 2 * 2;
+
+	bRed = false;
+	bGreen = false;
+	bBlue = false;
+	btmpInvalidData = true;
+	nIndex = 0;
+
+	switch (nPx)
+	{
+	case SCREEN_COLOR_SINGLE:
+	case SCREEN_COLOR_DOUBLE:
+	case SCREEN_COLOR_THREE:
+		iRightBit = 0;
+
+		if (((nLeft + nWidth) % nPixType) != 0)
+			iRightBit = nPixType - ((nLeft + nWidth) % nPixType); //右边起始字节的多余位数
+
+		iLeftBit = nLeft % nPixType; //左边起始字节的多余位数
+		nAllWidth = iLeftBit + nWidth + iRightBit;
+		nDimensions = nAllWidth * nHeight;
+		bitsRed = new BYTE[nDimensions];
+		bitsGreen = new BYTE[nDimensions];
+		bitsBlue = new BYTE[nDimensions];
+
+		for (h = 0; h < nHeight; ++h)
+		{
+			for (w = 0; w < nAllWidth; ++w)
+			{
+				if ((w < iLeftBit) || (w >= (iLeftBit + nWidth)))
+					Col = RGB(0, 0, 0);
+				else
+					Col = RGB(Bmp[bytesPerLine * h + (w - iLeftBit) * 3 + 2],
+						Bmp[bytesPerLine * h + (w - iLeftBit) * 3 + 1],
+						Bmp[bytesPerLine * h + (w - iLeftBit) * 3 + 0]);
+
+				ColR = GetRValue(Col);
+				ColG = GetGValue(Col);
+				ColB = GetBValue(Col);
+
+				if (nPx == SCREEN_COLOR_DOUBLE)
+				{
+					if (nMkStyle == DOUBLE_COLOR_PIXTYPE_1) //双基色，R+G
+						bRed = ColR > 127;
+					else //双基色，G+R
+						bGreen = ColR > 127;
+
+					if (bRed || bGreen)
+						btmpInvalidData = false;
+				}
+				else if (nPx == SCREEN_COLOR_SINGLE)
+				{
+					bRed = ColR > 127;
+					if (bRed)
+						btmpInvalidData = false;
+				}
+				else if (nPx == SCREEN_COLOR_THREE)
+				{
+					bRed = ColR > 127;
+
+					if (bRed)
+						btmpInvalidData = false;
+				}
+
+				if (nPx == SCREEN_COLOR_DOUBLE)
+				{
+					if (nMkStyle == DOUBLE_COLOR_PIXTYPE_1) //双基色，R+G
+						bGreen = ColG > 127;
+					else //双基色，G+R
+						bRed = ColG > 127;
+
+					if (bRed || bGreen)
+						btmpInvalidData = false;
+				}
+				else if (nPx == SCREEN_COLOR_SINGLE)
+				{
+					bGreen = ColG > 127;
+					//单基色去绿色数据没有用处。因此不作判断
+				}
+				else if (nPx == SCREEN_COLOR_THREE)
+				{
+					bGreen = ColG > 127;
+					if (bGreen)
+						btmpInvalidData = false;
+				}
+
+				if (nPx == SCREEN_COLOR_THREE)
+				{
+					bBlue = ColB > 127;
+
+					if (bBlue)
+						btmpInvalidData = false;
+				}
+
+				bitsRed[nIndex] = bRed ? 0 : 1;
+				bitsGreen[nIndex] = bGreen ? 0 : 1;
+				bitsBlue[nIndex] = bBlue ? 0 : 1;
+				++nIndex;
+			}
+		}
+
+		if (nPx == SCREEN_COLOR_THREE)
+		{
+			for (I = 0; I < (nDimensions / 8); ++I)
+			{
+				byRed = (bitsRed[I * 8] << 7) + (bitsRed[I * 8 + 1] << 6) + (bitsRed[I * 8 + 2] << 5) + (bitsRed[I * 8 + 3] << 4)
+					+ (bitsRed[I * 8 + 4] << 3) + (bitsRed[I * 8 + 5] << 2) + (bitsRed[I * 8 + 6] << 1) + (bitsRed[I * 8 + 7]);
+				byGreen = (bitsGreen[I * 8] << 7) + (bitsGreen[I * 8 + 1] << 6) + (bitsGreen[I * 8 + 2] << 5) + (bitsGreen[I * 8 + 3] << 4)
+					+ (bitsGreen[I * 8 + 4] << 3) + (bitsGreen[I * 8 + 5] << 2) + (bitsGreen[I * 8 + 6] << 1) + bitsGreen[I * 8 + 7];
+				byBlue = (bitsBlue[I * 8] << 7) + (bitsBlue[I * 8 + 1] << 6) + (bitsBlue[I * 8 + 2] << 5) + (bitsBlue[I * 8 + 3] << 4)
+					+ (bitsBlue[I * 8 + 4] << 3) + (bitsBlue[I * 8 + 5] << 2) + (bitsBlue[I * 8 + 6] << 1) + bitsBlue[I * 8 + 7];
+
+				pInfoBuf += char(byRed);
+				pInfoBuf += char(byGreen);
+				pInfoBuf += char(byBlue);
+			}
+		}
+		else if (nPx == SCREEN_COLOR_DOUBLE)
+		{
+			for (I = 0; I < (nDimensions / 8); ++I)
+			{
+				byRed = (bitsRed[I * 8] << 7) + (bitsRed[I * 8 + 1] << 6) + (bitsRed[I * 8 + 2] << 5) + (bitsRed[I * 8 + 3] << 4)
+					+ (bitsRed[I * 8 + 4] << 3) + (bitsRed[I * 8 + 5] << 2) + (bitsRed[I * 8 + 6] << 1) + bitsRed[I * 8 + 7];
+				byGreen = (bitsGreen[I * 8] << 7) + (bitsGreen[I * 8 + 1] << 6) + (bitsGreen[I * 8 + 2] << 5) + (bitsGreen[I * 8 + 3] << 4)
+					+ (bitsGreen[I * 8 + 4] << 3) + (bitsGreen[I * 8 + 5] << 2) + (bitsGreen[I * 8 + 6] << 1) + bitsGreen[I * 8 + 7];
+
+				pInfoBuf += char(byRed);
+				pInfoBuf += char(byGreen);
+			}
+		}
+		else if (nPx == SCREEN_COLOR_SINGLE)
+		{
+			for (I = 0; (I < nDimensions / 8); ++I)
+			{
+				byRed = (bitsRed[I * 8] << 7) + (bitsRed[I * 8 + 1] << 6) + (bitsRed[I * 8 + 2] << 5) + (bitsRed[I * 8 + 3] << 4)
+					+ (bitsRed[I * 8 + 4] << 3) + (bitsRed[I * 8 + 5] << 2) + (bitsRed[I * 8 + 6] << 1) + bitsRed[I * 8 + 7];
+				pInfoBuf += char(byRed);
+
+			}
+		}
+		delete[] bitsRed;
+		delete[] bitsGreen;
+		delete[] bitsBlue;
+		bInvalidData = btmpInvalidData;
+		break;
+
+	case SCREEN_COLOR_FULLCOLOR:
+		nAllWidth = nWidth;
+		nDimensions = nAllWidth * nHeight;
+
+		for (h = 0; h < nHeight; ++h)
+		{
+			p = &Bmp[bytesPerLine * h];
+
+			for (w = 0; w < nAllWidth; ++w)
+			{
+				BYTE highByte, lowByte;
+
+				byRed = p[w * 3 + 2];
+				byGreen = p[w * 3 + 1];
+				byBlue = p[w * 3 + 0];
+
+				highByte = ((byRed / 8) << 3) & 0xF8 + ((byGreen / 4) >> 3) & 0x7;
+				lowByte = ((byGreen / 4) << 5) & 0xE0 + ((byBlue / 8) >> 3) & 0x1F;
+
+				if ((highByte != 0) || (lowByte != 0))
+					btmpInvalidData = false;
+				//双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
+
+				pInfoBuf += (char)lowByte; //低字节
+				pInfoBuf += (char)highByte; //高字节
+			}
+		}
+		bInvalidData = btmpInvalidData;
+		DoEvents();
+		break;
+	case SCREEN_COLOR_TWO_COLOR_GRAY:
+		nAllWidth = nWidth;
+		nDimensions = nAllWidth * nHeight;
+
+		for (h = 0; h < nHeight; ++h)
+		{
+			p = &Bmp[bytesPerLine * h];
+
+			for (w = 0; w < nAllWidth; ++w)
+			{
+				BYTE highByte, lowByte;
+
+				byRed = p[w * 3 + 2];
+				byGreen = p[w * 3 + 1];
+				byBlue = p[w * 3 + 0];
+
+				highByte = ((byRed / 8) << 3) & 0xF8 + ((byGreen / 4) >> 3) & 0x7;
+				lowByte = ((byGreen / 4) << 5) & 0xE0 + ((byBlue / 8) >> 3) & 0x1F;
+
+				if ((highByte != 0) || (lowByte != 0))
+					btmpInvalidData = false;
+				//双字节参数值表示为R(5bits)+G(6bits)+B(5bits) 生成数据时，先低字节，然后高字节。
+
+				pInfoBuf += (char)highByte; //低字节
+				pInfoBuf += (char)lowByte; //高字节
+			}
+		}
+
+		bInvalidData = btmpInvalidData;
+		DoEvents();
+		break;
+	}
+}
+
+string MakebmpTxt(DWORD thrd_ScreenWidth, DWORD thrd_ScreenHeight,
+	DWORD thrd_ScreenColor, DWORD thrd_ScreenPixels, DWORD thrd_ScreenPixType, DWORD thrd_ScreenStyle,
+	TRVStyle t_rvstyle, TTntMemo t_memo, TRVReportHelper t_RVReportHelper,
+	Json::Value AreaFile_Obj, DWORD nX, DWORD nY, DWORD nWidth, DWORD nHeight, DWORD &nFilePageCount) //打开图文区域的外部文件txt文件
+{
+	fstream fd;
+	DWORD i, realw;
+	string s, ansitxt;
+	string unicodetxt;
+	HBITMAP bmp;
+	DWORD m, nAlignment, ncolor;
+	DWORD nKardPixType, nshowstyle, nMkStyle, nshowspeed, nshowtime;
+	bool nbold, nItalic, nUnderline, nStrikeout;
+	string sztmpSendbuf;
+	DWORD ntmpPagecount;
+	DWORD nRealityRunSpeed, nDefaultRunSpeed;
+	string szFontName;
+	int nFontSize, nFontColor;
+	DWORD ntmpFilePageCount, nRealPageCount;
+	//tntmmostream: TTNTMemoryStream;
+	DWORD nDocHeight;
+
+	nAlignment = 0;
+	szFontName = AreaFile_Obj["File_FontName"].asString();
+	if (AreaFile_Obj["File_Bold"].asUInt() == 1)
+		nbold = true;
+	else
+		nbold = false;
+	nItalic = false;
+	nUnderline = false;
+	nStrikeout = false;
+	nFontSize = AreaFile_Obj["File_FontSize"].asInt();
+	nFontColor = AreaFile_Obj["File_FontColor"].asInt();
+	/////////////////////////协议的头
+	//算出每一页的数据的大小nPageSize
+	sztmpSendbuf = "";
+	ansitxt = "";
+	unicodetxt = "";
+	nRealPageCount = 0;
+
+	HWND hDesktopWnd = GetDesktopWindow();
+	HDC hDesktopDC = GetWindowDC(hDesktopWnd);
+	HDC hMemoryDC = CreateCompatibleDC(hDesktopDC);
+	BYTE *pBmpBits = NULL;
+
+	BITMAPINFO bi;
+	memset(&bi, 0, sizeof(bi));
+	bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bi.bmiHeader.biWidth = nX + nWidth;
+	bi.bmiHeader.biHeight = nY + nHeight;
+	bi.bmiHeader.biBitCount = 24;
+	bi.bmiHeader.biPlanes = 1;
+	bi.bmiHeader.biSizeImage = (bi.bmiHeader.biWidth * 3 + 1) / 2 * 2 * bi.bmiHeader.biHeight;
+
+	HBITMAP hBitmap = CreateDIBSection(hMemoryDC, &bi, DIB_RGB_COLORS, (void**)&pBmpBits, NULL, 0);
+	HBITMAP hOldBitmap = (HBITMAP)SelectObject(hMemoryDC, hBitmap);
+
+	//if (WideFileExists(AreaFile_Obj["File_Name"].asCString())) //打开外部文件并判断TXT文件
+	{
+		//tntmmostream  = TTNTMemoryStream.Create;
+		//try
+		ifstream file(AreaFile_Obj["File_Name"].asCString());
+		stringstream ss;
+
+		ss << file.rdbuf();
+		s = ss.str();
+
+		if ((AreaFile_Obj["File_ShowStyle"].asUInt() == FILE_SHOWSTYLE_SINGLE)) //向左连移并且为单行的模式
+		{
+			HFONT hFont = CreateFontA(nFontSize, 0, 0, 0, nbold ? FW_BOLD : FW_DONTCARE, nItalic,
+				nUnderline, nStrikeout, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
+				CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, szFontName.c_str());
+			HFONT hOldFont = (HFONT)SelectObject(hMemoryDC, hFont);
+			SIZE size;
+
+			GetTextExtentPoint32A(hMemoryDC, s.c_str(), s.size(), &size);
+			realw = size.cx;
+
+			if (((realw % nWidth) != 0) || (realw == 0))
+				ntmpFilePageCount = realw / nWidth + 1;
+			else
+				ntmpFilePageCount = realw / nWidth;
+
+			//FillPageInfo(t_RVReportHelper, nWidth * ntmpFilePageCount, nHeight); //转换为图片
+
+			nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+				, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
+				, AreaFile_Obj["File_Speed"].asUInt()
+				, nDefaultRunSpeed);
+
+			//if (AreaFile_Obj["File_Stunt"].asUInt() == 38) //向右连移
+			//	sztmpSendbuf = sztmpSendbuf +
+			//		MakeRightSigalImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+			//			, AreaFile_Obj["File_Stunt"].asUInt()
+			//			, AreaFile_Obj["File_OutsStunt"].asUInt()
+			//			, nRealityRunSpeed
+			//			, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+			//			, AreaFile_Obj["File_ShowCount"].asUInt()
+			//			, AreaFile_Obj["File_Reserved1"].asUInt()
+			//			, AreaFile_Obj["File_Reserved2"].asUInt()
+			//			, AreaFile_Obj["File_Reserved3"].asUInt()
+			//			, AreaFile_Obj["File_Reserved4"].asUInt()
+			//			, AreaFile_Obj["File_Reserved5"].asUInt()
+			//			, AreaFile_Obj["File_Reserved6"].asUInt()
+			//			, AreaFile_Obj["File_Reserved7"].asUInt()
+			//			, realw, false, nRealPageCount);
+			//else
+			//	sztmpSendbuf = sztmpSendbuf +
+			//		MakeSigalImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+			//			, AreaFile_Obj["File_Stunt"].asUInt()
+			//			, AreaFile_Obj["File_OutsStunt"].asUInt()
+			//			, nRealityRunSpeed
+			//			, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+			//			, AreaFile_Obj["File_ShowCount"].asUInt()
+			//			, AreaFile_Obj["File_Reserved1"].asUInt()
+			//			, AreaFile_Obj["File_Reserved2"].asUInt()
+			//			, AreaFile_Obj["File_Reserved3"].asUInt()
+			//			, AreaFile_Obj["File_Reserved4"].asUInt()
+			//			, AreaFile_Obj["File_Reserved5"].asUInt()
+			//			, AreaFile_Obj["File_Reserved6"].asUInt()
+			//			, AreaFile_Obj["File_Reserved7"].asUInt()
+			//			, realw, false, nRealPageCount);
+		}
+		//else if (nshowstyle == 6) //向上连移
+		//{
+		//	FillPageInfoupscroll(t_RVReportHelper, nWidth, nHeight, ntmpPagecount);
+		//	ntmpFilePageCount = ntmpPagecount;
+		//	nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+		//		, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
+		//		, AreaFile_Obj["File_Speed"].asUInt()
+		//		, nDefaultRunSpeed);
+
+		//	sztmpSendbuf = sztmpSendbuf +
+		//		MakePageImageupscroll(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+		//			, AreaFile_Obj["File_Stunt"].asUInt()
+		//			, AreaFile_Obj["File_OutsStunt"].asUInt()
+		//			, nRealityRunSpeed
+		//			, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+		//			, AreaFile_Obj["File_ShowCount"].asUInt()
+		//			, AreaFile_Obj["File_Reserved1"].asUInt()
+		//			, AreaFile_Obj["File_Reserved2"].asUInt()
+		//			, AreaFile_Obj["File_Reserved3"].asUInt()
+		//			, AreaFile_Obj["File_Reserved4"].asUInt()
+		//			, AreaFile_Obj["File_Reserved5"].asUInt()
+		//			, AreaFile_Obj["File_Reserved6"].asUInt()
+		//			, AreaFile_Obj["File_Reserved7"].asUInt()
+		//			, false, nRealPageCount);
+		//}
+		//else //其他的显示方式
+		//{
+		//	//FillPageInfo(t_RVReportHelper, nWidth, nHeight);
+		//	/*ntmpFilePageCount = t_RVReportHelper.PagesCount;
+		//	nDocHeight = TReportRVData(t_RVReportHelper.RichView.RVData).DocumentHeight;
+		//	if (nDocHeight mod nHeight < > 0)
+		//		TReportRVData(t_RVReportHelper.RichView.RVData).DocumentHeight = (nDocHeight div nHeight + 1) * nHeight;*/
+		//	nRealityRunSpeed = GetControlStuntRealityRunSpeed(thrd_ScreenWidth, thrd_ScreenHeight
+		//		, thrd_ScreenColor, AreaFile_Obj["File_Stunt"].asUInt()
+		//		, AreaFile_Obj["File_Speed"].asUInt()
+		//		, nDefaultRunSpeed);
+
+		//	sztmpSendbuf = sztmpSendbuf +
+		//		MakeDoubleImage(t_RVReportHelper, ntmpFilePageCount, nWidth, nHeight, nX, thrd_ScreenColor, thrd_ScreenPixels, thrd_ScreenPixType, thrd_ScreenStyle
+		//			, AreaFile_Obj["File_Stunt"].asUInt()
+		//			, AreaFile_Obj["File_OutsStunt"].asUInt()
+		//			, nRealityRunSpeed
+		//			, AreaFile_Obj["File_Showtime"].asUInt() * AREA_SHOWTIME_BASIC
+		//			, AreaFile_Obj["File_ShowCount"].asUInt()
+		//			, AreaFile_Obj["File_Reserved1"].asUInt()
+		//			, AreaFile_Obj["File_Reserved2"].asUInt()
+		//			, AreaFile_Obj["File_Reserved3"].asUInt()
+		//			, AreaFile_Obj["File_Reserved4"].asUInt()
+		//			, AreaFile_Obj["File_Reserved5"].asUInt()
+		//			, AreaFile_Obj["File_Reserved6"].asUInt()
+		//			, AreaFile_Obj["File_Reserved7"].asUInt()
+		//			, false, nRealPageCount);
+		//}
+	}
+
+	nFilePageCount = nRealPageCount;
+	return sztmpSendbuf;
+}
+
+//string MakeRightSigalImage(TRVReportHelper t_RVReportHelpe,
+//	DWORD count, DWORD w, DWORD h, DWORD x, DWORD nPx, DWORD nMkStyle, DWORD nKardPixType, DWORD nScreenStyle,
+//	DWORD nStunt, DWORD nOutStunt, DWORD nRunSpeed, DWORD nShowTime, DWORD nShowCount,
+//	DWORD nReserved1, DWORD nReserved2, DWORD nReserved3, DWORD nReserved4, DWORD nReserved5, DWORD nReserved6,
+//	DWORD nReserved7, DWORD nrealwidth, bool bOnePage, DWORD &nRealPageCount)
+//{
+//	HBITMAP bmp2, bmp1, mBmpTitlePage;
+//	string str2;
+//	DWORD i, realw, nrepeatTime;
+//	BOOL noblank;
+//	DWORD nCurAddress, nAllWidth, nPageSize, nPageStyle;
+//	DWORD ncurPageAllLength;
+//	string szcurPagebuf;
+//	BOOL bInvalidData;
+//
+//	str2 = "";
+//	nAllWidth = calpagesize(x, w, nPx, nKardPixType);
+//	nPageSize = GetPageSize(nAllWidth, h, nPx);
+//	nPageStyle = 0;
+//	noblank = false;
+//
+//	HWND hDesktopWnd = GetDesktopWindow();
+//	HDC hDesktopDC = GetWindowDC(hDesktopWnd);
+//	HDC hMemoryDC = CreateCompatibleDC(hDesktopDC);
+//	HBRUSH hBlackBrush = CreateSolidBrush(RGB(0, 0, 0));
+//
+//	BITMAPINFO bmp1Info;
+//	memset(&bmp1Info, 0, sizeof(bmp1Info));
+//	bmp1Info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+//	bmp1Info.bmiHeader.biWidth = w * count;
+//	bmp1Info.bmiHeader.biHeight = h;
+//	bmp1Info.bmiHeader.biPlanes = 1;
+//	bmp1Info.bmiHeader.biSizeImage = (bmp1Info.bmiHeader.biWidth * 3 + 1) / 2 * 2 * bmp1Info.bmiHeader.biHeight;
+//	bmp1Info.bmiHeader.biBitCount = 24;
+//
+//	BYTE *pBmp1Bits = NULL;
+//
+//	bmp1 = CreateDIBSection(hMemoryDC, &bmp1Info, DIB_RGB_COLORS, (void**)&pBmp1Bits, NULL, 0);
+//
+//	RECT rect = {0, 0, bmp1Info.bmiHeader.biWidth, bmp1Info.bmiHeader.biHeight };
+//	FillRect(hMemoryDC, &rect, hBlackBrush);
+//
+//
+//	DrawsingalPage(t_RVReportHelper, bmp1.Canvas, h); //绘制图片20100518版本
+//												  //bmp1.SaveToFile('c:\Total.bmp');
+//	bmp2 = tbitmap.Create;
+//	bmp2.PixelFormat  = GetBmpPixelFormat(nPx); // pf4bit;
+//	bmp2.Canvas.Lock;
+//	bmp2.Width  = w * count;
+//	bmp2.height  = h;
+//	bmp2.Canvas.Brush.Color  = clblack;
+//	bmp2.Canvas.FillRect(rect(0, 0, w * count, h));
+//	//  bmp2.Canvas.Draw(0, 0, bmp1);
+//	bmp2.Canvas.Draw(w * count - nrealwidth, 0, bmp1);
+//
+//mBmpTitlePage = tbitmap.Create;
+//mBmpTitlePage.Canvas.Lock;
+//mBmpTitlePage.PixelFormat  = GetBmpPixelFormat(nPx); // pf4bit;
+//mBmpTitlePage.Width  = w;
+//mBmpTitlePage.height  = h;
+//
+//if count * w = nrealwidth then
+//realw  = w else
+//	realw  = w - (count * w - nrealwidth);
+//
+////  realw := (realw div 8) + (realw mod 8);
+//if bOnePage = False then
+//nRealPageCount  = count
+//else
+//nRealPageCount  = 1;
+//for i  = count downto 1 do
+//begin
+//mBmpTitlePage.Canvas.Brush.Color  = clBlack;
+//mBmpTitlePage.Canvas.FillRect(Rect(0, 0, mBmpTitlePage.Width, mBmpTitlePage.Height));
+//
+//mBmpTitlePage.Canvas.CopyRect(rect(0, 0, mBmpTitlePage.Width, mBmpTitlePage.Height),
+//	bmp2.Canvas, Rect(w * (i - 1), 0, w * i, h));
+//
+//{    mBmpTitlePage.Canvas.CopyRect(rect(0, 0, mBmpTitlePage.Width, mBmpTitlePage.Height),
+//	bmp2.Canvas,
+//	Rect(areashowlist[nAreaOrd].uwidth * (i - 1), 0,
+//		areashowlist[nAreaOrd].uwidth * i, areashowlist[nAreaOrd].uheight));
+//}
+////  mBmpTitlePage.SaveToFile('c:\' + IntToStr(i) + '.bmp');
+//
+//SetLength(szcurPagebuf, 0);
+//if (i = 1) and (nStunt = AREA_STUNT_RCONTIMOVE) then
+//begin
+//szcurPagebuf  = Char(nPageStyle) //数据类型
+//	+ Char(nStunt)
+//	+ Char(nOutStunt)
+//	+ Char(nRunSpeed)
+//	+ Char(nShowtime and $FF)
+//	+ Char((nShowtime shr 8) and $00FF)
+//	+ Char(nShowCount)
+//	+ Char(realw and $FF) //实际宽度低字节
+//	+ Char((realw shr 8) and $00FF) //实际宽度高字节
+//	+ Char(nReserved3) //保留字
+//	+ Char(nReserved4) //保留字
+//	+ Char(nReserved5) //保留字
+//	+ Char(nReserved6); //保留字
+//end else
+//begin
+//szcurPagebuf  = Char(nPageStyle) //数据类型
+//	+ Char(nStunt)
+//	+ Char(nOutStunt)
+//	+ Char(nRunSpeed)
+//	+ Char(nShowtime and $FF)
+//	+ Char((nShowtime shr 8) and $00FF)
+//	+ Char(nShowCount)
+//	+ Char(nReserved1) //保留字
+//	+ Char(nReserved2) //保留字
+//	+ Char(nReserved3) //保留字
+//	+ Char(nReserved4) //保留字
+//	+ Char(nReserved5) //保留字
+//	+ Char(nReserved6); //保留字
+//end;
+//nCurAddress = Length(szcurPagebuf);
+//SetLength(szcurPagebuf, nCurAddress + nPageSize);
+//Inc(nCurAddress);
+////需要对无效页数据进行处理
+//TranCanvToInfo(mBmpTitlePage, @szcurPagebuf[nCurAddress]
+//, X, w, h, nPx, nMkStyle, nKardPixType, nScreenStyle, bInvalidData);
+//if bInvalidData = True then
+//begin
+//Dec(nRealPageCount);
+////13个字节为图文区域信息数据类型到六个保留字的13个字节。
+//SetLength(szcurPagebuf, Length(szcurPagebuf) - nPageSize - 13);
+//Continue;
+//end;
+//ncurPageAllLength = length(szcurPagebuf);
+//str2 = str2 + Char(ncurPageAllLength and $00FF)
+//	+ Char((ncurPageAllLength shr 8) and $00FF)
+//	+ Char((ncurPageAllLength shr 16) and $00FF)
+//	+ Char((ncurPageAllLength shr 24) and $00FF) + szcurPagebuf;
+//	  if bOnePage = True then
+//		  Break;
+//	  end;
+//	  bmp2.Canvas.Unlock;
+//	  bmp1.Canvas.Unlock;
+//	  mBmpTitlePage.Canvas.Unlock;
+//	  FreeAndNil(bmp1);
+//	  FreeAndNil(bmp2);
+//	  FreeAndNil(mBmpTitlePage);
+//  result = str2;
+//	  end;
+//
+//	  procedure DrawsingalPage(t_RVReportHelper: TRVReportHelper; Canvas: TCanvas; h: Cardinal);
+//	  var
+//		  vh, eleft, i, j   : integer;
+//	  begin
+//		  eleft : = 0;
+//	  for i : = 1 to t_RVReportHelper.PagesCount do
+//		  begin
+//		  if t_RVReportHelper.PagesCount > 1 then
+//			  begin
+//			  if i = t_RVReportHelper.PagesCount then
+//				  vh : = TReportRVData(t_RVReportHelper.RichView.RVData).DocumentHeight -
+//				  TPrintableRVData(t_RVReportHelper.RichView.RVData).Pages.Items[i - 1].Starty else
+//				  vh : = TPrintableRVData(t_RVReportHelper.RichView.RVData).Pages.Items[i].StartY -
+//				  TPrintableRVData(t_RVReportHelper.RichView.RVData).Pages.Items[i - 1].StartY;
+//	  end else
+//		  if t_RVReportHelper.PagesCount = 1 then vh : = TReportRVData(t_RVReportHelper.RichView.RVData).DocumentHeight;
+//  eleft: = 0;
+//
+//	  for j : = 0 to TPrintableRVData(t_RVReportHelper.RichView.RVData).Pages.Items[i - 1].StartDrawItemNo - 1 do
+//		  eleft : = eleft + t_RVReportHelper.RichView.RVData.DrawItems[j].Width;
+//
+//	  // if vh > h then
+//	  //    t_RVReportHelper.DrawPageAt(eleft, h - vh, i, Canvas, false, h)
+//	  //  else
+//	  t_RVReportHelper.DrawPageAt(eleft, (h - vh) div 2, i, Canvas, false, h);
+//	  end;
+//	end;
