@@ -6,15 +6,11 @@
 extern Json::Value g_ControllerList_Obj;
 extern Json::Value g_Controller_Supary;
 
-
-static UINT g_argProFrameSingleColorBmpCount = 0;
-static UINT g_argProFrameMuliColorBmpCount = 0;
-
 SysParameter Syssetup;
 BYTE g_aryCRC16Byte[512];
 string g_szCRC16Str;
-static UINT *g_aryProFrameSingleColorBmp = NULL;
-static UINT *g_aryProFrameMuliColorBmp = NULL;
+vector<DWORD> g_aryProFrameSingleColorBmp;
+vector<DWORD> g_aryProFrameMuliColorBmp;
 tagCommStatusRecord g_arytagCommStatusRecord;
 string g_szAppPath;
 
@@ -43,19 +39,16 @@ bool StrIsInt(string Source)
 
 void CreateFrameArray(UINT singleColorCount, UINT multiColorCount)
 {
-	g_aryProFrameSingleColorBmp = new UINT[singleColorCount];
 	for (UINT i = 0; i < singleColorCount; i++)
 	{
-		g_aryProFrameSingleColorBmp[i] = IDB_SINGLECOLOR_1 + i;
+		g_aryProFrameSingleColorBmp.push_back(IDB_SINGLECOLOR_1 + i);
 	}
-	g_argProFrameSingleColorBmpCount = singleColorCount;
 
-	g_aryProFrameMuliColorBmp = new UINT[multiColorCount];
 	for (UINT i = 0; i < multiColorCount; i++)
 	{
-		g_aryProFrameMuliColorBmp[i] = IDB_MULTICOLOR_1 + i;
+		g_aryProFrameMuliColorBmp.push_back(IDB_MULTICOLOR_1 + i);
+
 	}
-	g_argProFrameMuliColorBmpCount = multiColorCount;
 }
 
 void GetControllerList(Json::Value &ControllerList_Obj, Json::Value &Controller_Supary)
@@ -171,7 +164,7 @@ UINT GetSelFrameWidth(UINT nDY_AreaFMode, UINT nDY_AreaFLine)
 {
 	UNREFERENCED_PARAMETER(nDY_AreaFMode);
 
-	if (nDY_AreaFLine < g_argProFrameSingleColorBmpCount)
+	if (nDY_AreaFLine < g_aryProFrameSingleColorBmp.size())
 	{
 		HBITMAP hBmp = LoadBitmap(GetModuleHandle(L"LedDynamicArea.dll"), MAKEINTRESOURCE(g_aryProFrameSingleColorBmp[nDY_AreaFLine]));
 		BITMAP bmp;

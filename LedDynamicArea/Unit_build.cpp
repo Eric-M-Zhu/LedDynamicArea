@@ -6,6 +6,9 @@
 
 #define NumCharSets 19
 
+extern vector<DWORD> g_aryProFrameSingleColorBmp;
+extern vector<DWORD> g_aryProFrameMuliColorBmp;
+
 TCharSetRec CharSets[NumCharSets] = { { "ANSI_CHARSET",  0},
 	{"DEFAULT_CHARSET",  1},
 	{"SYMBOL_CHARSET",  2},
@@ -25,6 +28,8 @@ TCharSetRec CharSets[NumCharSets] = { { "ANSI_CHARSET",  0},
 	{"RUSSIAN_CHARSET",  204},
 	{"MAC_CHARSET",  77},
 	{"BALTIC_CHARSET",  186} };
+
+void GetProgramFrameColorBmp(BYTE *pBits, DWORD nWidth, DWORD nHeight, DWORD nColorOrd);
 
 int GetMaxInArray(int A[], size_t size)
 {
@@ -834,39 +839,39 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //szData, szEncryptionData, szEncryptionValue: string;
 //bGBX: Boolean;
 //begin
-//nAllWidth : = calpagesize(x, w, nPx, nKardPixType);
-//nPageStyle: = 0;
-//nrepeatime: = 0;
-//tmpBmp: = TBitmap.Create;
+//nAllWidth  = calpagesize(x, w, nPx, nKardPixType);
+//nPageStyle = 0;
+//nrepeatime = 0;
+//tmpBmp = TBitmap.Create;
 ////tmpBmp.PixelFormat := GetBmpPixelFormat(nPx);//pf4bit;
-//tmpBmp.Width : = w;
-//tmpBmp.height : = h;
+//tmpBmp.Width  = w;
+//tmpBmp.height  = h;
 //tmpBmp.Canvas.Lock;
 //if WideFileExists(filename) then
 //begin
 //try
-//bGBX : = False;
-//sztmpFileName: = Copy(filename, 1, Length(filename) - 3) + 'GBX';
+//bGBX  = False;
+//sztmpFileName = Copy(filename, 1, Length(filename) - 3) + 'GBX';
 //if WideFileExists(sztmpFileName) then
 //begin
 //AssignFile(fp, sztmpFileName);
 //try
 //Reset(fp, 1);
-//nLength: = FileSize(fp);
+//nLength = FileSize(fp);
 //SetLength(szData, nLength);
 //BlockRead(fp, szData[1], nLength);
 //finally
 //CloseFile(fp);
 //end;
-//szEncryptionValue: = GIF_SECRET;
-//nEncryptionLength: = Length(szEncryptionValue);
-//szEncryptionData: = '';
-//for I : = 1 to nlength do
+//szEncryptionValue = GIF_SECRET;
+//nEncryptionLength = Length(szEncryptionValue);
+//szEncryptionData = '';
+//for I  = 1 to nlength do
 //begin
-//J : = (I - 1) mod nEncryptionLength;
-//szEncryptionData: = szEncryptionData + Char(Byte(szData[I]) xor Byte(szEncryptionValue[J + 1]));
+//J  = (I - 1) mod nEncryptionLength;
+//szEncryptionData = szEncryptionData + Char(Byte(szData[I]) xor Byte(szEncryptionValue[J + 1]));
 //end;
-//sztmpFileName: = WideExtractFilePath(sztmpFileName) + 'GIF' + Format('%.4d', [YearOf(now)])
+//sztmpFileName = WideExtractFilePath(sztmpFileName) + 'GIF' + Format('%.4d', [YearOf(now)])
 //	+ Format('%.2d', [MonthOf(now)])
 //	+ Format('%.2d', [DayOf(now)])
 //	+ Format('%.2d', [HourOf(now)])
@@ -881,55 +886,55 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //				   CloseFile(fp);
 //			   end;
 //			   //FileSetAttr(sztmpFileName, faHidden);
-//		   bGBX: = True;
+//		   bGBX = True;
 //			   end
 //else
-//sztmpFileName : = filename;
+//sztmpFileName  = filename;
 //
 //try
-//fd : = TtntFileStream.Create(sztmpFileName, fmShareDenyNone);
-//fd.Position : = 0;
-//fd.Position : = 0;
+//fd  = TtntFileStream.Create(sztmpFileName, fmShareDenyNone);
+//fd.Position  = 0;
+//fd.Position  = 0;
 //fd.Read(buf, 2);
-//fd.Position : = 0;
+//fd.Position  = 0;
 //if (buf[0] = $42) and (buf[1] = $4D) then //bmp
 //begin
 //fd.Read(FileHeader, SizeOf(TBitmapFileHeader));
 //fd.Read(InfoHeader, SizeOf(TBitmapInfoHeader));
-//tmpBmp.Width : = InfoHeader.biWidth;
-//tmpBmp.Height : = InfoHeader.biheight;
-//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Width  = InfoHeader.biWidth;
+//tmpBmp.Height  = InfoHeader.biheight;
+//tmpBmp.Canvas.Brush.Color  = clBlack;
 //tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
 //streamToBmp(fd, tmpBmp.Width, tmpBmp.height, InfoHeader.biBitCount, FileHeader.bfOffBits, tmpBmp);
 //end else
 //if (buf[0] = $FF) and (buf[1] = $D8) then //jpg
 //begin
-//tmpBmp.Width : = w;
-//tmpBmp.height : = h;
-//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Width  = w;
+//tmpBmp.height  = h;
+//tmpBmp.Canvas.Brush.Color  = clBlack;
 //tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
-//Image: = TGPImage.Create(sztmpFileName);
-//bmp: = TBitmap.Create;
+//Image = TGPImage.Create(sztmpFileName);
+//bmp = TBitmap.Create;
 //bmp.Canvas.Lock;
 ////bmp.PixelFormat := GetBmpPixelFormat(nPx);//pf4bit;
-//bmp.Width : = Image.GetWidth;
-//bmp.height : = Image.GetHeight;
-//graphics: = TGPGraphics.Create(bmp.Canvas.Handle);
+//bmp.Width  = Image.GetWidth;
+//bmp.height  = Image.GetHeight;
+//graphics = TGPGraphics.Create(bmp.Canvas.Handle);
 //graphics.DrawImage(Image, 0, 0, bmp.Width, bmp.Height);
-//graphics: = nil;
-//Image: = nil;
+//graphics = nil;
+//Image = nil;
 //tmpBmp.Canvas.StretchDraw(rect(0, 0, w, h), bmp);
 //bmp.Canvas.Unlock;
 //FreeAndNil(bmp);
 //end else //其他格式
 //begin
-//tmpBmp.Width : = w;
-//tmpBmp.height : = h;
-//tmpBmp.Canvas.Brush.Color : = clBlack;
+//tmpBmp.Width  = w;
+//tmpBmp.height  = h;
+//tmpBmp.Canvas.Brush.Color  = clBlack;
 //tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
 //end;
 //finally
-//fd.Position : = 0;
+//fd.Position  = 0;
 //fd.Free;
 //end;
 //finally
@@ -938,26 +943,26 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //end;
 //end else
 //begin
-//tmpBmp.Width : = w;
-//tmpBmp.height : = h;
-//tmpBmp.Canvas.Brush.Color : = clBlack;
-//tmpBmp.Canvas.Font.Color : = clred;
-//tmpBmp.Canvas.Font.Size : = 9;
+//tmpBmp.Width  = w;
+//tmpBmp.height  = h;
+//tmpBmp.Canvas.Brush.Color  = clBlack;
+//tmpBmp.Canvas.Font.Color  = clred;
+//tmpBmp.Canvas.Font.Size  = 9;
 //tmpBmp.Canvas.FillRect(Rect(0, 0, tmpBmp.Width, tmpBmp.Height));
 //tmpBmp.Canvas.TextOut(0, 0, 'NIL');
 //end;
 //
-//mBmpPage: = TBitmap.Create;
+//mBmpPage = TBitmap.Create;
 ////mBmpPage.PixelFormat :=GetBmpPixelFormat(nPx);// pf4bit;
-//mBmpPage.Width : = w;
-//mBmpPage.Height : = h;
+//mBmpPage.Width  = w;
+//mBmpPage.Height  = h;
 //mBmpPage.Canvas.Lock;
-//mBmpPage.Canvas.Brush.Color : = clBlack;
+//mBmpPage.Canvas.Brush.Color  = clBlack;
 //mBmpPage.Canvas.FillRect(Rect(0, 0, mBmpPage.Width, mBmpPage.Height));
 //mBmpPage.Canvas.StretchDraw(Rect(0, 0, w, h), tmpBmp);
 //
 //SetLength(szcurPagebuf, 0);
-//szcurPagebuf: = Char(nPageStyle) //数据类型
+//szcurPagebuf = Char(nPageStyle) //数据类型
 //	+ Char(nStunt)
 //	+ Char(nOutStunt)
 //	+ Char(nRunSpeed)
@@ -971,17 +976,17 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //	+ Char(nReserved5) //保留字
 //	+ Char(nReserved6); //保留字
 //
-//nCurAddress: = Length(szcurPagebuf);
-//nPageSize: = GetPageSize(nAllWidth, h, nPx);
+//nCurAddress = Length(szcurPagebuf);
+//nPageSize = GetPageSize(nAllWidth, h, nPx);
 //	SetLength(szcurPagebuf, nCurAddress + nPageSize);
 //	Inc(nCurAddress);
 //	//需要对无效页数据进行处理；图片区域无需处理 ；页数为1
-//nRealPageCount: = 1;
+//nRealPageCount = 1;
 //	TranCanvToInfo(mBmpPage, @szcurPagebuf[nCurAddress]
 //	, x, w, h, nPx, nMkStyle,
 //		nKardPixType, nScreenStyle, bInvalidData);
-//ncurPageAllLength: = length(szcurPagebuf);
-//szBmpTextBuf: = szBmpTextBuf + Char(ncurPageAllLength and $00FF)
+//ncurPageAllLength = length(szcurPagebuf);
+//szBmpTextBuf = szBmpTextBuf + Char(ncurPageAllLength and $00FF)
 //	+ Char((ncurPageAllLength shr 8) and $00FF)
 //	+ Char((ncurPageAllLength shr 16) and $00FF)
 //	+ Char((ncurPageAllLength shr 24) and $00FF) + szcurPagebuf;
@@ -990,7 +995,7 @@ string MakeDynamicAreaInfo(DWORD nScreenOrd, DWORD nDYAreaOrd, Json::Value Scree
 //			tmpBmp.Canvas.Unlock;
 //			FreeAndNil(tmpBmp);
 //			FreeAndNil(mBmpPage);
-//		Result: = szBmpTextBuf;
+//		Result = szBmpTextBuf;
 //end;
 
 DWORD GetPageSize(DWORD nAllWidth, DWORD nHeight, DWORD nPx)
@@ -1007,4 +1012,254 @@ DWORD GetPageSize(DWORD nAllWidth, DWORD nHeight, DWORD nPx)
 	default:
 		return 0;
 	}
+}
+
+void GetRealDYAreaLocation(Json::Value DYArea_Obj, DWORD &nRealX, DWORD &nRealY, DWORD &nRealW, DWORD &nRealH)
+{
+	DWORD nFrame_Width;
+
+	if (DYArea_Obj["DY_AreaFMode"].asUInt() == 0xFF)
+	{
+		nRealX = DYArea_Obj["DY_AreaX"].asUInt();
+		nRealY = DYArea_Obj["DY_AreaY"].asUInt();
+		nRealW = DYArea_Obj["DY_AreaWidth"].asUInt();
+		nRealH = DYArea_Obj["DY_AreaHeight"].asUInt();
+	}
+	else
+	{
+		nFrame_Width = DYArea_Obj["DY_AreaFWidth"].asUInt();
+		nRealX = DYArea_Obj["DY_AreaX"].asUInt() + nFrame_Width;
+		nRealY = DYArea_Obj["DY_AreaY"].asUInt() + nFrame_Width;
+		nRealW = DYArea_Obj["DY_AreaWidth"].asUInt() - nFrame_Width * 2;
+		nRealH = DYArea_Obj["DY_AreaHeight"].asUInt() - nFrame_Width * 2;
+		if (nRealW < 0)
+			nRealW = 1;
+		if (nRealH < 0)
+			nRealH = 1;
+	}
+}
+
+string MakeFrameValue(Json::Value Screen_Obj, DWORD nDYAreaOrd)
+{
+	DWORD nRealX, nRealY, nRealW, nRealH;
+	BYTE nFrame_DispStype;
+	string szSendBuf, szFrameData;
+	HBITMAP bmp, bmp2;
+	DWORD nIndex, n, nDataLength;
+	bool bInvalidData;
+
+	if (Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFMode"].asUInt() == 0xFF)
+	{
+		szSendBuf.clear();
+		szSendBuf += (char)(0);
+	}
+	else
+	{
+		GetRealDYAreaLocation(Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd], nRealX, nRealY, nRealW, nRealH);
+		nFrame_DispStype = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFStunt"].asUInt();
+
+		if (nFrame_DispStype == 6) //因为在PC软件中屏蔽掉了“红绿交替转动”特技。因此当边框特技为6是设定为固定显示。
+			nFrame_DispStype = 7;
+
+		szSendBuf.clear();
+		szSendBuf += (char)(1);
+		szSendBuf += (char)(nFrame_DispStype);
+		szSendBuf += (char)(Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFRunSpeed"].asUInt());
+		szSendBuf += (char)(Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFMoveStep"].asUInt());
+		szSendBuf += (char)(Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt());
+		szSendBuf += (char)(0);
+		szSendBuf += (char)(0);
+
+		HWND hDesktopWnd = GetDesktopWindow();
+		HDC hDesktopDC = GetWindowDC(hDesktopWnd);
+		HDC hMemoryDC = CreateCompatibleDC(hDesktopDC);
+		HDC hMemoryDC2 = CreateCompatibleDC(hMemoryDC);
+		BITMAPINFO bi;
+		BYTE *pBmpBits = NULL;
+		BYTE *pBmpBits2 = NULL;
+		HBRUSH hBlackBrush = CreateSolidBrush(RGB(0, 0, 0));
+		HPEN hRedPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+		RECT rect = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
+		RECT rect2 = { 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight };
+
+		memset(&bi, 0, sizeof(BITMAPINFO));
+		bi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+		bi.bmiHeader.biWidth = PRO_FRAME_LENGTH;
+		bi.bmiHeader.biHeight = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt();
+		bi.bmiHeader.biBitCount = 24;
+		bi.bmiHeader.biSizeImage = (bi.bmiHeader.biWidth * 3 + 1) / 2 * 2;
+		bi.bmiHeader.biPlanes = 1;
+
+		bmp = CreateDIBSection(hMemoryDC, &bi, DIB_RGB_COLORS, (void**)&pBmpBits, NULL, 0);
+		bmp2 = NULL;
+		SelectObject(hMemoryDC, bmp);
+		FillRect(hMemoryDC, &rect, hBlackBrush);
+
+		if (Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFMode"].asUInt() == 0) //单色
+		{
+			nIndex = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFLine"].asUInt();
+
+			if (g_aryProFrameSingleColorBmp.size() >= nIndex)
+			{
+				SIZE bmp2Size;
+				bmp2 = LoadBitmap(GetModuleHandle(_T("LedDynamicArea.dll")), MAKEINTRESOURCE(g_aryProFrameSingleColorBmp[nIndex]));
+				SelectObject(hMemoryDC2, bmp2);
+				GetBitmapDimensionEx(bmp2, &bmp2Size);
+				rect2.right = bmp2Size.cx;
+				rect2.bottom = bmp2Size.cy;
+				//if (g_aryProFrameSingleColorBmp[nIndex] != nil)
+				//{
+				//	bmp2.Width = g_aryProFrameSingleColorBmp[nIndex].Width;
+				//	bmp2.Height = g_aryProFrameSingleColorBmp[nIndex].Height;
+				//	bmp2.Canvas.CopyRect(Rect(0, 0, bmp2.Width, bmp2.Height), g_aryProFrameSingleColorBmp[nIndex].Canvas, Rect(0, 0, bmp2.Width, bmp2.Height));
+				//}
+				//else
+				//{
+				//	bmp2.Width = PRO_FRAME_LENGTH;
+				//	bmp2.Height = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt();
+				//	bmp2.Canvas.Brush.Color = clblack;
+				//	bmp2.Canvas.FillRect(rect(0, 0, bmp2.Width, bmp2.Height));
+				//	bmp2.Canvas.Pen.Width = 1;
+				//	bmp2.Canvas.Pen.Color = clRed;
+				//	for n = 0 to bmp2.Height - 1 do
+				//	{
+				//		bmp2.Canvas.MoveTo(0, n);
+				//		bmp2.Canvas.LineTo(bmp2.Width div 2, n);
+				//	}
+				//}
+			}
+			else
+			{
+				//bmp2 = CreateDIBSection(hMemoryDC2, &bi, DIB_RGB_COLORS, (void**)&pBmpBits2, NULL, 0);
+				HPEN hOldPen = (HPEN)SelectObject(hMemoryDC2, hRedPen);
+
+				FillRect(hMemoryDC2, &rect2, hBlackBrush);
+
+				for (size_t n = 0; n < rect2.bottom; n++)
+				{
+					MoveToEx(hMemoryDC2, 0, n, NULL);
+					LineTo(hMemoryDC2, rect2.right / 2, n);
+				}
+
+				SelectObject(hMemoryDC2, hOldPen);
+				/*bmp2.Width = PRO_FRAME_LENGTH;
+				bmp2.Height = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt();
+				bmp2.Canvas.Brush.Color = clblack;
+				bmp2.Canvas.FillRect(rect(0, 0, bmp2.Width, bmp2.Height));
+				bmp2.Canvas.Pen.Width = 1;
+				bmp2.Canvas.Pen.Color = clRed;
+				for n = 0 to bmp2.Height - 1 do
+				{
+					bmp2.Canvas.MoveTo(0, n);
+					bmp2.Canvas.LineTo(bmp2.Width div 2, n);
+				}*/
+			}
+			//finally
+			//}
+			GetProgramFrameColorBmp(pBmpBits2, rect2.right, rect2.bottom
+				, Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFColor"].asUInt());
+		}
+		else if (Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFMode"].asUInt() == 1) //花色
+		{
+			//try
+			nIndex = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFLine"].asUInt();
+			if (g_aryProFrameMuliColorBmp.size() >= nIndex)
+			{
+				bmp2 = LoadBitmap(GetModuleHandle(_T("LedDynamicArea.dll")), MAKEINTRESOURCE(g_aryProFrameMuliColorBmp[nIndex]));
+
+				/*if (g_aryProFrameMuliColorBmp[nIndex] != nil)
+				{
+					bmp2.Width = g_aryProFrameMuliColorBmp[nIndex].Width;
+					bmp2.Height = g_aryProFrameMuliColorBmp[nIndex].Height;
+					bmp2.Canvas.CopyRect(Rect(0, 0, bmp2.Width, bmp2.Height)
+						, g_aryProFrameMuliColorBmp[nIndex].Canvas, Rect(0, 0, bmp2.Width, bmp2.Height));
+				}
+				else
+				{
+					bmp2.Width = PRO_FRAME_LENGTH;
+					bmp2.Height = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt();
+					bmp2.Canvas.Brush.Color = clblack;
+					bmp2.Canvas.FillRect(rect(0, 0, bmp2.Width, bmp2.Height));
+					bmp2.Canvas.Pen.Width = 1;
+					bmp2.Canvas.Pen.Color = clRed;
+					for n = 0 to bmp2.Height - 1 do
+					{
+						bmp2.Canvas.MoveTo(0, n);
+						bmp2.Canvas.LineTo(bmp2.Width div 2, n);
+					}
+				}*/
+			}
+			else
+			{
+				HPEN hOldPen = (HPEN)SelectObject(hMemoryDC2, hRedPen);
+
+				FillRect(hMemoryDC2, &rect, hBlackBrush);
+
+				for (size_t n = 0; n < bi.bmiHeader.biHeight; n++)
+				{
+					MoveToEx(hMemoryDC2, 0, n, NULL);
+					LineTo(hMemoryDC2, bi.bmiHeader.biWidth / 2, n);
+				}
+
+				SelectObject(hMemoryDC2, hOldPen);
+
+				/*bmp2.Width = PRO_FRAME_LENGTH;
+				bmp2.Height = Screen_Obj["Screen_lstDYArea"][(int)nDYAreaOrd]["DY_AreaFWidth"].asUInt();
+				bmp2.Canvas.Brush.Color = clblack;
+				bmp2.Canvas.FillRect(rect(0, 0, bmp2.Width, bmp2.Height));
+				bmp2.Canvas.Pen.Width = 1;
+				bmp2.Canvas.Pen.Color = clRed;
+				for n = 0 to bmp2.Height - 1 do
+				{
+					bmp2.Canvas.MoveTo(0, n);
+					bmp2.Canvas.LineTo(bmp2.Width div 2, n);
+				}*/
+			}
+			//finally
+			//}
+		}
+
+		StretchBlt(hMemoryDC, 0, 0, bi.bmiHeader.biWidth, bi.bmiHeader.biHeight,
+			hMemoryDC2, rect2.left, rect2.top, rect2.right, rect2.bottom, SRCCOPY);
+		nDataLength = GetPageSize(PRO_FRAME_LENGTH, rect.bottom, Screen_Obj["Screen_color"].asUInt());
+		TranCanvToInfo(bmp, szFrameData
+			, 0, bmp.Width, bmp.Height, Screen_Obj["Screen_color"].asUInt()
+			, Screen_Obj["Screen_pixels"].asUInt(),
+			Screen_Obj["Screen_nPixType"].asUInt()
+			, Screen_Obj["Screen_nPixType"].asUInt(), bInvalidData);
+		szSendBuf = szSendBuf + szFrameData;
+
+		DeleteObject(hRedPen);
+		DeleteObject(hBlackBrush);
+		DeleteObject(bmp2);
+		DeleteObject(bmp);
+		DeleteDC(hMemoryDC2);
+		DeleteDC(hMemoryDC);
+		ReleaseDC(hDesktopWnd, hDesktopDC);
+	}
+
+	return szSendBuf;
+}
+
+void GetProgramFrameColorBmp(BYTE *pBits, DWORD nWidth, DWORD nHeight, DWORD nColorOrd)
+{
+	DWORD w, h;
+	COLORREF nColor;
+	BYTE *Col, ColR, ColG;
+	size_t bytesPerLine = (nWidth * 3 + 1) / 2 * 2;
+
+	nColor = nColorOrd;
+
+	for (w = 0; w < nWidth; ++w)
+		for (h = 0; h < nHeight; ++h)
+		{
+			Col = &pBits[h * bytesPerLine + w * 3];
+			ColR = Col[0];
+			if (ColR > 127)
+			{
+				Col[0] = GetRValue(nColor);
+				Col[1] = GetGValue(nColor);
+				Col[2] = GetBValue(nColor);
+			}
+		}
 }
